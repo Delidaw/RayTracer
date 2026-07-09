@@ -12,7 +12,7 @@ christoffel = ChristoffelSymbols(bh)
 #Create Christoffel tensor
 gamma = christoffel.compute(r = 50, theta = np.pi / 2)
 
-labels = ["t", "r", "θ", "φ"]
+coord = ["t", "r", "θ", "φ"]
 
 print("\n=========================")
 print("CHRISTOFFEL SYMBOLS")
@@ -25,6 +25,6 @@ for lam in range(4):
 
             if abs(value) > 1e-12:
                 print(
-                    f"Γ^{labels[lam]}_{{{labels[mu]}{labels[nu]}}}"
+                    f"Γ[{coord[lam]},{coord[mu]},{coord[nu]}]"
                     f" = {value:.6f}"
                 )
