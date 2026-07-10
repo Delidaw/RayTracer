@@ -38,3 +38,12 @@ class OrbitSimulator:
             )
 
         return np.array(trajectory)
+    
+    def orbital_period(self, state):
+        """
+        Compute the orbital period in proper state
+        """
+
+        _, _, _, _, _, _, _, uphi = state
+        
+        return 2 * np.pi / uphi

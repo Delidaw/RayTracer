@@ -15,15 +15,29 @@ initials = InitialConditions(bh)
 
 initial_state = initials.circular_orbit(radius = 50)
 
+step_size = 0.005
+
+orbital_period = simulator.orbital_period(initial_state)
+
+total_time = 2 * orbital_period
+
+steps = int(total_time / step_size)
+
 trajectory = simulator.simulate(
     initial_state,
-    step_size = 0.05,
-    steps = 5000
+    step_size = step_size,
+    steps = steps
     )
 
 r = trajectory[:, 1]
 theta = trajectory[:, 2]
 phi = trajectory[:, 3]
+
+"""
+print(f"Minimum radius : {np.min(r):.6f}")
+print(f"Maximum radius : {np.max(r):.6f}")
+print(f"Radius change  : {np.max(r) - np.min(r):.6f}")
+"""
 
 # Convert spherical coordinates to Cartesian for plotting
 x = r * np.sin(theta) * np.cos(phi)
@@ -55,3 +69,10 @@ plt.legend()
 plt.title("Particle Orbit around a Schwarzschild Black Hole")
 
 plt.show()
+
+"""
+print(f"Initial phi : {phi[0]}")
+print(f"Final phi   : {phi[-1]}")
+print(f"Total angle : {phi[-1] - phi[0]}")
+print(phi[:10])
+"""
