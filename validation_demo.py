@@ -48,7 +48,8 @@ angular_momentum = np.array(angular_momentum)
 
 time = np.arange(len(r)) * step_size
 
-"""
+
+#Radius vs Time
 plt.figure(figsize = (10, 5))
 
 plt.plot(time, r)
@@ -61,7 +62,7 @@ plt.title("Radius vs Proper Time")
 plt.grid(True)
 
 plt.show()
-"""
+
 
 """
 print(f"Initial phi : {phi[0]}")
@@ -70,7 +71,7 @@ print(f"Total angle : {phi[-1] - phi[0]}")
 print(phi[:10])
 """
 
-"""
+#Angular Position vs Time
 plt.figure(figsize = (10, 5))
 
 plt.plot(time,phi)
@@ -83,8 +84,10 @@ plt.title("Angular Position vs Proper Time")
 plt.grid(True)
 
 plt.show()
-"""
 
+
+
+#Energy vs Time
 plt.figure(figsize = (10, 5))
 
 plt.plot(time, energy)
@@ -99,7 +102,7 @@ plt.grid(True)
 plt.show()
 
 
-
+#Angular Momentum vs Time
 plt.figure(figsize=(10,5))
 
 plt.plot(time, angular_momentum)
