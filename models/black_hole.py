@@ -46,3 +46,21 @@ class BlackHole:
             "ISCO Radius": self.isco,
             "Escape Velocity": self.escape_velocity()
     }
+
+    def conserved_energy(self, state):
+        """
+        Computes the conserved energy per unit mass.
+        """
+        _, r, _, _, ut, _, _, _ = state
+        
+        f =  - self.schwarzschild_radius / r
+
+        return f * ut
+
+    def conserved_angular_momentum(self, state):
+        """
+        Computes the conserved angular momentum per unit mass.
+        """
+        _, r, theta, _, _, _, _, uphi = state
+
+        return r**2 * np.sin(theta)**2 * uphi
