@@ -18,11 +18,7 @@ initial_state = particles.radial_infall(radius=50)
 
 step_size = 0.005
 
-orbital_period = simulator.orbital_period(initial_state)
-
-total_time = 2 * orbital_period
-
-steps = 10000
+steps = 20000
 
 trajectory = simulator.simulate(
     initial_state,

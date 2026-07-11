@@ -1,3 +1,8 @@
+# RayTracer
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -262,4 +267,121 @@
         animate();
     </script>
 </body>
-</html>
+</html> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+G = 1
+c = 1
+M = 10
+
+
+
+
+
+
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+#constants(scaled units)
+G = 1  # Gravitational constant
+M = 10  # Mass of the central object
+c = 1  # Speed of light
+
+#Schwarschild radius
+R_s = 2 * G * M / c**2
+
+#Radius coordinates
+r = np.linspace(R_s + 0.1, 50, 500)
+
+#Embedding surface (simplified)
+z = 2*np.sqrt(R_s * (r - R_s))
+
+#Create circular surface
+theta = np.linspace(0, 2 * np.pi, 500)
+R, Theta = np.meshgrid(r, theta)
+
+X = R * np.cos(Theta)
+Y = R * np.sin(Theta)
+Z = 2 * np.sqrt(R_s * (R - R_s))
+
+#Plot
+fig = plt.figure(figsize = (10, 8))
+ax = fig.add_subplot(111, projection='3d')
+ax.plot_surface(X, Y, Z, cmap='viridis', edgecolor='none')
+
+ax.set_title('Curved Spacetime Surface around a Mass')
+ax.set_xlabel('X-axis')
+ax.set_ylabel('Y-axis')
+ax.set_zlabel('Z-axis (Curvature)')
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import numpy as np
+from scipy.integrate import solve_ivp
+import matplotlib.pyplot as plt
+
+G = 1
+M = 1
+L = 4
+
+def geodesics(phi, y):
+    u, up = y
+    du_dphi = up
+    dup_dphi = (G * M / L ** 2) - u + (3 * G * M * u ** 2)
+    return [du_dphi, dup_dphi]
+
+phi_span = (0, 50)
+y0 = [0.1, 0]
+
+sol = solve_ivp(geodesics, phi_span, y0, t_eval = np.linspace(0, 50, 5000))
+
+u = sol.y[0]
+phi = sol.t
+r = 1 / u
+x = r * np.cos(phi)
+y = r * np.sin(phi)
+
+plt.figure(figsize = (8, 8))
+plt.plot(x, y)
+plt.scatter(0, 0, color = 'black', label = 'Mass')
+plt.axis('equal')
+plt.legend()
+plt.title("Relativistic Orbit")
+plt.show()
+

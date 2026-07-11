@@ -17,10 +17,31 @@ class OrbitSimulator:
 
     def simulate(self, initial_state, step_size, steps):
 
+        """
+        Simulate particle motion through Schwarzschild spacetime.
+
+    Parameters
+    ----------
+    initial_state : ndarray
+        Initial state vector.
+
+    step_size : float
+        RK4 integration step size.
+
+    steps : int
+        Maximum number of integration steps.
+
+    Returns
+    -------
+    ndarray
+        Complete trajectory.
+    """
         state = initial_state.copy()
 
         trajectory = []
 
+        #Schwarzschild radius
+        R_s = self.equation.connection.black_hole.schwarzschild_radius
 
         #Each iteration does 
         # #current state -> 
@@ -37,13 +58,24 @@ class OrbitSimulator:
                 step_size
             )
 
+            #Stop when the particle reaches event horizon
+            if state[1] <= R_s:
+                print("Particle reached event horizon.")
+                trajectory.append(state.copy())
+                break 
+
         return np.array(trajectory)
     
-    def orbital_period(self, state):
+    def orbital_period(self, initial_state):
         """
         Compute the orbital period in proper state
         """
 
-        _, _, _, _, _, _, _, uphi = state
+        uphi = initial_state[7]
+
+        if abs(uphi) < 1e-12:
+            raise ValueError(
+                "Radial trajectories have no orbital period."
+            )
         
         return 2 * np.pi / uphi

@@ -53,7 +53,7 @@ class BlackHole:
         """
         _, r, _, _, ut, _, _, _ = state
         
-        f =  - self.schwarzschild_radius / r
+        f = 1 - self.schwarzschild_radius / r
 
         return f * ut
 
