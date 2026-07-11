@@ -1,10 +1,11 @@
+"""
 import numpy as np
 
 class ParticleInitialConditions:
-    """
+    "
     Generates physically consistent initial states
     for massive particles in Schwarzschild spacetime.
-    """
+    "
 
     def __init__(self, black_hole):
         self.black_hole = black_hole
@@ -33,13 +34,14 @@ class ParticleInitialConditions:
         ])
 
     def escape_trajectory(self, radius, speed):
-        """
+        "
         Particle launched outward with an initial radial speed.
-        """
+        "
         pass
 
     def elliptical_orbit(self, radius, eccentricity):
-        """
+        "
         Particle placed on an elliptical orbit.
-        """
+        "
         pass
+"""

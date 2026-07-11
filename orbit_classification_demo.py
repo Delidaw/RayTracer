@@ -20,7 +20,7 @@ classifier = OrbitClassifier(bh)
 #           radial_velocity = -0.2,
 #           angular_velocity = 0.0
 #        ),
-"""
+
 trajectory = simulator.simulate(
     initial.radial_infall(radius=20),
     step_size=0.01,
@@ -29,7 +29,7 @@ trajectory = simulator.simulate(
 
 print("\nRadial Infall")
 print(classifier.classify(trajectory))
-"""
+
 
 """
 trajectory = simulator.simulate(
@@ -42,7 +42,7 @@ print("\nCircular Orbit")
 print(classifier.classify(trajectory))
 """
 
-
+"""
 trajectory = simulator.simulate(
     initial.elliptical_orbit(
         semi_major_axis=20,
@@ -54,7 +54,7 @@ trajectory = simulator.simulate(
 
 print("\nElliptical Orbit")
 print(classifier.classify(trajectory))
-
+"""
 
 """
 trajectory = simulator.simulate(
