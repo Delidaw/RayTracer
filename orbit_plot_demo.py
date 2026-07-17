@@ -37,7 +37,7 @@ state = np.array([
 result = simulator.simulate(
     state,
     step_size=0.01,
-    steps=5000
+    steps=50000
 )
 
 trajectory = result["trajectory"]

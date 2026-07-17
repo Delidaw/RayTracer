@@ -37,9 +37,12 @@ class OrbitPlotter:
         plt.scatter(
             0,
             0,
-            s=100,
+            s=500,
+            color="black",
+            edgecolors="gold",
+            linewidths=2,
             label="Black Hole"
-        )   
+        ) 
 
         plt.xlabel("x")
 

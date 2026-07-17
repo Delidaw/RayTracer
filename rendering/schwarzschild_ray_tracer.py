@@ -3,6 +3,8 @@ import numpy as np
 from physics.ray_generator import RayGenerator
 from physics.orbit_simulator import OrbitSimulator
 from rendering.star_field import StarField
+from physics.schwarzschild_metric import SchwarzschildMetric
+from physics.schwarzschild_derivatives import SchwarzschildDerivatives
 
 class SchwarzschildRayTracer:
     """
@@ -19,8 +21,13 @@ class SchwarzschildRayTracer:
 
         self.camera = camera
 
+        metric = SchwarzschildMetric(black_hole)
+
+        derivatives = SchwarzschildDerivatives(metric)
+
         self.simulator = OrbitSimulator(
-            black_hole
+            metric,
+            derivatives
         )
 
         self.generator = RayGenerator(
@@ -74,6 +81,8 @@ class SchwarzschildRayTracer:
                     steps=5000
                 )
 
+                trajectory = result["trajectory"]
+
                 print("r start:", trajectory[0,1])
                 print("r end  :", trajectory[-1,1])
                 print("min r  :", np.min(trajectory[:,1]))
@@ -90,8 +99,6 @@ class SchwarzschildRayTracer:
 
                 #print(type(result))
                 #break
-
-                trajectory = result["trajectory"]
 
                 captured = result["captured"]
 

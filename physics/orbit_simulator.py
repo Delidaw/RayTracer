@@ -17,7 +17,12 @@ class OrbitSimulator:
         self.integrator = RK4Integrator(self.equation)
 
 
-    def simulate(self, initial_state, step_size, steps):
+    def simulate(self, 
+                    initial_state, 
+                    step_size, 
+                    steps,
+                    escape_radius = 100
+                ):
 
         """
         Simulate particle motion in an arbitrary spacetime.
@@ -54,6 +59,8 @@ without modification.
         captured = False
         escaped = False
 
+        status = "max_steps"
+
         #Schwarzschild radius
         #R_s = self.equation.connection.black_hole.schwarzschild_radius
 
@@ -65,6 +72,8 @@ without modification.
         # stores it ->
         # advance one rk4 step
         # repeat  
+
+        print(initial_state)
 
         for _ in range(steps):
 
@@ -78,8 +87,10 @@ without modification.
             #------------------
             #Escape Condition
             #------------------
-            if state[1] > 100:
+            if state[1] > escape_radius:
                 escaped = True
+                status = "escaped"
+
                 trajectory.append(state.copy())
                 break
 
@@ -90,13 +101,16 @@ without modification.
             #Stop when the particle reaches event horizon
             if state[1] <= R_h:
                 captured = True
+                status = "captured"
+
                 trajectory.append(state.copy())
                 break 
 
         return {
             "trajectory": np.array(trajectory),
             "captured": captured,
-            "escaped": escaped
+            "escaped": escaped,
+            "status": status
 }
     
     def orbital_period(self, initial_state):
