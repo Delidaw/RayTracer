@@ -93,6 +93,9 @@ plt.plot(x3, y3, label= "r = 3M - ε")
 
 plt.scatter(0, 0, s = 150, color = "black", label = "Black Hole")
 
+plt.xlim(-6, 6)
+plt.ylim(-6, 6)
+
 plt.axis("equal")
 plt.grid(True)
 plt.legend()
