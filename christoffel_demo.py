@@ -2,12 +2,15 @@ import numpy as np
 
 from models.black_hole import BlackHole
 from physics.christoffel import ChristoffelSymbols
+from physics.schwarzschild_metric import SchwarzschildMetric
 
 #Create a black hole
-bh = BlackHole(mass = 10)
+bh = BlackHole(mass=1.0)
+
+metric = SchwarzschildMetric(bh)
 
 #Create a christoffel symbols calculator
-christoffel = ChristoffelSymbols(bh)
+christoffel = ChristoffelSymbols(metric)
 
 #Create Christoffel tensor
 gamma = christoffel.compute(r = 50, theta = np.pi / 2)

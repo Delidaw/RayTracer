@@ -1,6 +1,6 @@
 from models.black_hole import BlackHole
 
-bh = BlackHole(mass = 10)
+bh = BlackHole(mass = 10)#object creation
 
 
 print("\n======================================")

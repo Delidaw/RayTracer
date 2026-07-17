@@ -9,7 +9,6 @@ bh = BlackHole(mass=1)
 potential = EffectivePotential(bh)
 
 L = 4
-
 r = np.linspace(2.1, 40, 1000)
 
 V = potential.particle(r, L)
@@ -66,7 +65,7 @@ plt.xlabel("Radius")
 
 plt.ylabel("Effective Potential")
 
-plt.title("Schwarzschild Effective Potential")
+plt.title("Schwarzschild Particle Effective Potential")
 
 plt.grid(True)
 plt.legend()

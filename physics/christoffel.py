@@ -1,5 +1,7 @@
 import numpy as np
 
+from physics.metric import Metric
+
 """
 Imagine you're walking on Earth.
 If you walk due north from India, eventually you'll reach the North Pole.
@@ -37,22 +39,52 @@ class ChristoffelSymbols:
     for Schwarzschild spacetime.
     """
 
-    def __init__(self, black_hole):
-        self.black_hole = black_hole
+    def __init__(self, metric, derivatives):
+        #self.black_hole = black_hole    schwarzschild metric
+        self.metric= metric
+        self.derivatives = derivatives
 
     def compute(self, r, theta):
 
-        R_s = self.black_hole.schwarzschild_radius
+        g = self.metric.metric_tensor(r, theta)
 
-        f = 1 - R_s / r
+        g_inv = self.metric.inverse_metric(r, theta)
+
+        dg = self.derivatives.compute(r, theta)
+
+        #R_s = self.black_hole.schwarzschild_radius
+        #R_s = self.metric.event_horizon_radius()
+
+        #f = 1 - R_s / r
 
         #4 because we have 4 coordinates (t, r, θ, φ)
         #(0, 1, 2, 3) =( t, r, θ, φ)
 
         #gamma[λ][μ][ν]
         gamma = np.zeros((4, 4, 4))
+
+
+
+        for lam in range(4):
+            for mu in range(4):
+                for nu in range(4):
+                    gamma[lam, mu, nu] = 0.0
+                    for sigma in range(4):
+                        gamma[lam, mu, nu] += (
+                            g_inv[lam, sigma]
+                            * (
+                                dg[mu, sigma, nu]
+                                + dg[nu, sigma, mu]
+                                - dg[sigma, mu, nu]
+                            )
+                        )
+
+                    gamma[lam, mu, nu] *= 0.5
+
+        return gamma
+
         
-        
+        """
         #Γ^t_tr = Γ^t_rt
         gamma[0,0,1] = R_s / (2 * r**2 * f)
         gamma[0,1,0] = gamma[0,0,1]
@@ -85,3 +117,4 @@ class ChristoffelSymbols:
         gamma[3,3,2] = gamma[3,2,3]
 
         return gamma
+        """

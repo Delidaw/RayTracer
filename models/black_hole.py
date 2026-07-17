@@ -9,10 +9,11 @@ import numpy as np
 class BlackHole:
 
     #self means data for this particular black hole
-    def __init__(self, mass, G=1.0, c=1.0):
+    def __init__(self, mass, G=1.0, c=1.0, spin = 0.0):
         self.mass = mass
         self.G = G
         self.c = c
+        self.spin = spin
 
     #@property states the calculation has become the property of the function 
     #and so we will not need to call it as a function but as a property of the class

@@ -1,12 +1,16 @@
 import numpy as np
 
 from physics.christoffel import ChristoffelSymbols
+from physics.metric import Metric
+
 
 class GeodesicEquation:
 
-    def __init__(self, black_hole):
+    def __init__(self, metric, derivatives):
 
-        self.connection = ChristoffelSymbols(black_hole)
+        self.metric = metric
+        self.metric_derivatives = derivatives
+        self.connection = ChristoffelSymbols(metric, derivatives)
 
     def derivatives(self, state):
         """

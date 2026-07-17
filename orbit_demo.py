@@ -4,12 +4,15 @@ import matplotlib.pyplot as plt
 from models.black_hole import BlackHole
 from physics.orbit_simulator import OrbitSimulator
 from physics.initial_conditions import InitialConditions
+from physics.schwarzschild_metric import SchwarzschildMetric
 
 #Create a blackhole
 bh = BlackHole(mass = 10)
 
+metric = SchwarzschildMetric(bh)
+
 #create a simulator
-simulator = OrbitSimulator(bh)
+simulator = OrbitSimulator(metric)
 
 initials = InitialConditions(bh)
 
@@ -23,11 +26,13 @@ total_time = 2 * orbital_period
 
 steps = int(total_time / step_size)
 
-trajectory = simulator.simulate(
+result = simulator.simulate(
     initial_state,
     step_size = step_size,
     steps = steps
     )
+
+trajectory = result["trajectory"]
 
 r = trajectory[:, 1]
 theta = trajectory[:, 2]

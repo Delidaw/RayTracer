@@ -8,9 +8,11 @@ class OrbitSimulator:
     Simulates particle motion in Schwarzschild spacetime.
     """
 
-    def __init__(self, black_hole):
+    def __init__(self, metric, derivatives):
 
-        self.equation = GeodesicEquation(black_hole)
+        self.metric = metric
+
+        self.equation = GeodesicEquation(metric, derivatives)
 
         self.integrator = RK4Integrator(self.equation)
 
@@ -18,7 +20,16 @@ class OrbitSimulator:
     def simulate(self, initial_state, step_size, steps):
 
         """
-        Simulate particle motion through Schwarzschild spacetime.
+        Simulate particle motion in an arbitrary spacetime.
+
+        because now it can simulate:
+
+        Schwarzschild spacertime
+        Kerr spacertime
+        Reissner–Nordström (future) spacetime
+        Kerr–Newman (future) spacetime
+
+without modification.
 
     Parameters
     ----------
@@ -40,8 +51,14 @@ class OrbitSimulator:
 
         trajectory = []
 
+        captured = False
+        escaped = False
+
         #Schwarzschild radius
-        R_s = self.equation.connection.black_hole.schwarzschild_radius
+        #R_s = self.equation.connection.black_hole.schwarzschild_radius
+
+        #event horizon
+        R_h = self.metric.event_horizon_radius()
 
         #Each iteration does 
         # #current state -> 
@@ -58,13 +75,29 @@ class OrbitSimulator:
                 step_size
             )
 
+            #------------------
+            #Escape Condition
+            #------------------
+            if state[1] > 100:
+                escaped = True
+                trajectory.append(state.copy())
+                break
+
+
+            #------------------
+            #Event Horizon (capture)
+            #------------------
             #Stop when the particle reaches event horizon
-            if state[1] <= R_s:
-                print("Particle reached event horizon.")
+            if state[1] <= R_h:
+                captured = True
                 trajectory.append(state.copy())
                 break 
 
-        return np.array(trajectory)
+        return {
+            "trajectory": np.array(trajectory),
+            "captured": captured,
+            "escaped": escaped
+}
     
     def orbital_period(self, initial_state):
         """

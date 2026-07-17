@@ -91,3 +91,27 @@ class PhotonInitialConditions:
             kr,
             kphi
         )
+
+
+    def circular_photon_orbit(self, radius):
+        R_s = self.black_hole.schwarzschild_radius
+
+        if radius <= R_s:
+            raise ValueError(
+                "Photon must start outside the event horizon."
+            )
+        
+        f = 1 - R_s / radius
+
+        kt = 1.0
+
+        kr = 0.0
+
+        kphi = np.sqrt(f) / radius
+
+        return self._build_state(
+            radius,
+            kt,
+            kr,
+            kphi
+        )
