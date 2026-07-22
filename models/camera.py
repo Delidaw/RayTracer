@@ -65,7 +65,7 @@ class Camera:
 
         X, Y = self.pixel_grid()
 
-        Z = -np.ones_like(X)
+        Z = np.ones_like(X)
 
         directions = np.stack(
             (X, Y, Z),

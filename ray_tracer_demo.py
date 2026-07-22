@@ -8,7 +8,10 @@ from models.observer import Observer
 from models.camera import Camera
 
 from rendering.schwarzschild_ray_tracer import SchwarzschildRayTracer
+import physics.ray_generator as rg
 
+print("RayGenerator file:")
+print(rg.__file__)
 bh = BlackHole(mass=1)
 
 observer = Observer(radius=50)

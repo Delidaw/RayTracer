@@ -63,8 +63,6 @@ class ChristoffelSymbols:
         #gamma[λ][μ][ν]
         gamma = np.zeros((4, 4, 4))
 
-
-
         for lam in range(4):
             for mu in range(4):
                 for nu in range(4):
@@ -80,6 +78,17 @@ class ChristoffelSymbols:
                         )
 
                     gamma[lam, mu, nu] *= 0.5
+
+        
+        print("Γ^r_tt =", gamma[1,0,0])
+        print("Γ^r_rr =", gamma[1,1,1])
+        print("Γ^r_tφ =", gamma[1,0,3])
+        print("Γ^φ_rt =", gamma[3,1,0])
+        print("Γ^φ_rφ =", gamma[3,1,3])
+
+
+
+        print("\nLargest Christoffel =", np.max(np.abs(gamma)))
 
         return gamma
 

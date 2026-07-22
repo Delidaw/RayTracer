@@ -55,6 +55,8 @@ class KerrDerivatives(MetricDerivatives):
             - N * dSigma_dr
         ) / Sigma ** 2
 
+        dg[1,3,0] = dg[1,0,3]
+
         #∂g_tϕ / ∂θ
         dN_dtheta = 4 * M * a * r * np.sin(theta) * np.cos(theta)
 

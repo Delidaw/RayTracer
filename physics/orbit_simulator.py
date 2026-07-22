@@ -84,6 +84,10 @@ without modification.
                 step_size
             )
 
+            print(
+    f"step={_}  r={state[1]:.6f}  phi={state[3]:.6f}"
+)
+
             #------------------
             #Escape Condition
             #------------------

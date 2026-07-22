@@ -1,3 +1,9 @@
+import sys
+import os
+
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
+
 import numpy as np
 
 from physics.observer_tetrad import ObserverTetrad
@@ -45,6 +51,9 @@ class RayGenerator:
             direction
         )
 
+        print("direction =", direction)
+        print("local =", local)
+
         # Transform from the observer's local frame
         # into Schwarzschild coordinates.
 
@@ -54,6 +63,8 @@ class RayGenerator:
             + local[2] * basis["theta"]
             + local[3] * basis["phi"]
         )
+
+        print("e_r =", basis["radial"])
 
         #extractingt he components
         kt = k[0]

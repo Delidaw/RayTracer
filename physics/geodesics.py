@@ -41,6 +41,14 @@ class GeodesicEquation:
                         * velocity[nu]
                     )
 
+        print("-------------------------")
+        print("r =", r)
+        print("ur =", ur)
+        print("uphi =", uφ)
+
+        print("ar =", acceleration[1])
+        print("aphi =", acceleration[3])
+
         return np.array([
             ut, 
             ur, 

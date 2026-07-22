@@ -1,13 +1,21 @@
-from models.black_hole import BlackHole
+from flask import Flask
+from flask_cors import CORS
 
-bh = BlackHole(mass = 10)#object creation
+from api.photon import photon_bp
 
+app = Flask(__name__)
 
-print("\n======================================")
-print("      SCHWARZSCHILD BLACK HOLE")
-print("======================================")
+CORS(app)
 
-for key, value in bh.summary().items():
-    print(f"{key:<25}: {value:.3f}")
+app.register_blueprint(photon_bp)
 
-print("======================================")
+@app.route("/")
+def home():
+    return {
+        "project": "Stella Nova",
+        "engine": "General Relativity Physics Engine",
+        "status": "Running"
+    }
+
+if __name__ == "__main__":
+    app.run(debug=True)
