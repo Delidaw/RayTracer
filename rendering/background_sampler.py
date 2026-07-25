@@ -25,4 +25,13 @@ class BackgroundSampler:
         if norm != 0:
             direction = direction / norm
 
-        return self.star_field.sample(direction)
+        value = self.star_field.sample(direction)
+
+        return np.array(
+            [
+                value,
+                value,
+                value
+            ],
+            dtype=np.uint8
+        )

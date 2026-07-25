@@ -78,12 +78,12 @@ Phase 3: Photon Ray Tracing
 ✓ Photon Sphere
 ✓ Radial Photon
 ✓ Proper Null Four-Momentum
-⬜ Impact Parameter Validation
+✓ Impact Parameter Validation
 ✓ Tetrad Transformation
 ⬜ Escape/Capture Detection
 ⬜ Critical Impact Parameter
 ⬜ Photon Classification
-⬜ Schwarzschild Ray Tracer
+✓ Schwarzschild Ray Tracer
 
 Phase 4: Rendering
 ---------------------------------------------------------
@@ -97,23 +97,39 @@ Phase 4: Rendering
 ✓ Ray Generation
 ⬜ Image Plane
 ✓ Ray Physics
-⬜ Black Hole Shadow
+✓ Black Hole Shadow
 ⬜ Background Texture
 ⬜ Redshift Coloring
 ⬜ Anti-aliasing
+✓ Schwarzschild shadow
+✓ Scene
+⬜ Accretion disk intersection
+⬜ Accretion disk rendering
+⬜ Doppler beaming
+⬜ Lensing
+⬜ Adaptive sampling
+⬜ High-resolution rendering
+✓ First rendered image
+✅ Camera
+✅ Scene
+✅ BackgroundSampler
+✅ DiskIntersector
+✅ DiskShader (Radial Brightness)
+✅ ShadowClassifier
 
 Phase 5: Kerr Black Hole
 ---------------------------------------------------------
 ⬜ Kerr Impact Parameter
-⬜ KerrBlackHole
-⬜ Frame Dragging
-⬜ Kerr Photon Orbits
-⬜ ISCO
-⬜ Ergosphere
-⬜ Kerr Photon Sphere
+✓ KerrBlackHole / General Black Hole
+✓ Frame Dragging
+✓ Kerr Photon Orbits
+✓ Kerr ISCO
+✓ Ergosphere
+✓ Kerr Photon Sphere
 ✓ Kerr Metric
 ✓ Kerr Christoffels
-⬜ Kerr Ray Tracer
+✓ Kerr Ray Tracer Skeleton
+✓ Basic Kerr Shadow
 ⬜ Rotating BlackHole Shadow
 ✓ Generic Kerr Christoffel Validation
 ✓ Kerr Geodesic Equation
@@ -121,6 +137,10 @@ Phase 5: Kerr Black Hole
 ✓ Kerr Orbit Simulator
 ✓ Kerr Metric Validation (a = 0 → Schwarzschild) ⭐ NEW
 ✓ Kerr Metric Derivatives ⭐ NEW
+✅ Ergosphere equations
+✅ Ergosphere visualization
+✅ Kerr cross-section figure
+✅ Event Horizon
 
 Phase 6: Website
 ---------------------------------------------------------
@@ -6133,3 +6153,85 @@ FINALLY
                         │
                         ▼
                 Pixel Color
+
+
+
+
+
+
+
+
+
+
+
+Ergosphere
+↓
+ISCO
+↓
+Photon Sphere
+↓
+Impact Parameters
+↓
+Kerr Photon Orbits
+↓
+Rotating Shadow
+↓
+Accretion Disk
+↓
+Einstein Ring
+↓
+Final Website
+
+
+
+
+
+
+
+
+
+Version 1
+⬜⬛
+
+↓
+
+Version 2
+Black hole shadow
+
+↓
+
+Version 3
+Accretion disk
+
+↓
+
+Version 4
+Stars
+
+↓
+
+Version 5
+Rotating Kerr shadow
+
+↓
+
+Version 6
+Interactive website
+
+
+
+
+
+
+
+
+☐ Create rendering/kerr_ray_tracer.py
+☐ Create image array
+☐ Loop over pixels
+☐ Generate camera rays
+☐ Launch Kerr photons
+☐ Integrate geodesics
+☐ Detect capture
+☐ Color pixels
+☐ Save PNG
+☐ First Kerr Shadow

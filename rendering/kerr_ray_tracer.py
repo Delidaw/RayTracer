@@ -42,8 +42,12 @@ class KerrRayTracer:
         height = self.camera.height
 
         image = np.zeros(
-            (height, width),
-            dtype = np.uint8
+            (
+                height,
+                width,
+                3
+            ),
+            dtype=np.uint8
         )
 
         directions = self.camera.ray_directions()
@@ -68,21 +72,27 @@ class KerrRayTracer:
                 trajectory = result["trajectory"]
 
                 if self.shadow_classifier.is_shadow(result):
-                    image[j, i] = 0
+                    image[j, i] = [0,0,0]
                     
                 hit, hit_state = self.disk_intersector.intersects(
                     trajectory
                 )
 
-                elif hit:
+                if hit:
                     image[j, i] = self.disk_shader.shade(
                         hit_state
                     )
 
                 else:
-                    image[j, i] = self.background.sample(
+                    value = self.background.sample(
                         trajectory[-1]
                     )
+
+                    image[j, i] = [
+                        value,
+                        value,
+                        value
+                    ]
 
         return image
         """

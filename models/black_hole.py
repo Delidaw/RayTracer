@@ -1,8 +1,10 @@
-# ===============================
-# Schwarzschild Black Hole Model
-# Phase 1: Physical Properties
-# ===============================
-
+# =====================================================
+# Generic Black Hole Model
+# Supports:
+#   • Schwarzschild (spin = 0)
+#   • Kerr (spin ≠ 0)
+# phase 1: phase1_demo_black_hole.py
+# =====================================================
 
 import numpy as np
 

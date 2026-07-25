@@ -43,4 +43,48 @@ class DiskShader:
             0,
             255
         )
-        return np.uint8(brightness)
+
+        colour = self.temperature_to_rgb(
+            temperature
+        )
+
+        colour = (
+            colour.astype(float)
+            * brightness / 255
+        )
+
+        return colour.astype(np.uint8)
+
+    def temperature_to_rgb(self, temperature):
+        """
+        Converts a normalized temperature (0–1)
+        into an approximate accretion disk colour.
+
+        0 -> cool (red)
+        1 -> hot (white)
+        """
+
+        temperature = np.clip(
+            temperature,
+            0.0,
+            1.0
+        )
+
+        red = 255
+
+        green = int(
+            80 + 175 * temperature
+        )
+
+        blue = int(
+            30 + 225 * temperature
+        )
+
+        return np.array(
+            [
+                red,
+                green,
+                blue    
+            ],
+            dtype=np.uint8
+        )
