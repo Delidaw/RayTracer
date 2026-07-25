@@ -31,7 +31,7 @@ class KerrRayTracer:
         for i in range(height):
             for j in range(width):
 
-                direction = directions[i, j]
+                direction = directions[j, i]
 
                 state = self.ray_generator.generate(
                     observer,
@@ -40,13 +40,13 @@ class KerrRayTracer:
 
                 result = self.simulator.simulate(
                     state,
-                    step_size = 0.01,
-                    steps = 5000
+                    step_size = 0.05,
+                    steps = 300
                 )
 
                 if result["captured"]:
-                    image[i, j] = 0
+                    image[j, i] = 0
                 else:
-                    image[i, j] = 255
+                    image[j, i] = 255
 
         return image
