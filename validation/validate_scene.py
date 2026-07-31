@@ -43,7 +43,9 @@ camera = Camera(
     fov=60
 )
 
-stars = StarField()
+texture_path = "assets/milky_way.jpg"
+
+stars = StarField(texture_path)
 
 disk = AccretionDisk(
     inner_radius=3,

@@ -115,20 +115,20 @@ class KerrDerivatives(MetricDerivatives):
         )
 
 
-        print("dg[r,t,t] =", dg[1,0,0])
-        print("dg[theta,t,t] =", dg[2,0,0])
+        #print("dg[r,t,t] =", dg[1,0,0])
+        #print("dg[theta,t,t] =", dg[2,0,0])
 
-        print("dg[r,r,r] = ", dg[1,1,1])
-        print("dg[theta,r,r] = ", dg[2,1,1])
+        #print("dg[r,r,r] = ", dg[1,1,1])
+        #print("dg[theta,r,r] = ", dg[2,1,1])
 
-        print("dg[r,t,phi] = ", dg[1,0,3])
-        print("dg[theta,t,phi] = ", dg[2,0,3])
+        #print("dg[r,t,phi] = ", dg[1,0,3])
+        #print("dg[theta,t,phi] = ", dg[2,0,3])
 
-        print("dg[r,theta,theta] =", dg[1,2,2])
-        print("dg[theta,theta,theta] =", dg[2,2,2])
+        #print("dg[r,theta,theta] =", dg[1,2,2])
+        #print("dg[theta,theta,theta] =", dg[2,2,2])
 
-        print("dg[r,phi,phi] =", dg[1,3,3])
-        print("dg[theta,phi,phi] =", dg[2,3,3])
+        #print("dg[r,phi,phi] =", dg[1,3,3])
+        #print("dg[theta,phi,phi] =", dg[2,3,3])
 
         
 

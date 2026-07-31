@@ -8,7 +8,7 @@ from models.black_hole import BlackHole
 from models.observer import Observer
 from physics.observer_tetrad import ObserverTetrad
 
-from rendering.camera import Camera
+from models.camera import Camera
 from rendering.image_plane import ImagePlane
 from rendering.ray_generator import RayGenerator
 from rendering.ray_launcher import RayLauncher
@@ -20,6 +20,7 @@ observer = Observer(radius=20.0)
 tetrad = ObserverTetrad(black_hole)
 
 camera = Camera(
+    observer = observer,
     width=800,
     height=800,
     fov=60

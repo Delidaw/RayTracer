@@ -3,15 +3,18 @@ import os
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
-from rendering.camera import Camera
+from models.camera import Camera
 from rendering.image_plane import ImagePlane
 from rendering.ray_generator import RayGenerator
+from models.observer import Observer
 
 # ------------------------
 # Build rendering pipeline
 # ------------------------
 
+observer = Observer(radius = 50)
 camera = Camera(
+    observer = observer,
     width=800,
     height=800,
     fov=60

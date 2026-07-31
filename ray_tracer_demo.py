@@ -19,7 +19,8 @@ observer = Observer(radius=50)
 camera = Camera(
     observer,
     width=5,#2500 Rays
-    height=5
+    height=5,
+    fov = 60
 )
 
 renderer = SchwarzschildRayTracer(

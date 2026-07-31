@@ -1,5 +1,3 @@
-#legacy_camera.py
-
 
 import numpy as np
 
@@ -44,7 +42,7 @@ class Camera:
         y = np.linspace(
             -half_size,
             half_size,
-            self.width
+            self.height
         )
 
         X, Y = np.meshgrid(x, y)
@@ -81,4 +79,35 @@ class Camera:
         directions /= norms
 
         return directions
+
+    def ray_direction(self, x, y):
+        """
+        Generate a normalized ray direction for a single pixel
+        or subpixel coordinate.
+        """
+
+        half_size = np.tan(
+            np.radians(self.fov) / 2
+        )
+
+        px = -half_size + (
+            2.0 * half_size * x / self.width
+        )
+
+        py = -half_size + (
+            2.0 * half_size * y / self.height
+        )
+
+        direction = np.array(
+            [px, py, 1.0],
+            dtype=np.float64
+        )
+
+        direction /= np.linalg.norm(direction)
+
+        return direction
+
+    @property 
+    def aspect_ratio(self):
+        return self.width / self.height
 

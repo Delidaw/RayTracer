@@ -80,15 +80,15 @@ class ChristoffelSymbols:
                     gamma[lam, mu, nu] *= 0.5
 
         
-        print("Γ^r_tt =", gamma[1,0,0])
-        print("Γ^r_rr =", gamma[1,1,1])
-        print("Γ^r_tφ =", gamma[1,0,3])
-        print("Γ^φ_rt =", gamma[3,1,0])
-        print("Γ^φ_rφ =", gamma[3,1,3])
+        #print("Γ^r_tt =", gamma[1,0,0])
+        #print("Γ^r_rr =", gamma[1,1,1])
+        #print("Γ^r_tφ =", gamma[1,0,3])
+        #print("Γ^φ_rt =", gamma[3,1,0])
+        #print("Γ^φ_rφ =", gamma[3,1,3])
 
 
 
-        print("\nLargest Christoffel =", np.max(np.abs(gamma)))
+        #print("\nLargest Christoffel =", np.max(np.abs(gamma)))
 
         return gamma
 

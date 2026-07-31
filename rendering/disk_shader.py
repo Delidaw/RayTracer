@@ -6,8 +6,9 @@ class DiskShader:
     Computes the brightness of the accretion disk.
     """
 
-    def __init__(self, disk):
+    def __init__(self, disk, black_hole):
         self.disk = disk
+        self.black_hole = black_hole
 
     def shade(self, state):
         """
@@ -34,7 +35,9 @@ class DiskShader:
 
         phi = state[3]
 
-        doppler = 1.0 + 0.3 * np.cos(phi)
+        v_los = -np.sin(phi)
+
+        doppler = 1.0 + 0.4 * v_los
 
         brightness *= doppler
 
@@ -51,6 +54,45 @@ class DiskShader:
         colour = (
             colour.astype(float)
             * brightness / 255
+        )
+
+        # ------------------------------------
+        # Gravitational redshift
+        # ------------------------------------
+
+        M = self.black_hole.mass
+
+        g = np.sqrt(
+            max(
+                1e-6,
+                1 - 2 * M / r
+            )
+        )
+
+        if v_los > 0:
+            #approaching
+            colour[2] *= 1.25 #blue
+            colour[1] *= 1.10
+
+        else:
+            #receding
+            colour[0] *= 1.15 #red
+            colour[2] *= 0.70
+
+        colour = np.clip(
+            colour, 
+            0,
+            255
+        )
+
+        colour[0] *= 1.0
+        colour[1] *= g
+        colour[2] *= g * g
+
+        colour = np.clip(
+            colour,
+            0,
+            255
         )
 
         return colour.astype(np.uint8)
@@ -73,11 +115,11 @@ class DiskShader:
         red = 255
 
         green = int(
-            80 + 175 * temperature
+            120 + 135 * temperature
         )
 
         blue = int(
-            30 + 225 * temperature
+            40 + 170 * temperature
         )
 
         return np.array(

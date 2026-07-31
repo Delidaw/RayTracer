@@ -36,38 +36,35 @@ General Relativity Engine
 Phase 1: Schwarzschild Engine                    ✅ COMPLETE
 ---------------------------------------------------------
 ✓ BlackHole
-✓ Schwarzschild Metric
-✓ Christoffel Symbols
-✓ Geodesic Equation
-✓ RK4 Integrator
-✓ Orbit Simulator
-✓ Validation (basic)
-
 ✅ BlackHole
-✅ Metric abstraction (Metric base class) ⭐ NEW
-✅ Schwarzschild Metric
-✅ Metric Derivatives abstraction ⭐ NEW
-✅ Schwarzschild Metric Derivatives ⭐ NEW
-✅ Generic Christoffel Symbols (tensor formula) ⭐ NEW
+✓ Christoffel Symbols
 ✅ Christoffel Validation (old vs generic) ⭐ NEW
-✅ Generic Geodesic Equation ⭐ UPDATED
-✅ RK4 Integrator
-✅ Orbit Simulator
 ✅ Engine Validation (basic)
+✓ Geodesic Equation
+✅ Generic Geodesic Equation ⭐ UPDATED
+✅ Generic Christoffel Symbols (tensor formula) ⭐ NEW
+✅ Metric Derivatives abstraction ⭐ NEW
+✅ Metric abstraction (Metric base class) ⭐ NEW
+✓ Orbit Simulator
+✓ RK4 Integrator
+✓ Schwarzschild Metric
+✅ Schwarzschild Metric
+✅ Schwarzschild Metric Derivatives ⭐ NEW
+✓ Validation (basic)
 
 Phase 2: Particle Dynamics                       
 ---------------------------------------------------------
+✓ Angular Momentum Conservation
 ✓ Circular Orbit
-✓ Radial Infall
 ✓ Escape Trajectory
 ✓ Engine Validation (Energy + Angular Momentum)
 ✓ Elliptical Orbit
-✓ Photon Initial Conditions
-✓ Orbit Classification
 ✓ Effective Potential
 ✓ Energy Conservation
-✓ Angular Momentum Conservation
 ✓ Multiple Particle Simulation
+✓ Orbit Classification
+✓ Photon Initial Conditions
+✓ Radial Infall
 
 Phase 3: Photon Ray Tracing
 ---------------------------------------------------------
@@ -80,9 +77,9 @@ Phase 3: Photon Ray Tracing
 ✓ Proper Null Four-Momentum
 ✓ Impact Parameter Validation
 ✓ Tetrad Transformation
-⬜ Escape/Capture Detection
-⬜ Critical Impact Parameter
-⬜ Photon Classification
+✓ Escape/Capture Detection
+✓ Critical Impact Parameter
+✓ Photon Classification
 ✓ Schwarzschild Ray Tracer
 
 Phase 4: Rendering
@@ -92,34 +89,50 @@ Phase 4: Rendering
 ✓ StarField
 ✓ Local Orthonormal Tetrad
 ✓ Rendering Loop
-⬜ Accretion Disk
+✓ Accretion Disk
 ✓ Schwarzschild Ray Tracer
 ✓ Ray Generation
-⬜ Image Plane
+✓ Image Plane
 ✓ Ray Physics
 ✓ Black Hole Shadow
 ⬜ Background Texture
-⬜ Redshift Coloring
+✓ Redshift Coloring
 ⬜ Anti-aliasing
 ✓ Schwarzschild shadow
 ✓ Scene
 ⬜ Accretion disk intersection
-⬜ Accretion disk rendering
-⬜ Doppler beaming
+✓ Accretion disk rendering
+✓ Doppler beaming
 ⬜ Lensing
 ⬜ Adaptive sampling
 ⬜ High-resolution rendering
 ✓ First rendered image
 ✅ Camera
 ✅ Scene
-✅ BackgroundSampler
+✅ Background Sampler
 ✅ DiskIntersector
 ✅ DiskShader (Radial Brightness)
 ✅ ShadowClassifier
+✓ Adaptive sampling
+✓ Anti-aliasing
+⏳ Higher-order photon rings
+✓ Bloom / HDR
+✅ Tone Mapping
+✓ Kerr caustics
+⏳ Time-dependent rendering (camera fly-through)
+🌌 Real Sky Texture Mapping
+
+✓ Environment texture loading
+✓ Equirectangular mapping
+✓ Direction → UV conversion
+✓ Bilinear interpolation
+✓ Validation
+✓ HDR environment maps
+□ Floating-point texture support
 
 Phase 5: Kerr Black Hole
 ---------------------------------------------------------
-⬜ Kerr Impact Parameter
+✓ Kerr Impact Parameter
 ✓ KerrBlackHole / General Black Hole
 ✓ Frame Dragging
 ✓ Kerr Photon Orbits
@@ -130,7 +143,7 @@ Phase 5: Kerr Black Hole
 ✓ Kerr Christoffels
 ✓ Kerr Ray Tracer Skeleton
 ✓ Basic Kerr Shadow
-⬜ Rotating BlackHole Shadow
+✓ Rotating BlackHole Shadow
 ✓ Generic Kerr Christoffel Validation
 ✓ Kerr Geodesic Equation
 ✓ Kerr Geodesic metric architecture
@@ -188,6 +201,12 @@ Phase 9: Research & Publication
 ⬜ Results
 ⬜ GitHub Documentation
 ⬜ Competition Presentation
+
+
+✨ Integrate adaptive supersampling (you already have the framework)
+
+⚡ Multithreaded rendering
+🎬 Animation engine
 
 
 
