@@ -1,6 +1,22 @@
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
+# ======================================================
+# Project Root
+# ======================================================
+
+PROJECT_ROOT = os.path.dirname(
+    os.path.dirname(
+        os.path.abspath(__file__)
+    )
+)
+
+sys.path.insert(0, PROJECT_ROOT)
+
+
+# ======================================================
+# Imports
+# ======================================================
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -10,15 +26,16 @@ from models.observer import Observer
 from models.camera import Camera
 from models.scene import Scene
 from models.accretion_disk import AccretionDisk
+from models.star_field import StarField
 
 from physics.kerr_metric import KerrMetric
 from physics.kerr_derivatives import KerrDerivatives
 from physics.kerr_ray_generator import KerrRayGenerator
 from physics.orbit_simulator import OrbitSimulator
-from models.star_field import StarField
 
 from rendering.kerr_ray_tracer import KerrRayTracer
-
+from rendering.animation_engine import AnimationEngine
+from rendering.animation_exporter import AnimationExporter
 
 # ======================================================
 # Black Hole
@@ -36,7 +53,9 @@ bh = BlackHole(
 
 metric = KerrMetric(bh)
 
-derivatives = KerrDerivatives(metric)
+derivatives = KerrDerivatives(
+    metric
+)
 
 simulator = OrbitSimulator(
     metric,
@@ -63,6 +82,7 @@ disk = AccretionDisk(
     brightness=255
 )
 
+
 # ======================================================
 # Star Field
 # ======================================================
@@ -71,10 +91,6 @@ star_field = StarField(
     "assets/milky_way.jpg"
 )
 
-direction = np.array([1.0, 0.0, 0.0])
-
-print(type(star_field.sample(direction)))
-print(star_field.sample(direction))
 
 # ======================================================
 # Scene
@@ -94,20 +110,10 @@ scene = Scene(
 
 camera = Camera(
     observer=observer,
-    width=10,      # Increase later
-    height=10,
+    width=5,
+    height=5,
     fov=60
 )
-
-directions = camera.ray_directions()
-
-centre = directions[
-    camera.height // 2,
-    camera.width // 2
-]
-
-print("\n========== Centre Camera Ray ==========")
-print(centre)
 
 
 # ======================================================
@@ -118,18 +124,9 @@ generator = KerrRayGenerator(
     metric
 )
 
-print("\n========== Centre Photon ==========")
-
-state = generator.generate(
-    observer,
-    centre
-)
-
-print(state)
-
 
 # ======================================================
-# Renderer
+# Kerr Ray Tracer
 # ======================================================
 
 tracer = KerrRayTracer(
@@ -137,36 +134,107 @@ tracer = KerrRayTracer(
     camera,
     generator,
     simulator,
-    steps = 20,
-    max_workers = 1
+    steps=20
 )
 
 
 # ======================================================
-# Render
-# ======================================================
-print("Before render")
-direction = np.array([1.0, 0.0, 0.0])
-print(type(star_field.sample(direction)))
-print(star_field.sample(direction))
-print("Calling render...")
-
-image = tracer.render()
-
-
-# ======================================================
-# Display
+# Animation Engine
 # ======================================================
 
-"""
+animation = AnimationEngine(
+    tracer=tracer,
+    camera=camera,
+    frames=3
+)
+
+
+# ======================================================
+# Render Animation Frames
+# ======================================================
+
+print()
+print("=" * 50)
+print("Starting Stella Nova Animation")
+print("=" * 50)
+
+frames = animation.render_frames()
+
+# ======================================================
+# Export Animation
+# ======================================================
+
+exporter = AnimationExporter(
+    fps=2
+)
+
+exporter.save_gif(
+    frames,
+    "stella_nova_animation.gif"
+)
+
+exporter.save_mp4(
+    frames,
+    "stella_nova_animation.mp4"
+)
+
+print()
+print("=" * 50)
+print("CAMERA MOTION VALIDATION")
+print("=" * 50)
+
+for frame in range(3):
+    phi = (
+        2.0 * np.pi *
+        frame /
+        animation.frames
+    )
+
+    print(
+        f"Frame {frame + 1}: "
+        f"phi = {phi:.6f} rad"
+    )
+
+
+# ======================================================
+# Validation Results
+# ======================================================
+
+print()
+print("=" * 50)
+print("ANIMATION VALIDATION")
+print("=" * 50)
+
+print(
+    "Number of frames :",
+    len(frames)
+)
+
+for i, frame in enumerate(frames):
+
+    print(
+        f"Frame {i + 1}: "
+        f"shape={frame.shape}, "
+        f"min={frame.min():.6f}, "
+        f"max={frame.max():.6f}"
+    )
+
+
+# ======================================================
+# Display Last Frame
+# ======================================================
+
 plt.imshow(
-    image,
-    origin="lower"
+    np.clip(
+        frames[-1] / 255.0,
+        0,
+        1
+    )
 )
-"""
-plt.imshow(np.clip(image / 255.0, 0, 1))
 
-plt.title("Stella Nova - First Kerr Render")
+plt.title(
+    "Stella Nova - Animation Frame 3"
+)
 
 plt.axis("off")
 

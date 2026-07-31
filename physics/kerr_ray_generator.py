@@ -37,10 +37,10 @@ class KerrRayGenerator:
             + local[3] * basis["phi"]
         )
 
-        print("kt =", k[0])
-        print("kr =", k[1])
-        print("ktheta =", k[2])
-        print("kphi =", k[3])
+        #print("kt =", k[0])
+        #print("kr =", k[1])
+        #print("ktheta =", k[2])
+        #print("kphi =", k[3])
 
         kt = k[0]
         kr = k[1]

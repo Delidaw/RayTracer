@@ -32,6 +32,7 @@ class KerrRayTracer:
         simulator,
         step_size=0.05,
         steps=300,
+        max_workers = None,
     ):
 
         self.scene = scene
@@ -40,6 +41,8 @@ class KerrRayTracer:
         self.simulator = simulator
         self.step_size = step_size
         self.steps = steps
+
+        self.max_workers = max_workers
 
         self.background = BackgroundSampler(
             scene.star_field
@@ -101,7 +104,9 @@ class KerrRayTracer:
         print(f"Rendering {width} x {height}")
         print()
 
-        with ThreadPoolExecutor() as executor:
+        with ThreadPoolExecutor(
+            max_workers = self.max_workers
+        ) as executor:
 
             worker = partial(
                 self.render_row,

@@ -2,37 +2,39 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
-from models.star_field import StarField
+
 import numpy as np
 
-texture_path = "assets/milky_way.jpg"
+from models.star_field import StarField
 
-stars = StarField(texture_path)
 
-print(stars.sample(np.array([0,0,1])))
+print("=" * 60)
+print("STAR FIELD VALIDATION")
+print("=" * 60)
 
-TEXTURE = "assets/milky_way.jpg"   # <-- your actual texture path
+star_field = StarField(
+    "assets/milky_way.jpg"
+)
 
-stars = StarField(TEXTURE)
-
-directions = [
+test_directions = [
     np.array([1.0, 0.0, 0.0]),
-    np.array([-1.0, 0.0, 0.0]),
     np.array([0.0, 1.0, 0.0]),
+    np.array([-1.0, 0.0, 0.0]),
     np.array([0.0, -1.0, 0.0]),
     np.array([0.0, 0.0, 1.0]),
     np.array([0.0, 0.0, -1.0]),
-    np.array([1.0, 1.0, 1.0]),
 ]
 
+for i, direction in enumerate(test_directions, start=1):
+
+    colour = star_field.sample(direction)
+
+    print(
+        f"Direction {i}: "
+        f"{direction} -> "
+        f"colour = {colour}"
+    )
+
 print()
-print("========== Star Field Validation ==========")
-
-for d in directions:
-
-    colour = stars.sample(d)
-
-    print(f"{d} -> {colour}")
-
-print()
-print("✓ Bilinear sampling works.")
+print("Texture size :", star_field.width, "x", star_field.height)
+print("=" * 60)
