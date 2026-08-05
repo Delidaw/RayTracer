@@ -30,19 +30,18 @@ class KerrRayTracer:
         camera,
         ray_generator,
         simulator,
-        step_size=0.05,
-        steps=300,
-        max_workers = None,
+        settings,
     ):
 
         self.scene = scene
         self.camera = camera
         self.ray_generator = ray_generator
         self.simulator = simulator
-        self.step_size = step_size
-        self.steps = steps
+        self.settings = settings
 
-        self.max_workers = max_workers
+        self.step_size = settings.step_size
+        self.steps = settings.steps
+        self.max_workers = settings.max_workers
 
         self.background = BackgroundSampler(
             scene.star_field
@@ -70,7 +69,7 @@ class KerrRayTracer:
         self.adaptive_sampler = AdaptiveSampler()
 
         self.tone_mapper = ToneMapper(
-            exposure = 1.0
+            exposure = settings.exposure
         )
 
         self.bloom = Bloom()
@@ -147,13 +146,11 @@ class KerrRayTracer:
         #print(hdr.image()[0,0])
         #print(hdr.image()[5,5])
 
-        image = self.bloom.apply(
-          image
-        )
+        if self.settings.bloom:
+            image = self.bloom.apply(image)
 
-        image = self.blur.apply(
-          image
-        )
+        if self.settings.blur:
+            image = self.blur.apply(image)
 
         return image
         #return hdr.image()
@@ -271,6 +268,13 @@ class KerrRayTracer:
         )
 
         trajectory = result["trajectory"]
+
+        if result["status"] == "numerical_error":
+
+            return np.zeros(
+                3,
+                dtype=np.float32
+            )
 
         # ---------------------------------------------
         # Black hole capture

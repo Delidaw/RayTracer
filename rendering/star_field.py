@@ -23,6 +23,14 @@ class StarField:
 
     def sample(self, direction):
 
+        direction = np.asarray(direction, dtype=np.float64)
+
+        if (
+            not np.all(np.isfinite(direction))
+            or np.linalg.norm(direction) == 0
+        ):
+            return np.zeros(3, dtype=np.float32)
+
         direction = direction / np.linalg.norm(direction)
 
         x, y, z = direction

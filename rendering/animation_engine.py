@@ -1,5 +1,8 @@
 import numpy as np
 
+from rendering.frame_exporter import FrameExporter
+from rendering.video_encoder import VideoEncoder
+from rendering.camera_paths import OrbitPath
 
 class AnimationEngine:
     """
@@ -12,16 +15,17 @@ class AnimationEngine:
     def __init__(
         self,
         tracer,
-        camera,
-        frames=10
+        controller,
+        frames=10,
     ):
         self.tracer = tracer
-        self.camera = camera
+        self.controller = controller
         self.frames = frames
 
-    def render_frames(self):
+        self.exporter = FrameExporter()
+        self.encoder = VideoEncoder()
 
-        rendered_frames = []
+    def render_frames(self):
 
         for frame in range(self.frames):
 
@@ -37,9 +41,20 @@ class AnimationEngine:
 
             image = self.tracer.render()
 
-            rendered_frames.append(image)
+            self.exporter.save(
+                image,
+                frame
+            )
 
-        return rendered_frames
+        print()
+        print("Encoding video...")
+
+        self.encoder.encode()
+
+        print()
+        print("=" * 50)
+        print("Animation Complete")
+        print("=" * 50)
 
     def update(self, frame):
         """
@@ -54,5 +69,10 @@ class AnimationEngine:
         observer.phi = (
             2.0 * np.pi *
             frame /
+            self.frames
+        )
+
+        self.controller.update(
+            frame,
             self.frames
         )

@@ -152,6 +152,37 @@
     </div>
   </div>
 
+  <div style="margin-top:20px; text-align:center;">
+
+    <button
+        id="renderBtn"
+        style="
+            padding:12px 24px;
+            font-size:15px;
+            cursor:pointer;
+        ">
+        Render with Stella Nova
+    </button>
+
+    <p
+        id="status"
+        style="margin-top:10px;">
+        Ready
+    </p>
+
+  </div>
+
+  <img
+    id="renderOutput"
+    src=""
+    style="
+        display:none;
+        margin-top:20px;
+        max-width:100%;
+        border:1px solid #333;
+    "
+  >
+
   <div class="panel" style="margin-top:22px;">
     <h3 style="font-size:14px; color:var(--amber);">Reading the render</h3>
     <p style="color:var(--text-dim); font-size:13px; margin:0;">
@@ -532,6 +563,50 @@ function render(now) {
   requestAnimationFrame(render);
 }
 requestAnimationFrame(render);
+
+const renderBtn = document.getElementById("renderBtn");
+const statusBox = document.getElementById("status");
+const output = document.getElementById("renderOutput");
+
+renderBtn.onclick = async () => {
+
+    statusBox.textContent = "Rendering...";
+
+    const response = await fetch(
+        "http://127.0.0.1:5000/render",
+        {
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+                mass: state.mass,
+
+                distance: state.dist,
+
+                fov: state.fovDeg,
+
+                resolution: state.res
+
+            })
+        }
+    );
+
+    const result = await response.json();
+
+    output.src =
+        "http://127.0.0.1:5000/" +
+        result.image +
+        "?t=" +
+        Date.now();
+
+    output.style.display = "block";
+
+    statusBox.textContent = "Render Complete";
+};
 </script>
 </body>
 </html>

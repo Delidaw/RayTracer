@@ -35,7 +35,20 @@ from physics.orbit_simulator import OrbitSimulator
 
 from rendering.kerr_ray_tracer import KerrRayTracer
 from rendering.animation_engine import AnimationEngine
-from rendering.animation_exporter import AnimationExporter
+from rendering.render_settings import RenderSettings
+
+# ======================================================
+# Render Settings
+# ======================================================
+
+settings = RenderSettings(
+    step_size = 0.05,
+    steps = 20,
+    max_workers  =1,
+    exposure=1.0,
+    bloom=True,
+    blur=True
+)
 
 # ======================================================
 # Black Hole
@@ -134,7 +147,7 @@ tracer = KerrRayTracer(
     camera,
     generator,
     simulator,
-    steps=20
+    settings,
 )
 
 
@@ -158,25 +171,25 @@ print("=" * 50)
 print("Starting Stella Nova Animation")
 print("=" * 50)
 
-frames = animation.render_frames()
+animation.render_frames()
 
 # ======================================================
 # Export Animation
 # ======================================================
 
-exporter = AnimationExporter(
-    fps=2
-)
+#exporter = AnimationExporter(
+#    fps=2
+#)
 
-exporter.save_gif(
-    frames,
-    "stella_nova_animation.gif"
-)
+#exporter.save_gif(
+#    frames,
+#    "stella_nova_animation.gif"
+#)
 
-exporter.save_mp4(
-    frames,
-    "stella_nova_animation.mp4"
-)
+#exporter.save_mp4(
+#    frames,
+#    "stella_nova_animation.mp4"
+#)
 
 print()
 print("=" * 50)
@@ -195,7 +208,6 @@ for frame in range(3):
         f"phi = {phi:.6f} rad"
     )
 
-
 # ======================================================
 # Validation Results
 # ======================================================
@@ -205,11 +217,11 @@ print("=" * 50)
 print("ANIMATION VALIDATION")
 print("=" * 50)
 
-print(
-    "Number of frames :",
-    len(frames)
-)
-
+#print(
+#    "Number of frames :",
+#    len(frames)
+#)
+"""
 for i, frame in enumerate(frames):
 
     print(
@@ -218,12 +230,12 @@ for i, frame in enumerate(frames):
         f"min={frame.min():.6f}, "
         f"max={frame.max():.6f}"
     )
-
+"""
 
 # ======================================================
 # Display Last Frame
 # ======================================================
-
+"""
 plt.imshow(
     np.clip(
         frames[-1] / 255.0,
@@ -239,3 +251,11 @@ plt.title(
 plt.axis("off")
 
 plt.show()
+"""
+
+print()
+print("=" * 50)
+print("ANIMATION VALIDATION COMPLETE")
+print("=" * 50)
+print("Frames exported to : frames/")
+print("Video created      : black_hole.mp4")

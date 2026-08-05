@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Event Horizon — Black Hole Ray Tracing</title>
+<title>PHOTON FORGE
+  A General Relativity Visualization Engine
+</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -86,11 +88,15 @@
   <section class="hero">
     <div>
       <div class="eyebrow">Ray Tracing Black Holes</div>
-      <h1>Ray-traced <span class="accent">gravity</span>,<br/>rendered in real time.</h1>
+      <h1>Ray-traced <span class="accent">spacetime</span>.<br/>Rendered through Einstein's universe.</h1>
       <p class="lead">
-        A from-scratch renderer that fires light rays through curved spacetime around a
-        Schwarzschild black hole, bending them geodesic-by-geodesic until they escape,
-        orbit, or fall past the event horizon. An ML surrogate model then learns to
+        A computational general relativity engine that integrates
+        null geodesics through curved spacetime around Schwarzschild
+        and Kerr black holes.
+
+        Simulating gravitational lensing, photon rings,
+        accretion disks, and relativistic effects from first principles.
+        An ML surrogate model then learns to
         approximate the expensive integration, trading a bit of accuracy for a lot of speed.
       </p>
       <div class="cta-row">
@@ -381,7 +387,7 @@ function draw() {
   for (let ring = 0; ring < 26; ring++) {
     const frac = ring / 26;
     const r = rInner + frac * (rOuter - rInner);
-    const angleOffset = t * (0.6 + frac * 0.4);
+    const angleOffset = t * (1 + spin * rFactor);
     const alpha = (1 - frac) * 0.55;
     const hue = 40 - frac * 25;
     ctx.beginPath();

@@ -2,6 +2,8 @@ import numpy as np
 
 from physics.geodesics import GeodesicEquation
 from physics.integrator import RK4Integrator
+from validation.validate_caustics import trajectory
+from physics.adaptive_rk4 import AdaptiveRK4
 
 class OrbitSimulator:
     """
@@ -16,13 +18,15 @@ class OrbitSimulator:
 
         self.integrator = RK4Integrator(self.equation)
 
+        self.adaptive = AdaptiveRK4()
+
 
     def simulate(self, 
-                    initial_state, 
-                    step_size, 
-                    steps,
-                    escape_radius = 100
-                ):
+                initial_state, 
+                step_size, 
+                steps,
+                escape_radius = 100
+            ):
 
         """
         Simulate particle motion in an arbitrary spacetime.
@@ -34,7 +38,7 @@ class OrbitSimulator:
         Reissner–Nordström (future) spacetime
         Kerr–Newman (future) spacetime
 
-without modification.
+        without modification.
 
     Parameters
     ----------
@@ -73,29 +77,53 @@ without modification.
         # advance one rk4 step
         # repeat  
 
-        print(initial_state)
+        #print(initial_state)
 
         for _ in range(steps):
 
             trajectory.append(state.copy())
 
-            state = self.integrator.step(
-                state,
-                step_size
+            h = self.adaptive.step_size(
+                state[1]
             )
 
+            state = self.integrator.step(
+                state,
+                h
+            )
+
+            # --------------------------------------------------
+            # Numerical stability check
+            # --------------------------------------------------
+
+            if not np.all(np.isfinite(state)):
+                status = "numerical_error"
+
+                trajectory.append(state.copy())
+
+                break
+
             print(
-    f"step={_}  r={state[1]:.6f}  phi={state[3]:.6f}"
-)
+                f"step={_}  r={state[1]:.6f}  phi={state[3]:.6f}"
+            )
 
             #------------------
-            #Escape Condition
+            # Escape Condition
             #------------------
-            if state[1] > escape_radius:
+
+            r = state[1]
+            kr = state[5]
+
+            # Photon has travelled sufficiently far away
+            # and is moving outward.
+
+            if r >= escape_radius and kr > 0.0:
+
                 escaped = True
                 status = "escaped"
 
                 trajectory.append(state.copy())
+
                 break
 
 
@@ -114,8 +142,9 @@ without modification.
             "trajectory": np.array(trajectory),
             "captured": captured,
             "escaped": escaped,
-            "status": status
-}
+            "status": status,
+            "steps": len(trajectory)
+        }
     
     def orbital_period(self, initial_state):
         """

@@ -16,24 +16,29 @@ class PhotonRing:
         self.max_boost = 1.8
 
     def brightness(self, trajectory):
+        """
+        Brighten photons that complete one or more
+        revolutions around the black hole.
+        """
 
         if len(trajectory) < 2:
             return 1.0
 
         phi = trajectory[:, 3]
 
-        total_angle = np.sum(
-            np.abs(
-                np.diff(phi)
-            )
-        )
+        # Remove discontinuities at ±π
+        phi = np.unwrap(phi)
 
-        if total_angle < self.ring_angle:
+        total_angle = np.abs(phi[-1] - phi[0])
+
+        revolutions = total_angle / (2.0 * np.pi)
+
+        if revolutions < 0.5:
             return 1.0
 
         boost = 1.0 + min(
             self.max_boost - 1.0,
-            (total_angle - self.ring_angle) / np.pi
+            revolutions * 0.4
         )
 
         return boost

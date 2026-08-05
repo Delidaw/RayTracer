@@ -18,7 +18,20 @@ from physics.orbit_simulator import OrbitSimulator
 from models.star_field import StarField
 
 from rendering.kerr_ray_tracer import KerrRayTracer
+from rendering.render_settings import RenderSettings
 
+# ======================================================
+# Render Settings
+# ======================================================
+
+settings = RenderSettings(
+    width=10,
+    height=10,
+    fov=60,
+    exposure=1.0,
+    bloom=True,
+    blur=True
+)
 
 # ======================================================
 # Black Hole
@@ -94,9 +107,9 @@ scene = Scene(
 
 camera = Camera(
     observer=observer,
-    width=10,      # Increase later
-    height=10,
-    fov=60
+    width=settings.width,      # Increase later
+    height=settings.height,
+    fov=settings.fov
 )
 
 directions = camera.ray_directions()
@@ -137,8 +150,7 @@ tracer = KerrRayTracer(
     camera,
     generator,
     simulator,
-    steps = 20,
-    max_workers = 1
+    settings
 )
 
 
