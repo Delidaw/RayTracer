@@ -1,6 +1,7 @@
 const NAV_LINKS = [
   { href: "index.html", label: "Home" },
-  { href: "renderer.html", label: "1 · Renderer" },
+  { href: "renderer.html", label: "1 · GPU Renderer" },
+  { href: "engine.html", label: "Physics Engine" },
   { href: "trajectories.html", label: "2 · Photon Paths" },
   { href: "mesh.html", label: "3 · Curvature Mesh" },
   { href: "lensing.html", label: "4 · Lensing" },

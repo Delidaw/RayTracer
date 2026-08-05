@@ -2,9 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>PHOTON FORGE
-  A General Relativity Visualization Engine
-</title>
+<title>Event Horizon — Black Hole Ray Tracing</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -88,15 +86,11 @@
   <section class="hero">
     <div>
       <div class="eyebrow">Ray Tracing Black Holes</div>
-      <h1>Ray-traced <span class="accent">spacetime</span>.<br/>Rendered through Einstein's universe.</h1>
+      <h1>Ray-traced <span class="accent">gravity</span>,<br/>rendered in real time.</h1>
       <p class="lead">
-        A computational general relativity engine that integrates
-        null geodesics through curved spacetime around Schwarzschild
-        and Kerr black holes.
-
-        Simulating gravitational lensing, photon rings,
-        accretion disks, and relativistic effects from first principles.
-        An ML surrogate model then learns to
+        A from-scratch renderer that fires light rays through curved spacetime around a
+        Schwarzschild black hole, bending them geodesic-by-geodesic until they escape,
+        orbit, or fall past the event horizon. An ML surrogate model then learns to
         approximate the expensive integration, trading a bit of accuracy for a lot of speed.
       </p>
       <div class="cta-row">
@@ -161,9 +155,7 @@
   <section style="padding-top:50px;" id="redshift-section">
     <div class="section-title"><span class="idx">§3</span><h2>Gravitational Redshift &amp; Time Dilation</h2></div>
     <p class="lead" style="max-width:720px;">
-      A clock sitting near a black hole ticks slower than one far away — and photons climbing out of a gravity well lose energy and shift toward the red end of the spectrum. Both effects follow from the <strong>Schwarzschild metric</strong>, 
-with the gravitational time component described by the metric factor 
-<em>f(r) = 1 − 2GM/(rc²)</em>.
+      A clock sitting near a black hole ticks slower than one far away — and photons climbing out of a gravity well lose energy and shift toward the red end of the spectrum. Both effects follow directly from the <strong>Schwarzschild metric factor</strong> <em>f(r) = 1 − 2M/r</em>.
     </p>
 
     <div class="grid-2" style="margin-top:24px; align-items:start;">
@@ -200,16 +192,16 @@ with the gravitational time component described by the metric factor
             <div class="v" id="gr-gap-val">—</div>
           </div>
           <div class="grav-readout__cell">
-            <div class="k">Newtonian escape velocity</div>
+            <div class="k">Escape velocity v<sub>esc</sub></div>
             <div class="v" id="gr-vesc-val">—</div>
           </div>
         </div>
 
         <div class="grav-readout__formula">
-          <span>z(r)</span> = 1/√(1 - 2GM/rc²) − 1<br/>
-          <span>τ/t</span> = √(1 - 2GM/rc²)<br/>
-          <span>f(r)</span> = 1 − r<sub>s</sub>/r &nbsp;|&nbsp; r<sub>s</sub> = 2GM/c²<br/>
-          <span>v<sub>esc</sub></span> = √(2GM/r) &nbsp; (Newtonian)
+          <span>z(r)</span> = 1 / √(1 − 2M/r) − 1<br/>
+          <span>τ/t</span> = √(1 − 2M/r)<br/>
+          <span>f(r)</span> = 1 − r<sub>s</sub>/r &nbsp;|&nbsp; r<sub>s</sub> = 2M<br/>
+          <span>v<sub>esc</sub></span> = √(2M/r)
         </div>
       </div>
 
@@ -217,12 +209,10 @@ with the gravitational time component described by the metric factor
       <div class="panel">
         <h3 style="color:var(--amber); font-size:15px;">What these numbers mean</h3>
         <p style="color:var(--text-dim); font-size:13.5px; margin-bottom:12px;">
-          <strong style="color:var(--text);">Redshift z</strong> tells you by how much a photon emitted at radius <em>r</em> is stretched when received at infinity. A photon emitted with wavelength λ arrives at infinity with wavelength λ · (1 + z). 
-As r → 2M, the gravitational redshift diverges, meaning a distant observer 
-measures the photon's energy becoming arbitrarily small.
+          <strong style="color:var(--text);">Redshift z</strong> tells you by how much a photon emitted at radius <em>r</em> is stretched when received at infinity. A photon emitted with wavelength λ arrives with λ · (1 + z). At r → 2M the redshift diverges — the photon's energy goes to zero before it escapes.
         </p>
         <p style="color:var(--text-dim); font-size:13.5px; margin-bottom:12px;">
-          <strong style="color:var(--text);">Time dilation τ/t</strong> is the ratio of proper time (experienced by a stationary observer at <em>r</em>) to coordinate time at infinity. At r = 6M (ISCO) a stationary clock ticks at ≈ 81.6% of the rate of a distant clock. At the photon sphere (r = 3M) it ticks at ≈ 57.7% of the rate of a distant clock.
+          <strong style="color:var(--text);">Time dilation τ/t</strong> is the ratio of proper time (experienced by a stationary observer at <em>r</em>) to coordinate time at infinity. At r = 6M (ISCO) a clock ticks at ≈ 94% of the rate of a distant clock. At the photon sphere (r = 3M) it ticks at ≈ 82%.
         </p>
         <div class="stat-grid" style="margin-top:14px;">
           <div class="stat-cell"><div class="k">At ISCO (r = 6M)</div><div class="v" id="gr-isco-z">—</div></div>
@@ -236,9 +226,10 @@ measures the photon's energy becoming arbitrarily small.
 
   <section style="padding-top:50px;">
     <div class="section-title"><span class="idx">§4</span><h2>Explore the simulation suite</h2></div>
-    <p class="lead">Twelve linked demos, each isolating one piece of the physics.</p>
+    <p class="lead">A linked suite of interactive pages, each isolating one piece of the physics.</p>
     <div class="demo-list">
       <a href="renderer.html"><div class="n">01</div><div class="t">Interactive Black Hole Renderer</div></a>
+      <a href="engine.html"><div class="n">01B</div><div class="t">Backend-Connected Scientific Renderer</div></a>
       <a href="trajectories.html"><div class="n">02</div><div class="t">Photon Trajectory Graph</div></a>
       <a href="mesh.html"><div class="n">03</div><div class="t">Spacetime Curvature Mesh</div></a>
       <a href="lensing.html"><div class="n">04</div><div class="t">Gravitational Lensing Demo</div></a>
@@ -387,7 +378,7 @@ function draw() {
   for (let ring = 0; ring < 26; ring++) {
     const frac = ring / 26;
     const r = rInner + frac * (rOuter - rInner);
-    const angleOffset = t * (1 + spin * rFactor);
+    const angleOffset = t * (0.6 + frac * 0.4);
     const alpha = (1 - frac) * 0.55;
     const hue = 40 - frac * 25;
     ctx.beginPath();

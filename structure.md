@@ -1,8 +1,52 @@
-w
-
 
 
 General Relativity Engine
+│
+├── assets
+│     └── milky_way.jpg       ✅
+│
+├── frames
+│     ├── frames0000.png              ✅
+│     ├── frames0001.png              ✅
+│     └── frames0002.png              ✅
+│
+├── models
+│     ├── Accretion Disk              ✅
+│     ├── Black Hole              ✅
+│     ├── Camera              ✅
+│     ├── Observer              ✅
+│     ├── Scene              ✅
+│     └── Star Field             ✅
+│
+├── outputs
+│     └── kerr_ergosphere.png              ✅
+│
+├── physics
+│     ├── Adaptive RK4              ✅
+│     ├── Christoffel Old              ✅
+│     ├── Christoffel              ✅
+│     ├── Effective Potential              ✅
+│     ├── Erogsphere              ✅
+│     ├── Event Horizon              ✅
+│     ├── Frame Dragging              ✅
+│     ├── Geodesics              ✅
+│     ├── Impact Parameter              ✅
+│     ├── Initial Conditions              ✅
+│     ├── Integrator              ✅
+│     ├── Kerr Derivatives              ✅
+│     ├── Kerr ISCO              ✅
+│     ├── Kerr Metric              ✅
+│     ├── Kerr Observer Tetrad         ✅
+│     ├── Kerr Photon Sphere          ✅
+│     ├── Kerr Ray Generator        ✅
+│     ├── Metric Derivatives              ✅
+│     ├── Metric              ✅
+│     ├── Null Photon              ✅
+│     ├── Observer Tetrad              ✅
+│     ├── Orbit Classifier              ✅
+│     ├── Orbit Simulator              ✅
+│     ├── Particle Ensemble              ✅
+│     └── Star Field             ✅
 │
 ├── Black Hole Model                     ✅
 ├── Schwarzschild Metric                 ✅
@@ -169,6 +213,7 @@ Phase 6: Website
 Phase 7: Optimization
 ---------------------------------------------------------
 ✓ Adaptive RK4
+✓ Adaptive RK4 Validation
 ✓ Parallel Ray Tracing (Threadpool Executor)
 ⬜ NumPy Optimization
 ⬜ Numba
@@ -198,6 +243,213 @@ Phase 9: Research & Publication
 ⬜ Results
 ⬜ GitHub Documentation
 ⬜ Competition Presentation
+
+Phase 10: Visualization Engine
+---------------------------------------------------------
+✓ Frame Exporter
+✓ Video Encoder
+⬜ Camera Paths
+✓ Animation Timeline
+⬜ Rotating Accretion Disk
+⬜ Photon Trajectory Animation
+⬜ Multi-photon Animation
+⬜ Interactive Camera
+⬜ 3D Scene Viewer
+⬜ Website Integration
+
+
+
+
+Phase 6.5 — Visualization Engine
+Part 1 — Camera Fly-through ⭐⭐⭐⭐⭐
+
+You already have:
+
+✅ AnimationEngine
+✅ Observer
+✅ Camera
+
+Now extend it to support paths like:
+
+Orbit around the black hole
+Zoom toward the event horizon
+Escape outward
+Tilt above/below the accretion disk
+
+Example:
+
+Frame 1
+        *
+
+Frame 20
+          *
+
+Frame 40
+              *
+
+Frame 60
+                  *
+
+instead of keeping the observer at a fixed radius.
+
+Part 2 — Frame Export ⭐⭐⭐⭐⭐
+
+Instead of
+
+plt.imshow(image)
+
+save
+
+frame0000.png
+frame0001.png
+frame0002.png
+...
+
+Then use
+
+ffmpeg
+imageio
+OpenCV
+
+to create
+
+blackhole.mp4
+Part 3 — Interactive Camera ⭐⭐⭐⭐⭐
+
+Imagine opening the renderer and using
+
+WASD
+Mouse
+
+to move around the black hole in real time.
+
+The rendering can still be one frame every second initially.
+
+That's okay.
+
+The experience is much more impressive.
+
+Part 4 — 3D Scene Visualization ⭐⭐⭐⭐⭐
+
+Not ray tracing.
+
+A 3D visualization of
+
+Event horizon
+Ergosphere
+ISCO
+Photon sphere
+Observer
+Rays
+
+using
+
+Plotly
+PyVista
+OpenGL
+
+Something like:
+
+            observer
+
+                 ●
+
+                  \
+                   \
+                    \
+                 photon
+
+           (Photon sphere)
+
+          **************
+
+        (Event Horizon)
+
+             ███████
+
+that you can rotate with the mouse.
+
+Part 5 — Ray Animation ⭐⭐⭐⭐⭐
+
+One photon.
+
+Instead of only the final image,
+
+show
+
+Frame 1
+
+        *
+
+Frame 2
+
+       *
+
+Frame 3
+
+      *
+
+Frame 4
+
+    *
+
+Frame 5
+
+  *
+
+Frame 6
+
+ ███
+
+following the actual geodesic.
+
+Part 6 — Accretion Disk Rotation ⭐⭐⭐⭐⭐
+
+Your disk is static.
+
+Animate it.
+
+Particles orbit.
+
+Glow changes.
+
+Doppler changes.
+
+Part 7 — Multi-photon Animation ⭐⭐⭐⭐⭐
+
+Launch
+
+100
+
+500
+
+1000
+
+photons simultaneously.
+
+Watch them bend.
+
+It becomes mesmerizing.
+
+Part 8 — Interactive Website ⭐⭐⭐⭐⭐
+
+Eventually:
+
+                [Render]
+
+Spin
+Radius
+Disk Brightness
+FOV
+Exposure
+Bloom
+
+
+Move sliders.
+
+Render.
+
+Rotate camera.
 
 
 

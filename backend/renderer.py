@@ -36,16 +36,24 @@ def render_black_hole(parameters):
     # Render Settings
     # ======================================================
 
-    resolution = parameters["resolution"]
+    resolution = parameters("resolution", 64)
+
+    steps = int(
+        parameters.get("steps", 20)
+    )
+
+    fov = float(
+        parameters.get("fov", 55.0)
+    )
 
     settings = RenderSettings(
         width=resolution,
         height = resolution,
-        fov=parameters["fov"],
+        fov=fov,
         exposure=1.0,
         bloom=True,
         blur=True,
-        steps = 500,
+        steps = steps,
         step_size = 0.05,
         max_workers = 4
     )
@@ -54,10 +62,11 @@ def render_black_hole(parameters):
     # Black Hole
     # ======================================================
     
-    mass = parameters["mass"]
-    spin = 0.9
-    observer_radius = parameters["observer_radius"]
-    resolution = parameters["resolution"]
+    mass = float(parameters.get("mass", 1.0))
+    spin = float(parameters.get("spin", 0.9))
+                 
+    observer_radius = parameters("observer_radius", 20.0)
+    
 
     bh = BlackHole(
         mass=mass,

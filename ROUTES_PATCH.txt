@@ -1,0 +1,13 @@
+Add this import if it is not already present:
+
+from flask import render_template
+
+Add this route to backend/routes.py:
+
+@app.route("/renderer-v2")
+def renderer_v2_page():
+    return render_template("hybrid_renderer_v2.html")
+
+Then open:
+
+http://127.0.0.1:5000/renderer-v2

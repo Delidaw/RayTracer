@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Photon Forge Hybrid Renderer</title>
+<style>
+:root{--bg:#05080d;--panel:#0d1520;--line:#223248;--text:#e8eef6;--muted:#94a3b8;--cyan:#5ed7ff;--amber:#ffb454}
+*{box-sizing:border-box}html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+body{display:grid;grid-template-columns:300px 1fr}
+aside{padding:20px;background:var(--panel);border-right:1px solid var(--line);overflow:auto}
+h1{font-size:18px;letter-spacing:.12em;margin:0 0 6px}p{color:var(--muted);line-height:1.5}
+.control{margin:18px 0}.control label{display:flex;justify-content:space-between;margin-bottom:8px}.value{color:var(--cyan);font-family:monospace}
+input,select,button{width:100%}input[type=range]{accent-color:var(--cyan)}input[type=number],select{padding:9px;background:#07101a;color:var(--text);border:1px solid var(--line)}
+button{padding:11px;margin-top:10px;background:#12334a;color:white;border:1px solid #2b6c92;cursor:pointer}
+button.hq{background:#5a3510;border-color:#b36e2d}
+main{position:relative;min-width:0}.viewport{position:absolute;inset:0;background:#000}
+canvas,img{width:100%;height:100%;display:block;object-fit:contain}img{display:none}
+.badge{position:absolute;top:12px;left:12px;padding:7px 10px;background:#06101acc;border:1px solid var(--line);font:12px monospace}
+.loading{position:absolute;inset:0;display:none;place-items:center;background:#000a;z-index:5}.loading.show{display:grid}
+.spinner{width:42px;height:42px;border:3px solid #274052;border-top-color:var(--cyan);border-radius:50%;animation:s .8s linear infinite}@keyframes s{to{transform:rotate(360deg)}}
+.status{margin-top:14px;padding:10px;border:1px solid var(--line);font:12px monospace;color:var(--muted)}
+</style>
+</head>
+<body>
+<aside>
+<h1>PHOTON FORGE</h1>
+<p>Hybrid GPU preview + Python reference renderer</p>
+
+<div class="control"><label>Mass <span id="massOut" class="value">1.00</span></label><input id="mass" type="range" min=".3" max="3" step=".01" value="1"></div>
+<div class="control"><label>Spin <span id="spinOut" class="value">0.90</span></label><input id="spin" type="range" min="0" max=".99" step=".01" value=".9"></div>
+<div class="control"><label>Observer radius <span id="radiusOut" class="value">20.0 M</span></label><input id="radius" type="range" min="6" max="50" step=".1" value="20"></div>
+<div class="control"><label>FOV <span id="fovOut" class="value">55°</span></label><input id="fov" type="range" min="20" max="100" step="1" value="55"></div>
+<div class="control"><label>HQ resolution</label><select id="resolution"><option value="64">64</option><option value="128" selected>128</option><option value="256">256</option><option value="384">384</option></select></div>
+<div class="control"><label>HQ steps</label><input id="steps" type="number" value="30" min="10" max="5000"></div>
+
+<button id="gpuBtn">Show GPU preview</button>
+<button id="hqBtn" class="hq">Render with Python engine</button>
+<button id="resetBtn">Reset camera</button>
+
+<div id="status" class="status">Ready</div>
+<p>Drag the preview to orbit. Scroll to zoom. Start with 64–128 resolution and 20–30 steps while testing.</p>
+</aside>
+
+<main>
+<div class="viewport">
+<canvas id="canvas"></canvas>
+<img id="hqImage" alt="Python render">
+<div id="mode" class="badge">GPU PREVIEW</div>
+<div id="loading" class="loading"><div><div class="spinner"></div><p>Tracing geodesics…</p></div></div>
+</div>
+</main>
+
+<script>
+const canvas=document.getElementById("canvas"),gl=canvas.getContext("webgl2");
+if(!gl)throw new Error("WebGL2 required");
+
+const vs=`#version 300 es
+in vec2 a;out vec2 uv;void main(){uv=a*.5+.5;gl_Position=vec4(a,0,1);}`;
+
+const fs=`#version 300 es
+precision highp float;in vec2 uv;out vec4 o;
+uniform vec2 R;uniform float T,M,A,D,F,Y,P;
+float h(vec3 p){p=fract(p*.1031);p+=dot(p,p.yzx+33.33);return fract((p.x+p.y)*p.z);}
+vec3 sky(vec3 d){float s=step(.997,h(floor(d*480.)));return vec3(.002,.005,.012)+s*vec3(.9,.95,1.);}
+vec3 temperatureColor(float t) {
+  vec3 deepRed = vec3(0.85, 0.03, 0.01);
+  vec3 red     = vec3(1.00, 0.15, 0.03);
+  vec3 orange  = vec3(1.00, 0.48, 0.08);
+  vec3 white   = vec3(1.00, 0.98, 0.94);
+  vec3 cyan    = vec3(0.62, 0.92, 1.00);
+  vec3 blue    = vec3(0.25, 0.48, 1.20);
+
+  if (t < 3000.0) {
+    return deepRed;
+  }
+
+  if (t < 4000.0) {
+    float x = (t - 3000.0) / 1000.0;
+    return mix(deepRed, red, x);
+  }
+
+  if (t < 5500.0) {
+    float x = (t - 4000.0) / 1500.0;
+    return mix(red, orange, x);
+  }
+
+  if (t < 7000.0) {
+    float x = (t - 5500.0) / 1500.0;
+    return mix(orange, white, x);
+  }
+
+  if (t < 9500.0) {
+    float x = (t - 7000.0) / 2500.0;
+    return mix(white, cyan, x);
+  }
+
+  float x = clamp(
+    (t - 9500.0) / 5500.0,
+    0.0,
+    1.0
+  );
+
+  return mix(cyan, blue, x);
+}
+
+void main(){
+ vec2 q=uv*2.-1.;q.x*=R.x/R.y;
+ float cy=cos(Y),sy=sin(Y),cp=cos(P),sp=sin(P);
+ vec3 ro=D*vec3(cp*sy,sp,cp*cy),fw=normalize(-ro),rt=normalize(cross(fw,vec3(0,1,0))),up=cross(rt,fw);
+ vec3 rd=normalize(fw+(q.x*rt+q.y*up)*tan(F*.5));
+ float rh=M+sqrt(max(.0001,M*M-A*A));vec3 pos=ro,col=vec3(0);bool cap=false;
+ for(int i=0;i<180;i++){
+  float r=length(pos);if(r<rh*1.01){cap=true;break;}if(r>70.&&i>8)break;
+  float ds=clamp(.012*r,.02,.16);vec3 rad=pos/max(r,1e-4);float L2=dot(cross(pos,rd),cross(pos,rd));
+  vec3 acc=-rad*(3.*M*L2/max(pow(r,4.),1e-4))+cross(vec3(0,1,0),rd)*(2.*A*M/max(r*r*r,1e-4));
+  rd=normalize(rd+acc*ds);pos+=rd*ds;
+  float rr = length(pos.xz);
+
+float inner = max(2.6 * M, rh * 1.18);
+float outer = 8.0 * M;
+
+float diskThickness = 0.022 * M + 0.008;
+float planeGlow = exp(
+  -pow(abs(pos.y) / diskThickness, 2.0)
+);
+
+if (rr > inner && rr < outer && planeGlow > 0.005) {
+
+  float u = clamp(
+    (rr - inner) / (outer - inner),
+    0.0,
+    1.0
+  );
+
+  float phi = atan(pos.z, pos.x);
+
+  // Bright inner region
+  float innerGlow = exp(-5.5 * u);
+
+  // Thin luminous ring near the inner edge
+  float brightRing = exp(
+    -pow((u - 0.10) / 0.055, 2.0)
+  );
+
+  // Rotating spiral plasma pattern
+  float spiral =
+    0.72 +
+    0.28 * sin(
+      phi * 10.0 -
+      rr * 2.0 +
+      T * 1.4
+    );
+
+  // Small turbulent variations
+  float grain =
+    0.78 +
+    0.22 * h(
+      vec3(
+        pos.x * 2.8,
+        pos.z * 2.8,
+        T * 0.08
+      )
+    );
+
+  // Inner disk is hotter; outer disk is cooler.
+float tempK = mix(
+  15000.0,
+  3000.0,
+  pow(u, 0.75)
+);
+
+vec3 diskColor = temperatureColor(tempK);
+
+  // Approximate orbital velocity
+  vec3 tangent = normalize(
+    vec3(-pos.z, 0.0, pos.x)
+  );
+
+  float beta = clamp(
+    sqrt(M / max(rr, 0.0001)),
+    0.0,
+    0.72
+  );
+
+  // Doppler brightening of the approaching side
+  float doppler = 1.0 / max(
+    0.35,
+    1.0 - beta * dot(-rd, tangent)
+  );
+
+  float emission =
+    (
+      0.05 +
+      1.15 * innerGlow +
+      1.55 * brightRing
+    )
+    * spiral
+    * grain
+    * planeGlow;
+
+  col +=
+    diskColor
+    * emission
+    * clamp(pow(doppler, 2.2), 0.45, 2.7)
+    * 0.026;
+}
+ }
+ if(!cap)col+=sky(rd);
+ col=pow(1.-exp(-col*1.4),vec3(1./2.2));o=vec4(col,1);
+}`;
+
+function sh(t,s){const x=gl.createShader(t);gl.shaderSource(x,s);gl.compileShader(x);if(!gl.getShaderParameter(x,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(x));return x}
+const p=gl.createProgram();gl.attachShader(p,sh(gl.VERTEX_SHADER,vs));gl.attachShader(p,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(p);gl.useProgram(p);
+const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
+const a=gl.getAttribLocation(p,"a");gl.enableVertexAttribArray(a);gl.vertexAttribPointer(a,2,gl.FLOAT,false,0,0);
+const U={};["R","T","M","A","D","F","Y","P"].forEach(n=>U[n]=gl.getUniformLocation(p,n));
+
+const E=id=>document.getElementById(id),state={m:1,a:.9,d:20,f:55,y:0,p:.25};
+function bind(id,key,out,fmt){const e=E(id),go=()=>{state[key]=+e.value;E(out).textContent=fmt(state[key])};e.oninput=go;go()}
+bind("mass","m","massOut",v=>v.toFixed(2));bind("spin","a","spinOut",v=>v.toFixed(2));bind("radius","d","radiusOut",v=>v.toFixed(1)+" M");bind("fov","f","fovOut",v=>v+"°");
+
+function resize(){const r=canvas.getBoundingClientRect(),d=Math.min(devicePixelRatio,1.5);canvas.width=Math.max(2,r.width*d);canvas.height=Math.max(2,r.height*d);gl.viewport(0,0,canvas.width,canvas.height)}
+new ResizeObserver(resize).observe(canvas);
+
+let drag=false,lx=0,ly=0;canvas.onpointerdown=e=>{drag=true;lx=e.clientX;ly=e.clientY};window.onpointerup=()=>drag=false;
+window.onpointermove=e=>{if(!drag)return;state.y+=(e.clientX-lx)*.006;state.p=Math.max(-1.3,Math.min(1.3,state.p+(e.clientY-ly)*.006));lx=e.clientX;ly=e.clientY};
+canvas.onwheel=e=>{e.preventDefault();state.d=Math.max(6,Math.min(50,state.d+e.deltaY*.02));E("radius").value=state.d;E("radiusOut").textContent=state.d.toFixed(1)+" M"};
+
+const img=E("hqImage");function gpu(){img.style.display="none";canvas.style.display="block";E("mode").textContent="GPU PREVIEW"}E("gpuBtn").onclick=gpu;
+E("resetBtn").onclick=()=>{state.y=0;state.p=.25;state.d=20;E("radius").value=20;E("radiusOut").textContent="20.0 M";gpu()};
+
+E("hqBtn").onclick=async()=>{
+ E("loading").classList.add("show");E("status").textContent="Python renderer running…";
+ try{
+  const payload={mass:state.m,spin:state.a,observer_radius:state.d,fov:state.f,resolution:+E("resolution").value,steps:+E("steps").value};
+  const r=await fetch("/render",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+  if(!r.ok)throw new Error(await r.text());
+  const j=await r.json(),raw=j.image||"",url=raw.includes("backend/static/")?"/static/"+raw.split("backend/static/")[1]:raw;
+  img.src=url+"?t="+Date.now();canvas.style.display="none";img.style.display="block";E("mode").textContent="PYTHON HQ";E("status").textContent="Render complete";
+ }catch(err){E("status").textContent="Error: "+err.message}
+ finally{E("loading").classList.remove("show")}
+};
+
+function frame(t){resize();gl.uniform2f(U.R,canvas.width,canvas.height);gl.uniform1f(U.T,t*.001);gl.uniform1f(U.M,state.m);gl.uniform1f(U.A,state.a);gl.uniform1f(U.D,state.d);gl.uniform1f(U.F,state.f*Math.PI/180);gl.uniform1f(U.Y,state.y);gl.uniform1f(U.P,state.p);gl.drawArrays(gl.TRIANGLES,0,6);requestAnimationFrame(frame)}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
