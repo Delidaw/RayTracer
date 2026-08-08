@@ -140,3 +140,145 @@
 <script src="{{ url_for('static', filename='gpu-v2/renderer.js') }}"></script>
 </body>
 </html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Stella Nova — GPU Renderer V2</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='gpu-v2/style.css') }}">
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark"><span></span></div>
+      <div>
+        <h1>STELLA NOVA</h1>
+        <p>Realtime relativistic renderer · GPU V2</p>
+      </div>
+    </div>
+
+    <div class="top-actions">
+      <span id="fpsBadge" class="badge">GPU · -- FPS</span>
+      <button id="pauseButton" class="ghost-button">Pause</button>
+      <button id="fullscreenButton" class="ghost-button">Fullscreen</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <aside class="sidebar">
+      <section class="panel">
+        <div class="panel-heading">
+          <h2>Spacetime</h2>
+          <span>Kerr preview</span>
+        </div>
+
+        <div class="control">
+          <label for="mass">Mass <output id="massOutput">1.00 M</output></label>
+          <input id="mass" type="range" min="0.50" max="2.00" step="0.01" value="1.00">
+        </div>
+
+        <div class="control">
+          <label for="spin">Spin <output id="spinOutput">0.90 a/M</output></label>
+          <input id="spin" type="range" min="0.00" max="0.99" step="0.01" value="0.90">
+        </div>
+
+        <div class="control">
+          <label for="distance">Camera distance <output id="distanceOutput">18.0 M</output></label>
+          <input id="distance" type="range" min="6.0" max="40.0" step="0.1" value="18.0">
+        </div>
+
+        <div class="control">
+          <label for="fov">Field of view <output id="fovOutput">50°</output></label>
+          <input id="fov" type="range" min="25" max="90" step="1" value="50">
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <h2>Camera</h2>
+          <span>Drag viewport</span>
+        </div>
+
+        <div class="control">
+          <label for="yaw">Yaw <output id="yawOutput">0°</output></label>
+          <input id="yaw" type="range" min="-180" max="180" step="1" value="0">
+        </div>
+
+        <div class="control">
+          <label for="pitch">Pitch <output id="pitchOutput">18°</output></label>
+          <input id="pitch" type="range" min="-78" max="78" step="1" value="18">
+        </div>
+
+        <button id="resetCamera" class="wide-button">Reset camera</button>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <h2>Accretion flow</h2>
+          <span>Volumetric RTE</span>
+        </div>
+
+        <div class="control">
+          <label for="diskDensity">Optical density <output id="densityOutput">1.20</output></label>
+          <input id="diskDensity" type="range" min="0.10" max="3.00" step="0.05" value="1.20">
+        </div>
+
+        <div class="control">
+          <label for="diskThickness">Disk thickness <output id="thicknessOutput">0.22 M</output></label>
+          <input id="diskThickness" type="range" min="0.05" max="0.65" step="0.01" value="0.22">
+        </div>
+
+        <div class="control">
+          <label for="exposure">Exposure <output id="exposureOutput">1.25</output></label>
+          <input id="exposure" type="range" min="0.30" max="3.00" step="0.05" value="1.25">
+        </div>
+
+        <div class="control">
+          <label for="quality">Quality preset</label>
+          <select id="quality">
+            <option value="performance">Performance</option>
+            <option value="balanced" selected>Balanced</option>
+            <option value="quality">Quality</option>
+            <option value="ultra">Ultra</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="panel diagnostics">
+        <div class="panel-heading">
+          <h2>Diagnostics</h2>
+          <span>Live</span>
+        </div>
+        <dl>
+          <div><dt>Event horizon</dt><dd id="horizonValue">1.436 M</dd></div>
+          <div><dt>ISCO estimate</dt><dd id="iscoValue">2.321 M</dd></div>
+          <div><dt>Internal scale</dt><dd id="scaleValue">0.75×</dd></div>
+          <div><dt>Ray steps</dt><dd id="stepsValue">220</dd></div>
+        </dl>
+      </section>
+    </aside>
+
+    <section id="viewport" class="viewport">
+      <canvas id="canvas"></canvas>
+
+      <div class="viewport-hud top-left">
+        <strong>REALTIME GPU</strong>
+        <span>Volumetric disk · Doppler beaming · redshift</span>
+      </div>
+
+      <div class="viewport-hud bottom-left">
+        <span>Drag to orbit</span>
+        <span>Wheel to zoom</span>
+        <span>Double-click to reset</span>
+      </div>
+
+      <div id="shaderError" class="shader-error" hidden></div>
+    </section>
+  </main>
+</div>
+
+<script src="{{ url_for('static', filename='gpu-v2/renderer.js') }}"></script>
+</body>
+</html>
