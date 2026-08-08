@@ -24,7 +24,7 @@ from rendering.render_settings import RenderSettings
 def render_black_hole(parameters):
     """
     Render one black hole image using the
-    existing Stella Nova pipeline.
+    existing Photon Forge pipeline.
     """
 
     #
