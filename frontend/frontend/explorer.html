@@ -1,0 +1,919 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>
+    Black Hole Explorer — Photon Forge
+  </title>
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="explorer.css"
+  >
+
+</head>
+
+
+<body>
+
+
+<div id="nav-root"></div>
+
+
+<main class="explorer-shell">
+
+
+  <!-- =====================================================
+       PAGE TITLE
+       ===================================================== -->
+
+  <header class="explorer-header">
+
+    <div>
+
+      <span>
+        PHOTON FORGE · OBSERVATORY
+      </span>
+
+      <h1>
+        Black Hole Explorer
+      </h1>
+
+      <p>
+        Explore black-hole appearances, spacetime structure
+        and live physical data.
+      </p>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =====================================================
+       MAIN LAYOUT
+       ===================================================== -->
+
+  <section class="explorer-layout">
+
+
+    <!-- ===================================================
+         LEFT — BLACK HOLE OBJECTS
+         =================================================== -->
+
+    <aside class="explorer-panel object-sidebar">
+
+
+      <div class="panel-title">
+
+        <span>
+          SELECT OBJECT
+        </span>
+
+        <strong>
+          Black Hole Catalogue
+        </strong>
+
+      </div>
+
+
+
+      <div class="object-list">
+
+
+        <button
+          class="object-button active"
+          data-object="sagittarius"
+        >
+
+          <div class="object-placeholder">
+            S
+          </div>
+
+          <div>
+
+            <strong>
+              Sagittarius A*
+            </strong>
+
+            <span>
+              Milky Way
+            </span>
+
+          </div>
+
+        </button>
+
+
+
+        <button
+          class="object-button"
+          data-object="m87"
+        >
+
+          <div class="object-placeholder">
+            M
+          </div>
+
+          <div>
+
+            <strong>
+              M87*
+            </strong>
+
+            <span>
+              Messier 87
+            </span>
+
+          </div>
+
+        </button>
+
+
+
+        <button
+          class="object-button"
+          data-object="cygnus"
+        >
+
+          <div class="object-placeholder">
+            C
+          </div>
+
+          <div>
+
+            <strong>
+              Cygnus X-1
+            </strong>
+
+            <span>
+              Stellar black hole
+            </span>
+
+          </div>
+
+        </button>
+
+
+
+        <button
+          class="object-button"
+          data-object="ngc1277"
+        >
+
+          <div class="object-placeholder">
+            N
+          </div>
+
+          <div>
+
+            <strong>
+              NGC 1277
+            </strong>
+
+            <span>
+              Compact galaxy
+            </span>
+
+          </div>
+
+        </button>
+
+
+
+        <button
+          class="object-button"
+          data-object="ton618"
+        >
+
+          <div class="object-placeholder">
+            T
+          </div>
+
+          <div>
+
+            <strong>
+              TON 618
+            </strong>
+
+            <span>
+              Quasar
+            </span>
+
+          </div>
+
+        </button>
+
+
+      </div>
+
+
+
+      <!-- OBJECT MEDIA -->
+
+      <div class="object-media">
+
+        <div class="small-panel-title">
+          OBJECT VIEW
+        </div>
+
+        <div id="objectMediaHost">
+
+          <div class="object-empty">
+
+            Add your Sagittarius A*
+            image/GIF here later.
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </aside>
+
+
+
+    <!-- ===================================================
+         CENTER
+         =================================================== -->
+
+    <section class="explorer-center">
+
+
+      <section class="explorer-panel main-view-panel">
+
+
+        <!-- ===============================================
+             TOP FOUR VIEWS
+
+             These are independent from the left buttons.
+             =============================================== -->
+
+        <div class="view-tabs">
+
+
+          <button
+            class="view-tab active"
+            data-view="render"
+          >
+            Render View
+          </button>
+
+
+          <button
+            class="view-tab"
+            data-view="thermal"
+          >
+            Thermal View
+          </button>
+
+
+          <button
+            class="view-tab"
+            data-view="geodesic"
+          >
+            Geodesic Grid
+          </button>
+
+
+          <button
+            class="view-tab"
+            data-view="data"
+          >
+            Data View
+          </button>
+
+
+        </div>
+
+
+
+        <!-- ===============================================
+             IMAGE/GIF VIEW
+             =============================================== -->
+
+        <div
+          id="visualView"
+          class="visual-view"
+        >
+
+          <img
+            id="mainViewVideo"
+            src="assets/explorer/views/render-view.mp4"
+            alt="Black hole render view"
+          >
+
+
+          <div class="view-caption">
+
+            <span id="viewType">
+              RENDER VIEW
+            </span>
+
+            <strong id="viewTitle">
+              Relativistic Appearance
+            </strong>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ===============================================
+             REAL BACKEND DATA VIEW
+
+             Hidden until Data View is clicked.
+             =============================================== -->
+
+        <div
+          id="dataView"
+          class="data-view hidden"
+        >
+
+
+          <div class="data-header">
+
+            <div>
+
+              <span>
+                LIVE PHYSICS DATA
+              </span>
+
+              <h2>
+                Kerr Geometry
+              </h2>
+
+              <p>
+                Values calculated by the Stella Nova
+                Flask backend.
+              </p>
+
+            </div>
+
+
+            <div class="backend-status">
+
+              <i id="backendDot"></i>
+
+              <span id="backendStatus">
+                Waiting
+              </span>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- DATA CONTROLS -->
+
+          <div class="data-controls">
+
+
+            <label>
+
+              <span>
+                Mass M☉
+              </span>
+
+              <input
+                id="dataMass"
+                type="number"
+                value="6500000000"
+              >
+
+            </label>
+
+
+
+            <label>
+
+              <span>
+                Spin χ
+              </span>
+
+              <input
+                id="dataSpin"
+                type="number"
+                value="0.90"
+                min="0"
+                max="0.998"
+                step="0.01"
+              >
+
+            </label>
+
+
+
+            <label>
+
+              <span>
+                Observer r/M
+              </span>
+
+              <input
+                id="dataObserver"
+                type="number"
+                value="50"
+              >
+
+            </label>
+
+
+
+            <label>
+
+              <span>
+                Inclination
+              </span>
+
+              <input
+                id="dataInclination"
+                type="number"
+                value="67"
+              >
+
+            </label>
+
+
+            <button id="calculateData">
+              Calculate
+            </button>
+
+
+          </div>
+
+
+
+          <!-- SUMMARY -->
+
+          <div class="data-summary">
+
+
+            <article>
+
+              <span>
+                GRAVITATIONAL RADIUS
+              </span>
+
+              <strong id="valueRg">
+                —
+              </strong>
+
+            </article>
+
+
+
+            <article>
+
+              <span>
+                EVENT HORIZON
+              </span>
+
+              <strong id="valueHorizon">
+                —
+              </strong>
+
+            </article>
+
+
+
+            <article>
+
+              <span>
+                PHOTON ORBIT
+              </span>
+
+              <strong id="valuePhoton">
+                —
+              </strong>
+
+            </article>
+
+
+
+            <article>
+
+              <span>
+                ISCO
+              </span>
+
+              <strong id="valueIsco">
+                —
+              </strong>
+
+            </article>
+
+
+          </div>
+
+
+
+          <!-- DETAILED PHYSICS -->
+
+          <div class="data-detail-grid">
+
+
+            <section class="data-card">
+
+              <h3>
+                Characteristic Radii
+              </h3>
+
+
+              <div class="data-row">
+
+                <span>
+                  Outer Horizon
+                </span>
+
+                <strong id="outerHorizon">
+                  —
+                </strong>
+
+              </div>
+
+
+              <div class="data-row">
+
+                <span>
+                  Inner Horizon
+                </span>
+
+                <strong id="innerHorizon">
+                  —
+                </strong>
+
+              </div>
+
+
+              <div class="data-row">
+
+                <span>
+                  Equatorial Ergosphere
+                </span>
+
+                <strong id="ergosphereRadius">
+                  —
+                </strong>
+
+              </div>
+
+
+              <div class="data-row">
+
+                <span>
+                  Prograde Photon Orbit
+                </span>
+
+                <strong id="photonPrograde">
+                  —
+                </strong>
+
+              </div>
+
+
+              <div class="data-row">
+
+                <span>
+                  Retrograde Photon Orbit
+                </span>
+
+                <strong id="photonRetrograde">
+                  —
+                </strong>
+
+              </div>
+
+
+              <div class="data-row">
+
+                <span>
+                  Prograde ISCO
+                </span>
+
+                <strong id="iscoPrograde">
+                  —
+                </strong>
+
+              </div>
+
+
+              <div class="data-row">
+
+                <span>
+                  Retrograde ISCO
+                </span>
+
+                <strong id="iscoRetrograde">
+                  —
+                </strong>
+
+              </div>
+
+
+            </section>
+
+
+
+            <section class="data-card">
+
+              <h3>
+                Physical Quantities
+              </h3>
+
+
+              <div class="data-row">
+
+                <span>
+                  Gravitational Time
+                </span>
+
+                <strong id="gravTime">
+                  —
+                </strong>
+
+              </div>
+
+
+              <div class="data-row">
+
+                <span>
+                  Horizon Area
+                </span>
+
+                <strong id="horizonArea">
+                  —
+                </strong>
+
+              </div>
+
+
+              <div class="data-row">
+
+                <span>
+                  Horizon Angular Velocity
+                </span>
+
+                <strong id="horizonOmega">
+                  —
+                </strong>
+
+              </div>
+
+
+              <div class="data-row">
+
+                <span>
+                  Hawking Temperature
+                </span>
+
+                <strong id="hawkingTemperature">
+                  —
+                </strong>
+
+              </div>
+
+
+              <div class="data-row">
+
+                <span>
+                  ISCO Frequency
+                </span>
+
+                <strong id="iscoFrequency">
+                  —
+                </strong>
+
+              </div>
+
+
+            </section>
+
+
+          </div>
+
+
+
+          <!-- REAL SVG CHARTS -->
+
+          <div class="data-charts">
+
+
+            <section class="data-card">
+
+              <h3>
+                Characteristic Radii vs Spin
+              </h3>
+
+              <svg
+                id="spinChart"
+                viewBox="0 0 600 220"
+              >
+              </svg>
+
+            </section>
+
+
+
+            <section class="data-card">
+
+              <h3>
+                Orbital Frequency vs Radius
+              </h3>
+
+              <svg
+                id="frequencyChart"
+                viewBox="0 0 600 220"
+              >
+              </svg>
+
+            </section>
+
+
+          </div>
+
+
+          <div class="physics-warning">
+
+            Kerr does not have one universal photon-sphere
+            radius. Data View therefore reports separate
+            equatorial prograde and retrograde photon
+            orbits.
+
+          </div>
+
+
+        </div>
+
+
+      </section>
+
+
+    </section>
+
+
+
+    <!-- ===================================================
+         RIGHT — OBJECT INFORMATION
+         =================================================== -->
+
+    <aside class="explorer-right">
+
+
+      <section class="explorer-panel">
+
+        <div class="panel-title">
+
+          <span>
+            OBJECT DETAILS
+          </span>
+
+          <strong id="objectName">
+            Sagittarius A*
+          </strong>
+
+        </div>
+
+
+        <div class="object-details">
+
+
+          <div>
+
+            <span>
+              Type
+            </span>
+
+            <strong id="objectType">
+              Supermassive black hole
+            </strong>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              Mass
+            </span>
+
+            <strong id="objectMass">
+              ≈ 4.3 × 10⁶ M☉
+            </strong>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              Distance
+            </span>
+
+            <strong id="objectDistance">
+              ≈ 26,700 ly
+            </strong>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              Host
+            </span>
+
+            <strong id="objectHost">
+              Milky Way
+            </strong>
+
+          </div>
+
+
+        </div>
+
+
+      </section>
+
+
+
+      <section class="explorer-panel quick-facts">
+
+        <div class="panel-title">
+
+          <span>
+            QUICK FACTS
+          </span>
+
+          <strong>
+            Selected Object
+          </strong>
+
+        </div>
+
+
+        <ul id="objectFacts">
+
+          <li>
+            Central black hole of the Milky Way.
+          </li>
+
+          <li>
+            Mass measured from nearby stellar orbits.
+          </li>
+
+          <li>
+            Imaged by the Event Horizon Telescope.
+          </li>
+
+        </ul>
+
+
+      </section>
+
+
+    </aside>
+
+
+  </section>
+
+
+</main>
+
+
+
+<script src="nav.js"></script>
+
+<script src="explorer.js"></script>
+
+
+</body>
+
+</html>

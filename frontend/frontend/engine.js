@@ -10,7 +10,7 @@ const gl = canvas.getContext("webgl2", {
   depth: false,
   stencil: false,
   preserveDrawingBuffer: false,
-  powerPreference: "high-performance"
+  powerPreference: "default"
 });
 
 if (!gl) {
@@ -1314,7 +1314,7 @@ function resizeCanvas() {
       Math.floor(
         rect.width *
         pixelRatio *
-        preset.renderScale * (dragging ? 0.68 : 1.0)
+        preset.renderScale
       )
     );
 
@@ -1324,7 +1324,7 @@ function resizeCanvas() {
       Math.floor(
         rect.height *
         pixelRatio *
-        preset.renderScale * (dragging ? 0.68 : 1.0)
+        preset.renderScale
       )
     );
 
@@ -1360,36 +1360,121 @@ let lastInteractionTime = performance.now();
 function drawFrame(now) {
   resizeCanvas();
 
-  const preset = qualityPresets[state.preset];
-  const animate = elements.animatePlasma.checked;
+  const preset =
+    qualityPresets[state.preset];
+
+  const animate =
+    elements.animatePlasma.checked;
 
   if (animate) {
-    stableAnimationTime = now * 0.001;
+    stableAnimationTime =
+      now * 0.001;
   }
 
-  gl.uniform2f(uniforms.uResolution, canvas.width, canvas.height);
-  gl.uniform1f(uniforms.uTime, stableAnimationTime);
-  gl.uniform1f(uniforms.uMass, state.mass);
-  gl.uniform1f(uniforms.uSpin, state.spin);
-  gl.uniform1f(uniforms.uDistance, state.distance);
-  gl.uniform1f(uniforms.uFov, degreesToRadians(state.fov));
-  gl.uniform1f(uniforms.uYaw, state.yaw);
-  gl.uniform1f(uniforms.uPitch, state.pitch);
-  gl.uniform1f(uniforms.uDiskDensity, state.diskDensity);
-  gl.uniform1f(uniforms.uDiskThickness, state.diskThickness);
-  gl.uniform1f(uniforms.uExposure, state.exposure);
-  gl.uniform1i(uniforms.uMaxSteps, preset.maxSteps);
-  gl.uniform1f(uniforms.uJitter, jitterFrame % 1024);
+  gl.uniform2f(
+    uniforms.uResolution,
+    canvas.width,
+    canvas.height
+  );
+
+  gl.uniform1f(
+    uniforms.uTime,
+    stableAnimationTime
+  );
+
+  gl.uniform1f(
+    uniforms.uMass,
+    state.mass
+  );
+
+  gl.uniform1f(
+    uniforms.uSpin,
+    state.spin
+  );
+
+  gl.uniform1f(
+    uniforms.uDistance,
+    state.distance
+  );
+
+  gl.uniform1f(
+    uniforms.uFov,
+    degreesToRadians(state.fov)
+  );
+
+  gl.uniform1f(
+    uniforms.uYaw,
+    state.yaw
+  );
+
+  gl.uniform1f(
+    uniforms.uPitch,
+    state.pitch
+  );
+
+  gl.uniform1f(
+    uniforms.uDiskDensity,
+    state.diskDensity
+  );
+
+  gl.uniform1f(
+    uniforms.uDiskThickness,
+    state.diskThickness
+  );
+
+  gl.uniform1f(
+    uniforms.uExposure,
+    state.exposure
+  );
+
+
+  // --------------------------------------
+  // Lower integration cost while dragging
+  // --------------------------------------
+
+  const activeMaxSteps =
+    dragging
+      ? Math.min(
+          preset.maxSteps,
+          75
+        )
+      : preset.maxSteps;
+
+
+  gl.uniform1i(
+    uniforms.uMaxSteps,
+    activeMaxSteps
+  );
+
+
+  gl.uniform1f(
+    uniforms.uJitter,
+    jitterFrame % 1024
+  );
+
   jitterFrame += 1;
 
-  const started = performance.now();
-  gl.drawArrays(gl.TRIANGLES, 0, 6);
-  const elapsed = performance.now() - started;
+
+  const started =
+    performance.now();
+
+  gl.drawArrays(
+    gl.TRIANGLES,
+    0,
+    6
+  );
+
+  const elapsed =
+    performance.now() -
+    started;
+
 
   elements.fpsBadge.textContent =
     animate
       ? "GPU · capped 20 FPS"
-      : "GPU · " + elapsed.toFixed(1) + " ms · idle";
+      : "GPU · " +
+        elapsed.toFixed(1) +
+        " ms · idle";
 }
 
 function renderLoop(now) {
@@ -1496,7 +1581,7 @@ async function runBackendRender() {
       "Reference render complete in " + seconds.toFixed(1) + " s.";
   } catch (error) {
     if (error.name === "AbortError") {
-      elements.backendStatus.textContent = "Request cancelled in the browser. Python may need a moment to stop.";
+      elements.backendStatus.textContent = "Browser request cancelled. The Python calculation may continue until the current render finishes.";
     } else {
       console.error(error);
       elements.backendStatus.textContent = "Render failed: " + error.message;

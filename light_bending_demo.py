@@ -5,23 +5,27 @@ from models.black_hole import BlackHole
 
 from physics.orbit_simulator import OrbitSimulator
 from physics.photon_initial_conditions import PhotonInitialConditions
+from physics.schwarzschild_derivatives import SchwarzschildDerivatives
+from physics.schwarzschild_metric import SchwarzschildMetric
 
 #creating the simulator
 bh = BlackHole(mass=1)
+metric = SchwarzschildMetric(bh)
+derivatives = SchwarzschildDerivatives(metric)
 
-simulator = OrbitSimulator(bh)
+simulator = OrbitSimulator(
+    metric,
+    derivatives
+)
 
 photons = PhotonInitialConditions(bh)
 
 #launching many photons
 impact_parameters = [
-    2,
     3,
-    4,
     5,
     6,
-    8,
-    10
+    8
 ]
 
 plt.figure(figsize=(8, 8))
@@ -33,11 +37,14 @@ for b in impact_parameters:
         impact_parameter = b
     )
 
-    trajectory = simulator.simulate(
+    trajectory_result = simulator.simulate(
         initial,
         step_size = 0.01,
-        steps = 12000
+        steps = 1500,
+        escape_radius = 60
     )
+
+    trajectory = trajectory_result["trajectory"]
 
     print("kphi initial =", trajectory[0,7])
     print("kphi final   =", trajectory[-1,7])

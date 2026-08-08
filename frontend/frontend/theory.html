@@ -1,0 +1,1027 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>
+    Theory — Photon Forge
+  </title>
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="theory.css"
+  >
+</head>
+
+
+<body>
+
+<div id="nav-root"></div>
+
+
+<main class="theory-shell">
+
+
+  <!-- =====================================================
+       HERO
+       ===================================================== -->
+
+  <section class="theory-hero">
+
+    <div class="theory-hero-copy">
+
+      <span class="theory-kicker">
+        GENERAL RELATIVITY
+      </span>
+
+      <h1>
+        Theory
+      </h1>
+
+      <h2>
+        The Mathematics of Spacetime
+      </h2>
+
+      <div class="theory-accent-line"></div>
+
+      <p>
+        Photon Forge is built on the framework of General
+        Relativity. This page connects the mathematics of
+        curved spacetime to the photon trajectories and
+        black-hole structures visualized by the engine.
+      </p>
+
+      <div class="theory-hero-actions">
+
+        <button
+          id="schwarzschildMode"
+          class="metric-button active"
+        >
+          Schwarzschild
+        </button>
+
+        <button
+          id="kerrMode"
+          class="metric-button"
+        >
+          Kerr
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="theory-hero-visual theory-video-wrap">
+
+      <video
+      class="theory-hero-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      >
+        <source
+        src="assets/theory/theory-hero.mp4"
+        type="video/mp4"
+        >
+      </video>
+
+      <div class="theory-video-overlay"></div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       MAIN LANDSCAPE THEORY LAYOUT
+       ===================================================== -->
+
+  <section class="theory-grid">
+
+
+    <!-- ===================================================
+         LEFT: CHAPTER NAVIGATION
+         =================================================== -->
+
+    <aside class="theory-sidebar theory-panel">
+
+      <div class="sidebar-title">
+        ON THIS PAGE
+      </div>
+
+
+      <button
+        class="chapter-link active"
+        data-target="geometrySection"
+      >
+        <span>01</span>
+        Spacetime Geometry
+      </button>
+
+
+      <button
+        class="chapter-link"
+        data-target="schwarzschildSection"
+      >
+        <span>02</span>
+        Schwarzschild Metric
+      </button>
+
+
+      <button
+        class="chapter-link"
+        data-target="geodesicsSection"
+      >
+        <span>03</span>
+        Geodesics
+      </button>
+
+
+      <button
+        class="chapter-link"
+        data-target="photonsSection"
+      >
+        <span>04</span>
+        Photons & Null Geodesics
+      </button>
+
+
+      <button
+        class="chapter-link"
+        data-target="conservedSection"
+      >
+        <span>05</span>
+        Conserved Quantities
+      </button>
+
+
+      <button
+        class="chapter-link"
+        data-target="potentialSection"
+      >
+        <span>06</span>
+        Effective Potential
+      </button>
+
+
+      <button
+        class="chapter-link"
+        data-target="radiiSection"
+      >
+        <span>07</span>
+        Characteristic Radii
+      </button>
+
+
+      <button
+        class="chapter-link"
+        data-target="kerrSection"
+      >
+        <span>08</span>
+        Kerr Black Hole
+      </button>
+
+
+      <button
+        class="chapter-link"
+        data-target="framesSection"
+      >
+        <span>09</span>
+        Reference Frames
+      </button>
+
+
+      <div class="sidebar-quote">
+
+        <span>“</span>
+
+        <p>
+          Geometry tells matter how to move;
+          matter tells geometry how to curve.
+        </p>
+
+        <strong>
+          — John Archibald Wheeler
+        </strong>
+
+      </div>
+
+
+      <div class="units-card">
+
+        <span>
+          UNITS USED
+        </span>
+
+        <p>
+          We use geometric units:
+        </p>
+
+        <strong>
+          G = c = 1
+        </strong>
+
+        <div>
+          [Mass] : Length
+        </div>
+
+        <div>
+          [Time] : Length
+        </div>
+
+        <div>
+          [Velocity] = 1
+        </div>
+
+      </div>
+
+    </aside>
+
+
+
+    <!-- ===================================================
+         CENTER: THEORY CONTENT
+         =================================================== -->
+
+    <article class="theory-content theory-panel">
+
+
+      <!-- 01 -->
+
+      <section
+        id="geometrySection"
+        class="theory-section"
+      >
+
+        <span class="section-number">
+          01.
+        </span>
+
+        <h3>
+          Spacetime Geometry
+        </h3>
+
+        <p>
+          In General Relativity, gravity is not treated as a
+          conventional force. Mass and energy curve spacetime,
+          and objects move along the geometry created by that
+          curvature.
+        </p>
+
+        <div class="equation-box">
+          Gμν = 8πTμν
+        </div>
+
+        <div class="equation-labels">
+
+          <span>
+            Einstein Tensor
+          </span>
+
+          <span>
+            Stress–Energy Tensor
+          </span>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- 02 -->
+
+      <section
+        id="schwarzschildSection"
+        class="theory-section"
+      >
+
+        <span class="section-number">
+          02.
+        </span>
+
+        <h3>
+          Schwarzschild Metric
+        </h3>
+
+        <p>
+          For a static, non-rotating, spherically symmetric
+          black hole of mass M, spacetime is described by the
+          Schwarzschild solution.
+        </p>
+
+        <div class="equation-box equation-large">
+          ds² = −(1 − 2M/r)dt²
+          + (1 − 2M/r)⁻¹dr²
+          + r²(dθ² + sin²θ dφ²)
+        </div>
+
+        <p>
+          The event horizon occurs at:
+        </p>
+
+        <div class="inline-equation">
+          rₛ = 2M
+        </div>
+
+      </section>
+
+
+
+      <!-- 03 -->
+
+      <section
+        id="geodesicsSection"
+        class="theory-section"
+      >
+
+        <span class="section-number">
+          03.
+        </span>
+
+        <h3>
+          Geodesics
+        </h3>
+
+        <p>
+          Particles and light follow geodesics — the
+          straightest possible paths through curved
+          spacetime.
+        </p>
+
+        <div class="equation-box equation-large">
+          d²xμ/dλ² + Γμ αβ
+          (dxα/dλ)(dxβ/dλ) = 0
+        </div>
+
+        <p>
+          The Christoffel symbols encode how the coordinates
+          respond to the underlying spacetime curvature.
+        </p>
+
+      </section>
+
+
+
+      <!-- 04 -->
+
+      <section
+        id="photonsSection"
+        class="theory-section"
+      >
+
+        <span class="section-number">
+          04.
+        </span>
+
+        <h3>
+          Photons & Null Geodesics
+        </h3>
+
+        <p>
+          Photons move along null geodesics. Their spacetime
+          interval therefore satisfies:
+        </p>
+
+        <div class="equation-box">
+          ds² = 0
+        </div>
+
+        <p>
+          This constraint is central to ray tracing because it
+          determines how light bends, escapes, or becomes
+          captured by the black hole.
+        </p>
+
+      </section>
+
+
+
+      <!-- 05 -->
+
+      <section
+        id="conservedSection"
+        class="theory-section"
+      >
+
+        <span class="section-number">
+          05.
+        </span>
+
+        <h3>
+          Conserved Quantities
+        </h3>
+
+        <p>
+          Symmetries of the spacetime create conserved
+          quantities along geodesics. In Schwarzschild
+          spacetime, the most useful are energy and angular
+          momentum.
+        </p>
+
+        <div class="equation-pair">
+
+          <div>
+            <span>Energy</span>
+            <strong>E = constant</strong>
+          </div>
+
+          <div>
+            <span>Angular Momentum</span>
+            <strong>L = constant</strong>
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- 06 -->
+
+      <section
+        id="potentialSection"
+        class="theory-section"
+      >
+
+        <span class="section-number">
+          06.
+        </span>
+
+        <h3>
+          Effective Potential
+        </h3>
+
+        <p>
+          The radial motion of particles and photons can be
+          interpreted through an effective potential. Peaks
+          and minima reveal unstable and stable orbit regions.
+        </p>
+
+        <div class="potential-visual">
+
+          <svg viewBox="0 0 560 180">
+
+            <line
+              x1="35"
+              y1="145"
+              x2="530"
+              y2="145"
+            ></line>
+
+            <line
+              x1="35"
+              y1="20"
+              x2="35"
+              y2="145"
+            ></line>
+
+            <path
+              d="M40 132
+                 C100 126 145 118 180 90
+                 C220 55 245 35 270 48
+                 C305 70 340 110 520 126"
+            ></path>
+
+            <circle
+              cx="270"
+              cy="48"
+              r="4"
+            ></circle>
+
+          </svg>
+
+          <span>
+            unstable photon orbit region
+          </span>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- 07 -->
+
+      <section
+        id="radiiSection"
+        class="theory-section"
+      >
+
+        <span class="section-number">
+          07.
+        </span>
+
+        <h3>
+          Characteristic Radii
+        </h3>
+
+        <p>
+          Several radii define the important structures
+          surrounding a black hole.
+        </p>
+
+        <div class="radii-grid">
+
+          <button
+            class="radius-card"
+            data-select="event-horizon"
+          >
+            <span>
+              Event Horizon
+            </span>
+
+            <strong id="horizonRadiusLabel">
+              r = 2.000 M
+            </strong>
+          </button>
+
+
+          <button
+            class="radius-card"
+            data-select="photon-sphere"
+          >
+            <span>
+              Photon Sphere
+            </span>
+
+            <strong id="photonRadiusLabel">
+              r = 3.000 M
+            </strong>
+          </button>
+
+
+          <button
+            class="radius-card"
+            data-select="isco"
+          >
+            <span>
+              ISCO
+            </span>
+
+            <strong id="iscoRadiusLabel">
+              r = 6.000 M
+            </strong>
+          </button>
+
+
+          <button
+            class="radius-card"
+            data-select="ergosphere"
+          >
+            <span>
+              Ergosphere
+            </span>
+
+            <strong>
+              Kerr only
+            </strong>
+          </button>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- 08 -->
+
+      <section
+        id="kerrSection"
+        class="theory-section"
+      >
+
+        <span class="section-number">
+          08.
+        </span>
+
+        <h3>
+          Kerr Black Hole
+        </h3>
+
+        <p>
+          The Kerr solution describes a rotating black hole.
+          Rotation introduces frame dragging, an ergosphere,
+          spin-dependent characteristic radii and asymmetric
+          photon trajectories.
+        </p>
+
+        <div class="kerr-feature-grid">
+
+          <div>
+            <span>
+              Outer Horizon
+            </span>
+
+            <strong>
+              r₊ = M + √(M² − a²)
+            </strong>
+          </div>
+
+
+          <div>
+            <span>
+              Frame Dragging
+            </span>
+
+            <strong>
+              ω ≠ 0
+            </strong>
+          </div>
+
+
+          <div>
+            <span>
+              Ergosphere
+            </span>
+
+            <strong>
+              Kerr only
+            </strong>
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- 09 -->
+
+      <section
+        id="framesSection"
+        class="theory-section"
+      >
+
+        <span class="section-number">
+          09.
+        </span>
+
+        <h3>
+          Reference Frames
+        </h3>
+
+        <p>
+          Observers measure local directions using an
+          orthonormal tetrad. Photon Forge uses observer-frame
+          directions to generate photons from camera pixels
+          before transforming them into spacetime
+          coordinates.
+        </p>
+
+      </section>
+
+
+
+      <!-- THEORY TO PIXELS -->
+
+      <section class="theory-to-pixels">
+
+        <span>
+          FROM THEORY TO PIXELS
+        </span>
+
+        <div class="theory-pipeline">
+
+          <div>
+            <b>Gμν</b>
+            <small>Einstein Equations</small>
+          </div>
+
+          <i>→</i>
+
+          <div>
+            <b>gμν</b>
+            <small>Metric Tensor</small>
+          </div>
+
+          <i>→</i>
+
+          <div>
+            <b>Γ</b>
+            <small>Geodesics</small>
+          </div>
+
+          <i>→</i>
+
+          <div>
+            <b>∫</b>
+            <small>RK4 Integration</small>
+          </div>
+
+          <i>→</i>
+
+          <div>
+            <b>●</b>
+            <small>Rendered Image</small>
+          </div>
+
+        </div>
+
+        <p>
+          Photon Forge solves these equations numerically,
+          tracing photon trajectories until they are
+          captured, intersect the disk, or escape to the
+          background.
+        </p>
+
+      </section>
+
+    </article>
+
+
+
+    <!-- ===================================================
+         RIGHT: CONCEPT / RADII / INTERACTIVE PANEL
+         =================================================== -->
+
+    <aside class="theory-right-column">
+
+
+      <!-- KEY CONCEPT -->
+
+      <section class="theory-panel concept-card">
+
+        <span class="right-card-label">
+          KEY CONCEPT
+        </span>
+
+        <h3>
+          Curvature
+        </h3>
+
+        <p>
+          Mass curves spacetime. Curved spacetime guides the
+          motion of light and matter.
+        </p>
+
+        <div class="concept-grid">
+
+          <div class="concept-grid-plane"></div>
+
+          <div class="concept-mass"></div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- CHARACTERISTIC RADII -->
+
+      <section class="theory-panel live-radii-card">
+
+        <span class="right-card-label">
+          CHARACTERISTIC RADII
+        </span>
+
+        <div class="right-radii-row">
+
+          <span>
+            Event Horizon
+          </span>
+
+          <strong id="backendValue">
+            2.000 M
+          </strong>
+
+        </div>
+
+
+        <div class="right-radii-row">
+
+          <span>
+            Photon Sphere
+          </span>
+
+          <strong id="rightPhotonValue">
+            3.000 M
+          </strong>
+
+        </div>
+
+
+        <div class="right-radii-row">
+
+          <span>
+            ISCO
+          </span>
+
+          <strong id="rightIscoValue">
+            6.000 M
+          </strong>
+
+        </div>
+
+
+        <div class="backend-indicator">
+
+          <span
+            id="backendStatusTheory"
+          >
+            local formula
+          </span>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- INTERACTIVE STRUCTURE -->
+
+      <section class="theory-panel interactive-card">
+
+        <span class="right-card-label">
+          INTERACTIVE STRUCTURE
+        </span>
+
+        <h3 id="structureTitle">
+          Event Horizon
+        </h3>
+
+        <div
+          id="structureTag"
+          class="structure-tag"
+        >
+          Schwarzschild · r = 2M
+        </div>
+
+        <p id="structureDescription">
+          The event horizon is the causal boundary of the
+          black hole.
+        </p>
+
+        <div
+          id="structureEquation"
+          class="mini-equation"
+        >
+          rₛ = 2M
+        </div>
+
+        <p id="structureSimulation">
+          Rays crossing this surface are classified as
+          captured.
+        </p>
+
+        <div class="structure-buttons">
+
+          <button
+            class="structure-nav-button active"
+            data-select="event-horizon"
+          >
+            Horizon
+          </button>
+
+          <button
+            class="structure-nav-button"
+            data-select="photon-sphere"
+          >
+            Photon Sphere
+          </button>
+
+          <button
+            class="structure-nav-button"
+            data-select="isco"
+          >
+            ISCO
+          </button>
+
+          <button
+            class="structure-nav-button"
+            data-select="ergosphere"
+          >
+            Ergosphere
+          </button>
+
+          <button
+            class="structure-nav-button"
+            data-select="accretion-disk"
+          >
+            Accretion Disk
+          </button>
+
+          <button
+            class="structure-nav-button"
+            data-select="shadow"
+          >
+            Shadow
+          </button>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- EINSTEIN RING -->
+
+      <section class="theory-panel ring-card">
+
+        <span class="right-card-label">
+          EINSTEIN RING
+        </span>
+
+        <div class="einstein-ring-visual">
+          <div></div>
+        </div>
+
+        <p>
+          Strong alignment between source, lens and observer
+          can create a circular gravitationally lensed image.
+        </p>
+
+        <a href="lensing.html">
+          Explore Lensing →
+        </a>
+
+      </section>
+
+
+
+      <!-- NEXT -->
+
+      <section class="theory-panel next-card">
+
+        <span class="right-card-label">
+          NEXT
+        </span>
+
+        <h3>
+          Kerr Spacetime
+        </h3>
+
+        <p>
+          Rotation introduces frame dragging, the ergosphere,
+          and more complex photon dynamics.
+        </p>
+
+        <button
+          id="switchToKerr"
+          class="next-button"
+        >
+          Explore Kerr →
+        </button>
+
+      </section>
+
+    </aside>
+
+
+  </section>
+
+
+
+  <!-- =====================================================
+       BOTTOM QUOTE
+       ===================================================== -->
+
+  <section class="theory-bottom-quote">
+
+    <div class="einstein-mark">
+      E = mc²
+    </div>
+
+    <blockquote>
+      “The most incomprehensible thing about the universe
+      is that it is comprehensible.”
+    </blockquote>
+
+    <span>
+      — Albert Einstein
+    </span>
+
+  </section>
+
+
+</main>
+
+
+<script src="nav.js"></script>
+<script src="theory.js"></script>
+
+</body>
+</html>

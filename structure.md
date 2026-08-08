@@ -260,6 +260,60 @@ Phase 10: Visualization Engine
 
 
 
+
+
+
+
+
+
+
+Day 1 — Renderer stability and frontend/backend connection
+✓ Make GPU rendering laptop-safe
+✓ Reduce ray steps while dragging
+✓ Confirm plasma animation is off by default
+✓ Test pause and hidden-tab behaviour
+✓ Verify /render with a tiny backend render
+✓ Confirm GPU and Python view switching
+✓ Add clear loading and error messages
+Day 2 — Visual Theory page
+✓ Lightweight black-hole structure explorer
+✓ Event horizon
+✓ Photon sphere
+✓ ISCO
+✓ Ergosphere
+✓ Accretion disk
+✓ Clickable explanations
+✓ Schwarzschild/Kerr selector
+✓ Backend-calculated radii
+✓ Home
+✓ Simulator
+✓ Visual Theory
+Explore
+Validation
+✓ About
+✓ Home Page Layout
+Day 3 — Validation and results
+⬜ One automated validation command
+⬜ Photon-sphere result
+⬜ Critical-impact-parameter result
+⬜ Capture/escape result
+⬜ Kerr a=0 validation
+⬜ Conservation results
+⬜ Performance table
+⬜ Validation/results webpage
+Day 4 — Competition build
+⬜ Test every page and navigation link
+⬜ Fix responsive layout
+⬜ Add methodology and limitations
+⬜ Final screenshots
+⬜ GitHub README
+⬜ Competition presentation
+⬜ Short demonstration video
+⬜ Final backup and ZIP
+
+
+
+
 Phase 6.5 — Visualization Engine
 Part 1 — Camera Fly-through ⭐⭐⭐⭐⭐
 

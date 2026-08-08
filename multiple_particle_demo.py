@@ -6,12 +6,19 @@ from models.black_hole import BlackHole
 from physics.initial_conditions import InitialConditions
 from physics.orbit_simulator import OrbitSimulator
 from physics.particle_ensemble import ParticleEnsemble
+from physics.schwarzschild_metric import SchwarzschildMetric
+from physics.schwarzschild_derivatives import SchwarzschildDerivatives
 
 bh = BlackHole(mass=1)
+metric = SchwarzschildMetric(bh)
+derivatives = SchwarzschildDerivatives(metric)
 
 initial = InitialConditions(bh)
 
-simulator = OrbitSimulator(bh)
+simulator = OrbitSimulator(
+    metric,
+    derivatives
+)
 
 ensemble = ParticleEnsemble(simulator)
 
@@ -44,7 +51,7 @@ ensemble.add_particle(
 
 trajectories = ensemble.simulate_all(
     step_size=0.01,
-    steps=30000
+    steps=1500
 )
 
 #Plotting all

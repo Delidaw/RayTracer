@@ -1,0 +1,1993 @@
+/* =========================================================
+   PHOTON FORGE — COMPACT DASHBOARD HOME
+   ========================================================= */
+
+:root {
+  --home-bg: #04060b;
+
+  --home-panel: rgba(7, 10, 18, 0.97);
+
+  --home-panel-2: rgba(10, 14, 24, 0.95);
+
+  --home-line:
+    rgba(105, 119, 175, 0.24);
+
+  --home-purple:
+    #685cff;
+
+  --home-purple-bright:
+    #8177ff;
+
+  --home-orange:
+    #ff9954;
+
+  --home-text:
+    #edf1fa;
+
+  --home-dim:
+    #818ba0;
+}
+
+
+body {
+  background:
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(78, 67, 180, 0.12),
+      transparent 35%
+    ),
+    var(--home-bg);
+
+  overflow-x: hidden;
+}
+
+
+/* =========================================================
+   MASTER 50 / 50 LAYOUT
+   ========================================================= */
+
+.home-dashboard {
+  width:
+    min(
+      calc(100% - 22px),
+      1560px
+    );
+
+  margin:
+    12px auto 45px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+
+  gap: 12px;
+
+  align-items: start;
+}
+
+
+.home-left,
+.home-right {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+
+  min-width: 0;
+}
+
+
+.home-card {
+  position: relative;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    var(--home-line);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(9, 12, 21, 0.98),
+      rgba(4, 7, 13, 0.98)
+    );
+
+  box-shadow:
+    0 12px 32px
+    rgba(0, 0, 0, 0.18);
+}
+
+
+.home-eyebrow,
+.compact-heading span,
+.mini-feature-heading span {
+  font-family:
+    var(
+      --font-mono,
+      "JetBrains Mono",
+      monospace
+    );
+
+  font-size: 8px;
+
+  letter-spacing: 0.13em;
+
+  color:
+    #887cff;
+}
+
+
+/* =========================================================
+   TOP LEFT — COMPACT HERO
+   ========================================================= */
+
+.compact-hero {
+  height: 315px;
+
+  display: grid;
+
+  grid-template-columns:
+    0.92fr 1.08fr;
+}
+
+
+.compact-hero-copy {
+  z-index: 5;
+
+  padding: 32px 20px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+
+.compact-hero-copy h1 {
+  margin:
+    9px 0 12px;
+
+  font-family:
+    Inter,
+    sans-serif;
+
+  font-size:
+    clamp(
+      35px,
+      3vw,
+      53px
+    );
+
+  line-height: 0.95;
+
+  font-weight: 400;
+
+  letter-spacing:
+    -0.045em;
+}
+
+
+.compact-hero-copy h1 span {
+  color:
+    var(--home-purple);
+}
+
+
+.compact-hero-copy p {
+  max-width: 340px;
+
+  margin: 0;
+
+  color:
+    #8f99ad;
+
+  font-size: 10px;
+
+  line-height: 1.65;
+}
+
+
+.compact-actions {
+  display: flex;
+
+  gap: 7px;
+
+  margin-top: 17px;
+
+  flex-wrap: wrap;
+}
+
+
+.home-primary-button,
+.home-secondary-button {
+  min-height: 37px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding:
+    0 13px;
+
+  text-decoration: none;
+
+  font-family:
+    var(
+      --font-mono,
+      monospace
+    );
+
+  font-size: 8.5px;
+
+  transition:
+    transform .18s ease,
+    border-color .18s ease;
+}
+
+
+.home-primary-button {
+  color: #fff;
+
+  border:
+    1px solid
+    #786cff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #5246f5,
+      #6a52ff
+    );
+
+  box-shadow:
+    0 0 20px
+    rgba(90, 76, 255, 0.18);
+}
+
+
+.home-secondary-button {
+  color:
+    #d5dbea;
+
+  border:
+    1px solid
+    #343b4d;
+
+  background:
+    rgba(6, 8, 14, 0.72);
+}
+
+
+.home-primary-button:hover,
+.home-secondary-button:hover {
+  transform:
+    translateY(-2px);
+}
+
+
+/* =========================================================
+   SMALL HERO BLACK HOLE
+   ========================================================= */
+
+.compact-black-hole {
+  position: relative;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(43, 46, 78, 0.22),
+      transparent 43%
+    ),
+    #010207;
+}
+
+
+.hero-stars {
+  position: absolute;
+
+  inset: 0;
+
+  background-image:
+
+    radial-gradient(
+      circle at 15% 20%,
+      white 0 .6px,
+      transparent .8px
+    ),
+
+    radial-gradient(
+      circle at 70% 35%,
+      #d5ddff 0 .6px,
+      transparent .9px
+    ),
+
+    radial-gradient(
+      circle at 45% 75%,
+      white 0 .5px,
+      transparent .8px
+    );
+
+  background-size:
+    85px 80px,
+    130px 115px,
+    75px 100px;
+
+  opacity: .72;
+}
+
+
+.small-bh {
+  position: absolute;
+
+  left: 50%;
+
+  top: 50%;
+
+  width: 310px;
+
+  height: 200px;
+
+  transform:
+    translate(-50%, -50%);
+}
+
+
+.small-bh-shadow {
+  position: absolute;
+
+  z-index: 5;
+
+  left: 50%;
+
+  top: 50%;
+
+  width: 98px;
+
+  height: 98px;
+
+  transform:
+    translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background: #000;
+}
+
+
+.small-bh-ring {
+  position: absolute;
+
+  z-index: 4;
+
+  left: 50%;
+
+  top: 50%;
+
+  width: 116px;
+
+  height: 116px;
+
+  transform:
+    translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  border:
+    2px solid
+    #ffd1a2;
+
+  box-shadow:
+    0 0 15px
+    rgba(255, 147, 76, .62);
+}
+
+
+.small-bh-disk {
+  position: absolute;
+
+  left: 50%;
+
+  top: 50%;
+
+  width: 285px;
+
+  height: 52px;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(-5deg);
+
+  border:
+    11px solid
+    rgba(255, 130, 55, .74);
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 18px
+    rgba(255, 102, 25, .46);
+}
+
+
+/* =========================================================
+   GENERAL COMPACT HEADING
+   ========================================================= */
+
+.compact-heading {
+  min-height: 47px;
+
+  padding:
+    11px 13px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content:
+    space-between;
+
+  gap: 12px;
+
+  border-bottom:
+    1px solid
+    var(--home-line);
+}
+
+
+.compact-heading > div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+
+.compact-heading strong {
+  color:
+    #dfe5f1;
+
+  font-size: 11px;
+
+  font-weight: 500;
+}
+
+
+.compact-heading > a {
+  color:
+    #7e88a0;
+
+  text-decoration: none;
+
+  font:
+    8px
+    var(
+      --font-mono,
+      monospace
+    );
+}
+
+
+.compact-heading > a:hover {
+  color:
+    var(--home-purple-bright);
+}
+
+
+/* =========================================================
+   SIMULATION GALLERY
+   ========================================================= */
+
+.gallery-box {
+  height: 220px;
+}
+
+
+.compact-gallery {
+  height:
+    calc(100% - 48px);
+
+  padding: 10px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, 1fr);
+
+  gap: 7px;
+}
+
+
+.gallery-item {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  text-decoration: none;
+
+  border:
+    1px solid
+    rgba(94, 106, 150, .21);
+
+  background:
+    #080b13;
+
+  transition:
+    border-color .2s ease,
+    transform .2s ease;
+}
+
+
+.gallery-item:hover {
+  border-color:
+    rgba(108, 93, 255, .55);
+
+  transform:
+    translateY(-2px);
+}
+
+
+.gallery-preview {
+  position: relative;
+
+  flex: 1;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at center,
+      #171928,
+      #010207 72%
+    );
+}
+
+
+.gallery-item > span {
+  padding: 7px;
+
+  color:
+    #c1c8d7;
+
+  font-size: 8px;
+}
+
+
+.gallery-hole {
+  position: absolute;
+
+  left: 50%;
+
+  top: 50%;
+
+  width: 45px;
+
+  height: 45px;
+
+  transform:
+    translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background: #000;
+
+  box-shadow:
+    0 0 0 1px
+    rgba(255, 200, 140, .9),
+
+    0 0 10px
+    rgba(255, 130, 55, .5);
+}
+
+
+.gallery-disk {
+  position: absolute;
+
+  left: 50%;
+
+  top: 50%;
+
+  width: 100px;
+
+  height: 25px;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(-5deg);
+
+  border:
+    5px solid
+    rgba(255, 131, 52, .75);
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 10px
+    rgba(255, 100, 25, .42);
+}
+
+
+.schwarzschild-disk {
+  transform:
+    translate(-50%, -50%);
+}
+
+
+.gallery-ring,
+.photon-ring-mini {
+  position: absolute;
+
+  left: 50%;
+
+  top: 50%;
+
+  width: 55px;
+
+  height: 55px;
+
+  transform:
+    translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  border:
+    1.5px solid
+    #ffc480;
+
+  box-shadow:
+    0 0 11px
+    rgba(255, 151, 76, .52);
+}
+
+
+.gallery-ring {
+  border-left-color:
+    #6385ff;
+
+  border-right-color:
+    #6385ff;
+}
+
+
+.edge-line {
+  position: absolute;
+
+  left: 50%;
+
+  top: 50%;
+
+  width: 110px;
+
+  height: 5px;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(-7deg);
+
+  background:
+    #ff9a51;
+
+  box-shadow:
+    0 0 9px
+    #ff7130;
+}
+
+
+/* =========================================================
+   LEFT THREE FEATURE CARDS
+   ========================================================= */
+
+.left-feature-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 8px;
+}
+
+
+.mini-feature {
+  min-height: 225px;
+
+  padding: 13px;
+
+  text-decoration: none;
+
+  color: inherit;
+}
+
+
+.mini-feature-heading {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+
+.mini-feature-heading strong {
+  color:
+    #dbe1ed;
+
+  font-size: 10px;
+
+  font-weight: 500;
+}
+
+
+.mini-feature p {
+  margin:
+    8px 0 0;
+
+  color:
+    #717b90;
+
+  font-size: 8px;
+
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   SMALL CURVATURE
+   ========================================================= */
+
+.mini-curvature {
+  position: relative;
+
+  height: 130px;
+
+  perspective: 350px;
+
+  overflow: hidden;
+}
+
+
+.curvature-grid-small {
+  position: absolute;
+
+  left: -5%;
+
+  top: 27px;
+
+  width: 110%;
+
+  height: 130px;
+
+  transform:
+    rotateX(66deg);
+
+  background-image:
+
+    linear-gradient(
+      rgba(79, 105, 255, .28)
+      1px,
+      transparent 1px
+    ),
+
+    linear-gradient(
+      90deg,
+      rgba(79, 105, 255, .28)
+      1px,
+      transparent 1px
+    );
+
+  background-size:
+    18px 18px;
+
+  border:
+    1px solid
+    rgba(80, 105, 255, .25);
+
+  border-radius:
+    0 0 50% 50%;
+}
+
+
+.curvature-hole-small {
+  position: absolute;
+
+  z-index: 3;
+
+  left: 50%;
+
+  bottom: 17px;
+
+  width: 37px;
+
+  height: 15px;
+
+  transform:
+    translateX(-50%);
+
+  border-radius: 50%;
+
+  background: #000;
+
+  box-shadow:
+    0 0 6px
+    #5274ff;
+}
+
+
+/* =========================================================
+   SMALL ORBITS
+   ========================================================= */
+
+.mini-orbits {
+  position: relative;
+
+  height: 130px;
+}
+
+
+.orbit-center {
+  position: absolute;
+
+  left: 50%;
+
+  top: 52%;
+
+  width: 30px;
+
+  height: 30px;
+
+  transform:
+    translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background: #000;
+
+  box-shadow:
+    0 0 0 1px
+    #ff9b5a;
+}
+
+
+.mini-orbit {
+  position: absolute;
+
+  left: 50%;
+
+  top: 52%;
+
+  transform:
+    translate(-50%, -50%);
+
+  border:
+    1px solid
+    rgba(84, 113, 220, .35);
+
+  border-radius: 50%;
+}
+
+
+.mini-orbit.o1 {
+  width: 68px;
+  height: 38px;
+}
+
+
+.mini-orbit.o2 {
+  width: 108px;
+  height: 58px;
+}
+
+
+.mini-orbit.o3 {
+  width: 145px;
+  height: 78px;
+}
+
+
+.orbit-particle-small {
+  position: absolute;
+
+  right: 16%;
+
+  top: 34%;
+
+  width: 5px;
+
+  height: 5px;
+
+  border-radius: 50%;
+
+  background:
+    #ff9a52;
+
+  box-shadow:
+    0 0 6px
+    #ff8c43;
+}
+
+
+/* =========================================================
+   MINI PHYSICS DASHBOARD
+   ========================================================= */
+
+.physics-mini-grid {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 6px;
+
+  margin-top: 14px;
+}
+
+
+.physics-mini-grid > div {
+  padding: 8px;
+
+  border:
+    1px solid
+    rgba(96, 108, 150, .19);
+
+  background:
+    rgba(11, 15, 25, .9);
+}
+
+
+.physics-mini-grid span {
+  display: block;
+
+  color:
+    #707a8f;
+
+  font-size: 7px;
+}
+
+
+.physics-mini-grid strong {
+  display: block;
+
+  margin-top: 3px;
+
+  color:
+    #aebeff;
+
+  font:
+    9px
+    var(
+      --font-mono,
+      monospace
+    );
+
+  font-weight: 500;
+}
+
+
+.mini-backend-state {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  margin-top: 10px;
+
+  color:
+    #747e91;
+
+  font:
+    7.5px
+    var(
+      --font-mono,
+      monospace
+    );
+}
+
+
+.dashboard-dot {
+  width: 5px;
+
+  height: 5px;
+
+  border-radius: 50%;
+
+  background:
+    #727a8a;
+}
+
+
+.dashboard-dot.connected {
+  background:
+    #66dfa6;
+
+  box-shadow:
+    0 0 6px
+    rgba(102, 223, 166, .65);
+}
+
+
+/* =========================================================
+   OPEN SOURCE STRIP
+   ========================================================= */
+
+.opensource-strip {
+  min-height: 70px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 1px;
+
+  background:
+    var(--home-line);
+}
+
+
+.opensource-strip > div {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  padding: 11px 14px;
+
+  background:
+    #080b13;
+}
+
+
+.opensource-strip strong {
+  color:
+    #7469ff;
+
+  font:
+    9px
+    var(
+      --font-mono,
+      monospace
+    );
+}
+
+
+.opensource-strip span {
+  margin-top: 3px;
+
+  color:
+    #70798d;
+
+  font-size: 7.5px;
+}
+
+
+/* =========================================================
+   RIGHT — ANATOMY
+   ========================================================= */
+
+.anatomy-home {
+  height: 430px;
+}
+
+
+.anatomy-home-stage {
+  position: relative;
+
+  height: 315px;
+
+  overflow: hidden;
+}
+
+
+.anatomy-bh {
+  position: absolute;
+
+  left: 50%;
+
+  top: 52%;
+
+  width: 410px;
+
+  height: 230px;
+
+  transform:
+    translate(-50%, -50%);
+}
+
+
+.anatomy-shadow {
+  position: absolute;
+
+  z-index: 5;
+
+  left: 50%;
+
+  top: 50%;
+
+  width: 100px;
+
+  height: 100px;
+
+  transform:
+    translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background: #000;
+}
+
+
+.anatomy-photon {
+  position: absolute;
+
+  z-index: 4;
+
+  left: 50%;
+
+  top: 50%;
+
+  width: 120px;
+
+  height: 120px;
+
+  transform:
+    translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  border:
+    2px solid
+    rgba(255, 194, 126, .92);
+
+  box-shadow:
+    0 0 14px
+    rgba(255, 133, 55, .48);
+}
+
+
+.anatomy-disk {
+  position: absolute;
+
+  left: 50%;
+
+  top: 50%;
+
+  width: 380px;
+
+  height: 63px;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(-3deg);
+
+  border:
+    11px solid
+    rgba(255, 126, 51, .64);
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 17px
+    rgba(255, 105, 26, .42);
+}
+
+
+.anatomy-note {
+  position: absolute;
+
+  width: 130px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2px;
+
+  font-size: 8px;
+}
+
+
+.anatomy-note b {
+  color:
+    #e0e5ef;
+
+  font-size: 9px;
+
+  font-weight: 500;
+}
+
+
+.anatomy-note span {
+  color:
+    #687288;
+}
+
+
+.anatomy-note.ergo {
+  left: 22px;
+  top: 36px;
+}
+
+
+.anatomy-note.horizon {
+  left: 27px;
+  top: 164px;
+}
+
+
+.anatomy-note.photon {
+  right: 20px;
+  top: 42px;
+}
+
+
+.anatomy-note.disk {
+  right: 20px;
+  top: 165px;
+}
+
+
+.anatomy-note.isco {
+  left: 35px;
+  bottom: 22px;
+}
+
+
+.anatomy-tabs {
+  height: 66px;
+
+  padding:
+    9px 12px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, 1fr);
+
+  gap: 5px;
+
+  border-top:
+    1px solid
+    var(--home-line);
+}
+
+
+.anatomy-tabs a {
+  display: grid;
+
+  place-items: center;
+
+  color:
+    #7f899e;
+
+  text-decoration: none;
+
+  font:
+    7.5px
+    var(
+      --font-mono,
+      monospace
+    );
+
+  border:
+    1px solid
+    rgba(93, 105, 145, .18);
+
+  background:
+    #080b13;
+}
+
+
+.anatomy-tabs a:first-child {
+  color:
+    #c7c2ff;
+
+  border-color:
+    rgba(106, 91, 255, .45);
+
+  background:
+    rgba(98, 82, 255, .1);
+}
+
+
+/* =========================================================
+   RIGHT — PIPELINE
+   ========================================================= */
+
+.pipeline-home {
+  min-height: 195px;
+}
+
+
+.pipeline-row {
+  display: flex;
+
+  align-items: center;
+
+  justify-content:
+    space-between;
+
+  gap: 6px;
+
+  padding:
+    25px 14px;
+}
+
+
+.pipeline-node {
+  min-width: 48px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 7px;
+}
+
+
+.pipeline-node i {
+  width: 43px;
+
+  height: 43px;
+
+  display: grid;
+
+  place-items: center;
+
+  border:
+    1px solid
+    #2e3547;
+
+  background:
+    #090d15;
+
+  color:
+    #a9b1c5;
+
+  font:
+    15px
+    var(
+      --font-mono,
+      monospace
+    );
+
+  font-style: normal;
+}
+
+
+.pipeline-node span {
+  white-space: nowrap;
+
+  color:
+    #80899d;
+
+  font-size: 7px;
+}
+
+
+.pipeline-row > b {
+  color:
+    #756aff;
+
+  font-weight: 400;
+
+  font-size: 12px;
+}
+
+
+.final-node i {
+  color:
+    #ffaf72;
+
+  border-color:
+    rgba(255, 157, 89, .42);
+}
+
+
+/* =========================================================
+   RIGHT — PROJECT / GITHUB
+   ========================================================= */
+
+.project-home {
+  min-height: 220px;
+
+  padding: 22px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    185px;
+
+  column-gap: 25px;
+
+  align-content: center;
+}
+
+
+.project-copy h2 {
+  margin:
+    6px 0 8px;
+
+  font-size: 19px;
+
+  font-weight: 500;
+}
+
+
+.project-copy p {
+  max-width: 480px;
+
+  margin: 0;
+
+  color:
+    #808a9f;
+
+  font-size: 9.5px;
+
+  line-height: 1.65;
+}
+
+
+.project-tech {
+  display: flex;
+
+  align-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 5px;
+}
+
+
+.project-tech span {
+  padding:
+    6px 8px;
+
+  border:
+    1px solid
+    rgba(96, 109, 151, .25);
+
+  color:
+    #858fa5;
+
+  background:
+    #080b13;
+
+  font:
+    7.5px
+    var(
+      --font-mono,
+      monospace
+    );
+}
+
+
+.project-actions {
+  grid-column:
+    1 / -1;
+
+  display: flex;
+
+  gap: 8px;
+
+  margin-top: 18px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (
+  max-width: 1050px
+) {
+
+  .home-dashboard {
+    grid-template-columns: 1fr;
+  }
+
+
+  .anatomy-home {
+    height: auto;
+  }
+
+}
+
+
+@media (
+  max-width: 720px
+) {
+
+  .home-dashboard {
+    width:
+      calc(100% - 14px);
+  }
+
+
+  .compact-hero {
+    height: auto;
+
+    grid-template-columns: 1fr;
+  }
+
+
+  .compact-black-hole {
+    min-height: 250px;
+  }
+
+
+  .compact-gallery {
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    overflow-y: auto;
+  }
+
+
+  .gallery-box {
+    height: 350px;
+  }
+
+
+  .left-feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .opensource-strip {
+    grid-template-columns: 1fr;
+  }
+
+
+  .pipeline-row {
+    overflow-x: auto;
+
+    justify-content:
+      flex-start;
+  }
+
+
+  .project-home {
+    grid-template-columns: 1fr;
+  }
+
+
+  .project-tech {
+    margin-top: 16px;
+  }
+
+
+  .project-actions {
+    flex-direction: column;
+  }
+
+}
+
+/* =========================================================
+   REAL HOMEPAGE IMAGES
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   TOP-LEFT HERO IMAGE
+   --------------------------------------------------------- */
+
+.compact-black-hole {
+  position: relative;
+
+  overflow: hidden;
+
+  background: #010207;
+}
+
+
+.hero-black-hole-image {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+  object-fit: contain;
+  background: #050812;
+
+  /*
+    Moves the important part of the image toward
+    the centre of this narrow box.
+  */
+  object-position: 39% center;
+}
+
+
+/*
+  Soft blend between the text side and the image.
+*/
+
+.compact-black-hole::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      rgba(5, 7, 13, 0.76) 0%,
+      rgba(5, 7, 13, 0.20) 24%,
+      transparent 48%
+    ),
+
+    linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15),
+      transparent 35%
+    );
+}
+
+
+/* ---------------------------------------------------------
+   ANATOMY IMAGE CARD
+   --------------------------------------------------------- */
+
+.anatomy-home.anatomy-image-card {
+  height: auto;
+
+  aspect-ratio: 16 / 9;
+
+  min-height: 0;
+
+  padding: 0;
+
+  background: #000;
+}
+
+
+.anatomy-image-link {
+  position: absolute;
+
+  inset: 0;
+
+  display: block;
+
+  overflow: hidden;
+
+  text-decoration: none;
+
+  color: white;
+}
+
+
+.anatomy-full-image {
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+  /*
+    CONTAIN is important here.
+
+    The anatomy graphic has text near its edges,
+    so we don't want object-fit: cover cropping it.
+  */
+  object-fit: contain;
+
+  object-position: center;
+
+  background: #000;
+
+  transition:
+    transform 0.35s ease,
+    filter 0.35s ease;
+}
+
+
+.anatomy-image-link:hover
+.anatomy-full-image {
+  transform: scale(1.012);
+
+  filter: brightness(1.05);
+}
+
+
+/* ---------------------------------------------------------
+   THEORY BUTTON OVER THE IMAGE
+   --------------------------------------------------------- */
+
+.anatomy-image-overlay {
+  position: absolute;
+
+  right: 15px;
+
+  bottom: 14px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 8px 11px;
+
+  border:
+    1px solid
+    rgba(111, 126, 180, 0.35);
+
+  background:
+    rgba(3, 6, 12, 0.78);
+
+  backdrop-filter:
+    blur(8px);
+
+  -webkit-backdrop-filter:
+    blur(8px);
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+
+.anatomy-image-overlay span {
+  color: #6ebcff;
+
+  font-family:
+    var(
+      --font-mono,
+      "JetBrains Mono",
+      monospace
+    );
+
+  font-size: 7px;
+
+  letter-spacing: 0.12em;
+}
+
+
+.anatomy-image-overlay strong {
+  color: #edf4ff;
+
+  font-size: 8px;
+
+  font-weight: 500;
+}
+
+
+.anatomy-image-link:hover
+.anatomy-image-overlay {
+  border-color:
+    rgba(111, 189, 255, 0.7);
+
+  background:
+    rgba(5, 10, 18, 0.92);
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 720px) {
+
+  .compact-black-hole {
+    min-height: 250px;
+  }
+
+
+  .hero-black-hole-image {
+    object-position: 38% center;
+  }
+
+
+  .anatomy-home.anatomy-image-card {
+    aspect-ratio: 16 / 9;
+  }
+
+
+  .anatomy-image-overlay span {
+    display: none;
+  }
+
+}
+
+/* =========================================================
+   FEATURE CARD IMAGES
+   ========================================================= */
+
+.mini-image-wrap {
+  position: relative;
+  height: 130px;
+  margin-top: 10px;
+
+  overflow: hidden;
+
+  background: #010207;
+
+  border:
+    1px solid
+    rgba(95, 108, 150, 0.18);
+}
+
+
+.mini-feature-image {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease;
+}
+
+
+.mini-feature:hover
+.mini-feature-image {
+  transform: scale(1.045);
+
+  filter:
+    brightness(1.06)
+    contrast(1.04);
+}
+
+
+/* subtle bottom fade */
+
+.mini-image-wrap::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 62%,
+      rgba(0, 0, 0, 0.22)
+    );
+}
+
+
+/* Spacetime curvature crop */
+
+.left-feature-grid
+.mini-feature:nth-child(1)
+.mini-feature-image {
+  object-position: center 58%;
+}
+
+
+/* Orbit explorer crop */
+
+.left-feature-grid
+.mini-feature:nth-child(2)
+.mini-feature-image {
+  object-position: center;
+}
+
+
+/* =====================================================
+   SIMULATION GALLERY
+   ===================================================== */
+
+.gallery-home {
+  padding: 14px 14px 16px;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.section-head span {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--accent, #7f8cff);
+  margin-bottom: 4px;
+}
+
+.section-head strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text, #ffffff);
+}
+
+.section-head a {
+  font-size: 12px;
+  color: var(--accent, #7f8cff);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+
+.gallery-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.gallery-thumb {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid rgba(120, 140, 255, 0.16);
+  background: #050812;
+}
+
+.gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+.gallery-card h4 {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.2;
+  color: #f4f6ff;
+  font-weight: 600;
+}
+
+.gallery-card p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.45;
+  color: rgba(220, 228, 255, 0.72);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

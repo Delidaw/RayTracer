@@ -6,8 +6,12 @@ from physics.initial_conditions import InitialConditions
 from physics.geodesics import GeodesicEquation
 from physics.integrator import RK4Integrator
 from physics.orbit_simulator import OrbitSimulator
+from physics.schwarzschild_metric import SchwarzschildMetric
+from physics.schwarzschild_derivatives import SchwarzschildDerivatives
 
 bh = BlackHole(mass = 1)
+metric = SchwarzschildMetric(bh)
+derivatives = SchwarzschildDerivatives(metric)
 
 initial = InitialConditions(bh).escape_trajectory(
     radius = 20,
@@ -19,12 +23,15 @@ initial = InitialConditions(bh).escape_trajectory(
 
 #integrator = RK4Integrator(bh)
 
-simulator = OrbitSimulator(bh)
+simulator = OrbitSimulator(
+    metric,
+    derivatives
+)
 
 trajectory = simulator.simulate(
     initial, 
     step_size = 0.01,
-    steps = 20000
+    steps = 200
 )
 """
 print("Initial radius :", trajectory[0, 1])

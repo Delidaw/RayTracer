@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>
+    About — Photon Forge
+  </title>
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="about.css"
+  >
+
+</head>
+
+
+<body>
+
+<div id="nav-root"></div>
+
+
+<main class="about-shell">
+
+
+  <!-- =====================================================
+       HERO
+       ===================================================== -->
+
+  <section class="about-hero">
+
+
+    <!-- LEFT -->
+
+    <div class="about-hero-copy">
+
+      <div class="about-kicker">
+        — ABOUT PHOTON FORGE
+      </div>
+
+
+      <h1>
+
+        Where physics<br>
+
+        becomes
+
+        <span>
+          computation.
+        </span>
+
+      </h1>
+
+
+      <p class="about-intro">
+
+        Photon Forge is a computational General Relativity
+        project combining theoretical physics, numerical
+        methods and scientific visualization to explore
+        black holes and the behaviour of light in curved
+        spacetime.
+
+      </p>
+
+
+      <blockquote>
+
+        We transform Einstein's equations into images,
+        allowing us to see the invisible.
+
+        <span>
+          — The Photon Forge Team
+        </span>
+
+      </blockquote>
+
+
+      <div class="about-actions">
+
+        <a
+          href="engine.html"
+          class="about-button primary"
+        >
+          Explore Simulation →
+        </a>
+
+
+        <a
+          href="theory.html"
+          class="about-button secondary"
+        >
+          Visit Theory
+        </a>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- RIGHT VISUAL -->
+
+    <div class="about-hero-visual">
+
+        <img
+            src="assets/about/about-hero.jpg"
+            alt="Black hole merging into streams of computer code"
+            class="about-hero-image"
+        >
+
+        <div class="about-hero-fade"></div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       PROJECT PILLARS
+       ===================================================== -->
+
+  <section class="about-pillars">
+
+
+    <!-- IDEA -->
+
+    <article class="about-card pillar-card">
+
+      <div class="pillar-heading">
+
+        <div class="pillar-icon">
+          ◎
+        </div>
+
+        <h2>
+          The Idea
+        </h2>
+
+      </div>
+
+
+      <p>
+
+        General Relativity tells us that mass and energy
+        curve spacetime, while matter and light follow the
+        resulting geometry.
+
+      </p>
+
+
+      <p>
+
+        Photon Forge solves these equations numerically so
+        that geodesics can be studied and visualized rather
+        than remaining only abstract mathematics.
+
+      </p>
+
+
+      <div class="mini-spacetime">
+
+        <div class="mini-grid"></div>
+
+        <div class="mini-mass"></div>
+
+      </div>
+
+    </article>
+
+
+
+    <!-- ENGINE -->
+
+    <article class="about-card pillar-card">
+
+      <div class="pillar-heading">
+
+        <div class="pillar-icon">
+          ⚙
+        </div>
+
+        <h2>
+          The Engine
+        </h2>
+
+      </div>
+
+
+      <p>
+
+        Built as a modular computational physics engine,
+        Photon Forge separates spacetime models, geodesic
+        integration, rendering and validation.
+
+      </p>
+
+
+      <ul class="engine-list">
+
+        <li>
+          Einstein field-equation framework
+        </li>
+
+        <li>
+          Schwarzschild and Kerr metrics
+        </li>
+
+        <li>
+          Christoffel-symbol calculation
+        </li>
+
+        <li>
+          Null and particle geodesics
+        </li>
+
+        <li>
+          RK4 numerical integration
+        </li>
+
+        <li>
+          Photon ray tracing
+        </li>
+
+        <li>
+          Accretion-disk interaction
+        </li>
+
+        <li>
+          Validation and testing
+        </li>
+
+      </ul>
+
+    </article>
+
+
+
+    <!-- PURPOSE -->
+
+    <article class="about-card pillar-card purpose-card">
+
+      <div class="pillar-heading">
+
+        <div class="pillar-icon">
+          ◌
+        </div>
+
+        <h2>
+          The Purpose
+        </h2>
+
+      </div>
+
+
+      <p>
+
+        The goal is to make the physics of black holes more
+        accessible by connecting mathematical equations to
+        observable structures and interactive simulations.
+
+      </p>
+
+
+      <p>
+
+        Photon Forge is designed for students, researchers
+        and anyone curious about how General Relativity
+        shapes the universe.
+
+      </p>
+
+
+      <div class="purpose-black-hole">
+
+        <div class="purpose-disk"></div>
+
+        <div class="purpose-ring"></div>
+
+        <div class="purpose-shadow"></div>
+
+      </div>
+
+    </article>
+
+
+
+    <!-- APPROACH -->
+
+    <article class="about-card pillar-card">
+
+      <div class="pillar-heading">
+
+        <div class="pillar-icon">
+          ∿
+        </div>
+
+        <h2>
+          Our Approach
+        </h2>
+
+      </div>
+
+
+      <p>
+
+        We combine physics-first modelling with modern
+        computation and high-performance visualization.
+
+      </p>
+
+
+      <p>
+
+        The interactive GPU renderer provides immediate
+        exploration, while the Python backend acts as the
+        numerical reference implementation.
+
+      </p>
+
+
+      <div class="tech-tags">
+
+        <span>Python</span>
+
+        <span>NumPy</span>
+
+        <span>SciPy</span>
+
+        <span>Flask</span>
+
+        <span>WebGL2</span>
+
+        <span>RK4</span>
+
+        <span>Kerr GR</span>
+
+        <span>Open Source</span>
+
+      </div>
+
+    </article>
+
+
+  </section>
+
+
+
+  <!-- =====================================================
+       TEAM
+       ===================================================== -->
+
+  <section class="about-card team-section">
+
+
+    <div class="team-intro">
+
+      <div class="about-kicker">
+        THE TEAM
+      </div>
+
+      <h2>
+        Built through physics,
+        computation and design.
+      </h2>
+
+      <p>
+
+        Photon Forge brings together theoretical physics,
+        numerical simulation and frontend visualization.
+
+      </p>
+
+    </div>
+
+
+
+    <!-- ANSHIKA -->
+
+    <article class="team-member">
+
+      <div class="member-photo member-placeholder">
+
+        <span>
+          AS
+        </span>
+
+      </div>
+
+      <div class="member-info">
+
+        <h3>
+          Anshika Sharma
+        </h3>
+
+        <p>
+          Geodesic Integration & Renderer & Visualization
+        </p>
+
+        <span>
+          Physics engine · numerical integration · ray tracing · visualization
+        </span>
+
+      </div>
+
+    </article>
+
+
+
+    <!-- MANYA -->
+
+    <article class="team-member">
+
+      <div class="member-photo member-placeholder">
+
+        <span>
+          MM
+        </span>
+
+      </div>
+
+      <div class="member-info">
+
+        <h3>
+          Manya Mishra
+        </h3>
+
+        <p>
+          Theoretical Framework & Physics Equations
+        </p>
+
+        <span>
+          General Relativity · equations
+        </span>
+
+      </div>
+
+    </article>
+
+
+
+    <!-- VAGISHA -->
+
+    <article class="team-member">
+
+      <div class="member-photo member-placeholder">
+
+        <span>
+          VY
+        </span>
+
+      </div>
+
+      <div class="member-info">
+
+        <h3>
+          Vagisha Yadav
+        </h3>
+
+        <p>
+          Frontend & Neural Network & Chatbot
+        </p>
+
+        <span>
+          Interface design · frontend · chatbot
+        </span>
+
+      </div>
+
+    </article>
+
+
+
+    <!-- QUOTE -->
+
+    <div class="team-quote">
+
+      <span class="quote-mark">
+        “
+      </span>
+
+      <p>
+
+        Curiosity drives us,
+        physics guides us,
+        and computation lets us
+        see what the universe hides.
+
+      </p>
+
+      <strong>
+        — Photon Forge Team
+      </strong>
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- =====================================================
+       PROJECT DETAILS
+       ===================================================== -->
+
+  <section class="about-project-strip">
+
+
+    <div>
+
+      <span>
+        PHYSICS
+      </span>
+
+      <strong>
+        General Relativity
+      </strong>
+
+    </div>
+
+
+    <div>
+
+      <span>
+        METRICS
+      </span>
+
+      <strong>
+        Schwarzschild + Kerr
+      </strong>
+
+    </div>
+
+
+    <div>
+
+      <span>
+        NUMERICS
+      </span>
+
+      <strong>
+        RK4 Integration
+      </strong>
+
+    </div>
+
+
+    <div>
+
+      <span>
+        RENDERING
+      </span>
+
+      <strong>
+        Python + WebGL2
+      </strong>
+
+    </div>
+
+
+    <div>
+
+      <span>
+        LICENSE
+      </span>
+
+      <strong>
+        MIT
+      </strong>
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- =====================================================
+       FOOTER
+       ===================================================== -->
+
+  <footer class="about-footer">
+
+
+    <div class="footer-brand">
+
+      <span class="footer-ring"></span>
+
+      <strong>
+        PHOTON FORGE
+      </strong>
+
+    </div>
+
+
+    <div class="footer-copy">
+
+      Computational General Relativity
+      · Black-Hole Ray Tracing
+
+    </div>
+
+
+    <div class="footer-links">
+
+      <a
+        href="https://github.com/Delidaw/RayTracer"
+        target="_blank"
+        rel="noopener"
+      >
+        GitHub
+      </a>
+
+      <a href="theory.html">
+        Theory
+      </a>
+
+      <a href="engine.html">
+        Simulation
+      </a>
+
+    </div>
+
+
+  </footer>
+
+
+</main>
+
+
+<script src="nav.js"></script>
+
+</body>
+</html>

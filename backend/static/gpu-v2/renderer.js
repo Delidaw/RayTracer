@@ -10,7 +10,7 @@ const gl = canvas.getContext("webgl2", {
   depth: false,
   stencil: false,
   preserveDrawingBuffer: false,
-  powerPreference: "high-performance"
+  powerPreference: "default"
 });
 
 if (!gl) {
@@ -1150,6 +1150,28 @@ let dragging = false;
 let lastPointerX = 0;
 let lastPointerY = 0;
 
+function getActiveRenderSettings() {
+  const normalSettings =
+    qualityPresets[state.preset];
+
+  if (!dragging) {
+    return normalSettings;
+  }
+
+  // Lower GPU load while the camera is moving.
+  return {
+    renderScale: Math.min(
+      normalSettings.renderScale,
+      0.36
+    ),
+
+    maxSteps: Math.min(
+      normalSettings.maxSteps,
+      75
+    )
+  };
+}
+
 canvas.addEventListener(
   "pointerdown",
   event => {
@@ -1268,7 +1290,7 @@ canvas.addEventListener(
 
 function resizeCanvas() {
   const preset =
-    qualityPresets[state.preset];
+    getActiveRenderSettings();
 
   const rect =
     canvas.getBoundingClientRect();

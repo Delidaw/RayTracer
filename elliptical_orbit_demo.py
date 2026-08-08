@@ -6,15 +6,23 @@ import matplotlib.pyplot as plt
 from models.black_hole import BlackHole
 from physics.initial_conditions import InitialConditions
 from physics.orbit_simulator import OrbitSimulator
+from physics.schwarzschild_metric import SchwarzschildMetric
+from physics.schwarzschild_derivatives import SchwarzschildDerivatives
 
 bh = BlackHole(mass = 1)
+metric = SchwarzschildMetric(bh)
+derivatives = SchwarzschildDerivatives(metric)
+
 
 initial = InitialConditions(bh).elliptical_orbit(
     semi_major_axis = 20,
     eccentricity = 0.4
 )
 
-simulator = OrbitSimulator(bh)
+simulator = OrbitSimulator(
+    metric,
+    derivatives
+)
 
 trajectory = simulator.simulate(
     initial,

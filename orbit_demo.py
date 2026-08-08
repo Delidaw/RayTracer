@@ -5,14 +5,19 @@ from models.black_hole import BlackHole
 from physics.orbit_simulator import OrbitSimulator
 from physics.initial_conditions import InitialConditions
 from physics.schwarzschild_metric import SchwarzschildMetric
+from physics.schwarzschild_derivatives import SchwarzschildDerivatives
 
 #Create a blackhole
 bh = BlackHole(mass = 10)
 
 metric = SchwarzschildMetric(bh)
+derivatives = SchwarzschildDerivatives(metric)
 
 #create a simulator
-simulator = OrbitSimulator(metric)
+simulator = OrbitSimulator(
+    metric,
+    derivatives
+)
 
 initials = InitialConditions(bh)
 
