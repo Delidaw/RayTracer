@@ -109,8 +109,11 @@
           data-object="sagittarius"
         >
 
-          <div class="object-placeholder">
-            S
+          <div class="object-thumbnail">
+            <img
+              src="assets/explorer/objects/sag_a.jpg"
+              alt="Sagittarius A star"
+            >
           </div>
 
           <div>
@@ -134,8 +137,11 @@
           data-object="m87"
         >
 
-          <div class="object-placeholder">
-            M
+          <div class="object-thumbnail">
+            <img
+              src="assets/explorer/objects/m87.jpg"
+              alt="M87 star black hole"
+            >
           </div>
 
           <div>
@@ -159,8 +165,11 @@
           data-object="cygnus"
         >
 
-          <div class="object-placeholder">
-            C
+          <div class="object-thumbnail">
+            <img
+              src="assets/explorer/objects/cygnus_x1.jpg"
+              alt="Cygnus X-1"
+            >
           </div>
 
           <div>
@@ -184,9 +193,12 @@
           data-object="ngc1277"
         >
 
-          <div class="object-placeholder">
-            N
-          </div>
+          <div class="object-thumbnail">
+  <img
+    src="assets/explorer/objects/ngc_1277.jpg"
+    alt="NGC 1277"
+  >
+</div>
 
           <div>
 
@@ -209,9 +221,12 @@
           data-object="ton618"
         >
 
-          <div class="object-placeholder">
-            T
-          </div>
+          <div class="object-thumbnail">
+  <img
+    src="assets/explorer/objects/ton_618.jpg"
+    alt="TON 618"
+  >
+</div>
 
           <div>
 
@@ -227,29 +242,6 @@
 
         </button>
 
-
-      </div>
-
-
-
-      <!-- OBJECT MEDIA -->
-
-      <div class="object-media">
-
-        <div class="small-panel-title">
-          OBJECT VIEW
-        </div>
-
-        <div id="objectMediaHost">
-
-          <div class="object-empty">
-
-            Add your Sagittarius A*
-            image/GIF here later.
-
-          </div>
-
-        </div>
 
       </div>
 
@@ -322,11 +314,29 @@
           class="visual-view"
         >
 
-          <img
-            id="mainViewVideo"
-            src="assets/explorer/views/render-view.mp4"
-            alt="Black hole render view"
-          >
+          <!-- Render View video -->
+<video
+  id="mainViewVideo"
+  autoplay
+  muted
+  loop
+  playsinline
+  preload="metadata"
+>
+  <source
+    src="assets/explorer/views/render-view.mp4"
+    type="video/mp4"
+  >
+</video>
+
+
+<!-- Thermal View / Geodesic Grid -->
+<img
+  id="mainViewImage"
+  class="hidden"
+  src="assets/explorer/views/thermal-view.png"
+  alt="Black hole scientific view"
+>
 
 
           <div class="view-caption">

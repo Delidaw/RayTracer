@@ -45,11 +45,11 @@ const scientificViews = {
     title:
       "Relativistic Appearance",
 
-    source:
-      "assets/explorer/views/render-view.jpg",
+    mediaType:
+      "video",
 
-    alt:
-      "Rendered visualization of a black hole"
+    source:
+      "assets/explorer/views/render-view.mp4"
 
   },
 
@@ -62,11 +62,11 @@ const scientificViews = {
     title:
       "Accretion Temperature",
 
-    source:
-      "assets/explorer/views/thermal-view.png",
+    mediaType:
+      "image",
 
-    alt:
-      "Thermal visualization of a black hole accretion flow"
+    source:
+      "assets/explorer/views/thermal-view.png"
 
   },
 
@@ -79,11 +79,11 @@ const scientificViews = {
     title:
       "Spacetime Geometry",
 
-    source:
-      "assets/explorer/views/geodesic-grid.gif",
+    mediaType:
+      "image",
 
-    alt:
-      "Animated geodesic grid around a black hole"
+    source:
+      "assets/explorer/views/geodesic-grid.gif"
 
   }
 
@@ -105,6 +105,10 @@ const dataView =
     "dataView"
   );
 
+  const mainViewVideo =
+  document.getElementById(
+    "mainViewVideo"
+  );
 
 const mainViewImage =
   document.getElementById(
@@ -128,41 +132,33 @@ const viewTitle =
    SWITCH CENTRAL VIEW
    ========================================================= */
 
-function setView(
-  viewName
-) {
+function setView(viewName) {
+
+  /* -----------------------------------------
+     ACTIVE TAB
+     ----------------------------------------- */
 
   document
-    .querySelectorAll(
-      ".view-tab"
-    )
-    .forEach(
-      button => {
+    .querySelectorAll(".view-tab")
+    .forEach(button => {
 
-        button.classList.toggle(
-          "active",
+      button.classList.toggle(
+        "active",
+        button.dataset.view === viewName
+      );
 
-          button.dataset.view ===
-          viewName
-        );
-
-      }
-    );
+    });
 
 
-  /* -------------------------------------------------------
+  /* =========================================
      DATA VIEW
-     ------------------------------------------------------- */
+     ========================================= */
 
-  if (
-    viewName ===
-    "data"
-  ) {
+  if (viewName === "data") {
 
     visualView.classList.add(
       "hidden"
     );
-
 
     dataView.classList.remove(
       "hidden"
@@ -170,26 +166,25 @@ function setView(
 
 
     /*
-      Request fresh backend data whenever the
-      Data View is opened.
+      Stop render video while Data View
+      is being inspected.
     */
+
+    mainViewVideo.pause();
+
 
     loadPhysicsData();
 
-
     return;
-
   }
 
 
-  /* -------------------------------------------------------
-     IMAGE / GIF VIEWS
-     ------------------------------------------------------- */
+  /* =========================================
+     VISUAL VIEWS
+     ========================================= */
 
   const selected =
-    scientificViews[
-      viewName
-    ];
+    scientificViews[viewName];
 
 
   if (!selected) {
@@ -201,46 +196,94 @@ function setView(
     "hidden"
   );
 
-
   visualView.classList.remove(
     "hidden"
   );
 
 
-  /*
-    Fade very slightly between scientific views.
-  */
+  /* =========================================
+     VIDEO
+     ========================================= */
 
-  mainViewImage.style.opacity =
-    "0";
+  if (selected.mediaType === "video") {
+
+    mainViewImage.classList.add(
+      "hidden"
+    );
+
+    mainViewVideo.classList.remove(
+      "hidden"
+    );
 
 
-  window.setTimeout(
-    () => {
+    /*
+      Only change source if necessary.
+    */
 
-      mainViewImage.src =
+    if (
+      !mainViewVideo.src.endsWith(
+        selected.source
+      )
+    ) {
+
+      mainViewVideo.src =
         selected.source;
 
+      mainViewVideo.load();
 
-      mainViewImage.alt =
-        selected.alt;
-
-
-      viewType.textContent =
-        selected.type;
+    }
 
 
-      viewTitle.textContent =
-        selected.title;
+    mainViewVideo
+      .play()
+      .catch(() => {
+        /*
+          Browser autoplay restrictions are
+          harmless because the video is muted.
+        */
+      });
+
+  }
 
 
-      mainViewImage.style.opacity =
-        "1";
+  /* =========================================
+     IMAGE / GIF
+     ========================================= */
 
-    },
+  else {
 
-    100
-  );
+    /*
+      Stop GPU/video decoding when not needed.
+    */
+
+    mainViewVideo.pause();
+
+
+    mainViewVideo.classList.add(
+      "hidden"
+    );
+
+    mainViewImage.classList.remove(
+      "hidden"
+    );
+
+
+    mainViewImage.src =
+      selected.source;
+
+  }
+
+
+  /* =========================================
+     CAPTION
+     ========================================= */
+
+  viewType.textContent =
+    selected.type;
+
+
+  viewTitle.textContent =
+    selected.title;
 
 }
 
@@ -291,11 +334,6 @@ document
 
 const blackHoles = {
 
-
-  /* =======================================================
-     SAGITTARIUS A*
-     ======================================================= */
-
   sagittarius: {
 
     name:
@@ -314,16 +352,16 @@ const blackHoles = {
       "Milky Way",
 
     mediaType:
-      null,
+      "image",
 
     media:
-      null,
+      "assets/explorer/objects/sag_a.jpg",
 
     facts: [
 
       "Located at the dynamical centre of the Milky Way.",
 
-      "Its mass is constrained by monitoring stellar orbits around the Galactic Centre.",
+      "Its mass is constrained by monitoring stars orbiting the Galactic Centre.",
 
       "Its surrounding emission was imaged by the Event Horizon Telescope."
 
@@ -331,10 +369,6 @@ const blackHoles = {
 
   },
 
-
-  /* =======================================================
-     M87*
-     ======================================================= */
 
   m87: {
 
@@ -354,10 +388,10 @@ const blackHoles = {
       "Messier 87",
 
     mediaType:
-      null,
+      "image",
 
     media:
-      null,
+      "assets/explorer/objects/m87.jpg",
 
     facts: [
 
@@ -371,10 +405,6 @@ const blackHoles = {
 
   },
 
-
-  /* =======================================================
-     CYGNUS X-1
-     ======================================================= */
 
   cygnus: {
 
@@ -394,10 +424,10 @@ const blackHoles = {
       "Milky Way",
 
     mediaType:
-      null,
+      "image",
 
     media:
-      null,
+      "assets/explorer/objects/cygnus_x1.jpg",
 
     facts: [
 
@@ -405,16 +435,12 @@ const blackHoles = {
 
       "It forms an X-ray binary with a massive companion star.",
 
-      "Accreting material produces intense X-ray emission."
+      "Gas transferred from the companion forms a hot accretion flow and produces strong X-ray emission."
 
     ]
 
   },
 
-
-  /* =======================================================
-     NGC 1277
-     ======================================================= */
 
   ngc1277: {
 
@@ -434,27 +460,23 @@ const blackHoles = {
       "NGC 1277",
 
     mediaType:
-      null,
+      "image",
 
     media:
-      null,
+      "assets/explorer/objects/ngc_1277.jpg",
 
     facts: [
 
       "NGC 1277 is a compact lenticular galaxy associated with the Perseus region.",
 
-      "Its central black-hole mass has been the subject of several observational studies.",
+      "Its central black-hole mass has been investigated through stellar-dynamical observations.",
 
-      "The galaxy is unusually compact relative to the estimated mass of its central black hole."
+      "The galaxy is notable for hosting an unusually massive central black hole relative to its compact size."
 
     ]
 
   },
 
-
-  /* =======================================================
-     TON 618
-     ======================================================= */
 
   ton618: {
 
@@ -474,25 +496,24 @@ const blackHoles = {
       "TON 618 quasar",
 
     mediaType:
-      null,
+      "image",
 
     media:
-      null,
+      "assets/explorer/objects/ton_618.jpg",
 
     facts: [
 
       "TON 618 is an extremely luminous distant quasar.",
 
-      "Its central black hole is among the most massive commonly cited black-hole estimates.",
+      "Its central black hole is among the most massive known black holes by commonly cited estimates.",
 
-      "The observed luminosity is generated by matter accreting onto the central compact object."
+      "Its enormous luminosity is produced by matter accreting onto the central black hole."
 
     ]
 
   }
 
 };
-
 
 /* =========================================================
    OBJECT INFORMATION ELEMENTS
@@ -675,14 +696,10 @@ function showObjectMedia(
    SELECT REAL BLACK HOLE
    ========================================================= */
 
-function selectObject(
-  objectKey
-) {
+function selectObject(objectKey) {
 
   const object =
-    blackHoles[
-      objectKey
-    ];
+    blackHoles[objectKey];
 
 
   if (!object) {
@@ -690,9 +707,10 @@ function selectObject(
   }
 
 
-  /* -------------------------------------------------------
-     DETAILS
-     ------------------------------------------------------- */
+  /* =====================================================
+     RIGHT-SIDE DETAILS
+     KEEPING THIS EXACTLY AS BEFORE
+     ===================================================== */
 
   objectName.textContent =
     object.name;
@@ -713,10 +731,6 @@ function selectObject(
   objectHost.textContent =
     object.host;
 
-
-  /* -------------------------------------------------------
-     FACTS
-     ------------------------------------------------------- */
 
   objectFacts.innerHTML =
     "";
@@ -743,18 +757,9 @@ function selectObject(
   );
 
 
-  /* -------------------------------------------------------
-     OPTIONAL MEDIA
-     ------------------------------------------------------- */
-
-  showObjectMedia(
-    object
-  );
-
-
-  /* -------------------------------------------------------
-     BUTTON ACTIVE STATE
-     ------------------------------------------------------- */
+  /* =====================================================
+     ACTIVE LEFT BUTTON
+     ===================================================== */
 
   document
     .querySelectorAll(
@@ -774,14 +779,96 @@ function selectObject(
     );
 
 
+  /* =====================================================
+     SHOW OBJECT IN MAIN CENTER BOX
+     ===================================================== */
+
   /*
-    CRITICAL:
-
-    We DO NOT call setView() here.
-
-    Therefore clicking M87, TON 618, etc.
-    cannot change Render / Thermal / Geodesic / Data.
+    Hide Data View if it was open.
   */
+
+  dataView.classList.add(
+    "hidden"
+  );
+
+
+  /*
+    Show normal visual container.
+  */
+
+  visualView.classList.remove(
+    "hidden"
+  );
+
+
+  /*
+    Stop render-view MP4 if it was playing.
+  */
+
+  if (mainViewVideo) {
+
+    mainViewVideo.pause();
+
+    mainViewVideo.classList.add(
+      "hidden"
+    );
+
+  }
+
+
+  /*
+    Show image element.
+  */
+
+  mainViewImage.classList.remove(
+    "hidden"
+  );
+
+
+  /*
+    Put selected real-black-hole image
+    inside the central display.
+  */
+
+  mainViewImage.src =
+    object.media;
+
+
+  mainViewImage.alt =
+    object.name;
+
+
+  /*
+    Update central caption.
+  */
+
+  viewType.textContent =
+    "BLACK HOLE OBJECT";
+
+
+  viewTitle.textContent =
+    object.name;
+
+
+  /*
+    Since we're now viewing an OBJECT,
+    none of the four top view buttons
+    should look selected.
+  */
+
+  document
+    .querySelectorAll(
+      ".view-tab"
+    )
+    .forEach(
+      button => {
+
+        button.classList.remove(
+          "active"
+        );
+
+      }
+    );
 
 }
 

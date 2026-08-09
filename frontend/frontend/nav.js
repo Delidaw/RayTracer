@@ -1,36 +1,161 @@
+"use strict";
+
+
 const NAV_LINKS = [
-  { href: "index.html", label: "Home" },
-  { href: "renderer.html", label: "1 · GPU Renderer" },
-  { href: "engine.html", label: "2 · Physics Engine" },
-  { href: "theory.html", label: "3 · Visual Theory" },
-/*  { href: "trajectories.html", label: "2 · Photon Paths" },
-  { href: "mesh.html", label: "3 · Curvature Mesh" },*/
-  { href: "explorer.html", label: "4 · Explorer" },
-/*  { href: "animation.html", label: "5 · Ray Animation" },
-  { href: "deflection.html", label: "6 · Deflection" },
-  { href: "intensity.html", label: "7 · Intensity" },
-  { href: "orbits.html", label: "8 · Orbits" },
-  { href: "compare.html", label: "9 · Newton vs GR" },*/
-  { href: "about.html", label: "About" },
+
+  {
+    href: "index.html",
+    label: "Home"
+  },
+
+  {
+    href: "engine.html",
+    label: "Simulation"
+  },
+
+  {
+    href: "explorer.html",
+    label: "Explorer"
+  },
+
+  {
+    href: "theory.html",
+    label: "Visual Theory"
+  },
+
+  {
+    href: "about.html",
+    label: "About"
+  }
+
 ];
 
-function renderNav() {
-  const current = location.pathname.split("/").pop() || "index.html";
-  const root = document.getElementById("nav-root");
-  if (!root) return;
-  const links = NAV_LINKS.map(
-    (l) =>
-      `<a class="navlink${l.href === current ? " active" : ""}" href="${l.href}">${l.label}</a>`
-  ).join("");
-  root.innerHTML = `
-    <nav class="topnav">
-      <a class="brand" href="index.html">⬤ PHOTON FORGE</a>
-      ${links}
-    </nav>
-  `;
+
+function buildNavigation() {
+
+  const root =
+    document.getElementById(
+      "nav-root"
+    );
+
+
+  if (!root) {
+    return;
+  }
+
+
+  const currentPage =
+    window.location.pathname
+      .split("/")
+      .pop()
+      ||
+      "index.html";
+
+
+  const nav =
+    document.createElement(
+      "nav"
+    );
+
+
+  nav.className =
+    "site-nav";
+
+
+  /* =====================================================
+     BRAND
+     ===================================================== */
+
+  const brand =
+    document.createElement(
+      "a"
+    );
+
+
+  brand.href =
+    "index.html";
+
+
+  brand.className =
+    "nav-brand";
+
+
+  brand.innerHTML =
+    `
+      <span class="nav-black-hole"></span>
+
+      <span class="nav-brand-text">
+        PHOTON FORGE
+      </span>
+    `;
+
+
+  nav.appendChild(
+    brand
+  );
+
+
+  /* =====================================================
+     LINKS
+     ===================================================== */
+
+  const links =
+    document.createElement(
+      "div"
+    );
+
+
+  links.className =
+    "nav-links";
+
+
+  NAV_LINKS.forEach(
+    item => {
+
+      const anchor =
+        document.createElement(
+          "a"
+        );
+
+
+      anchor.href =
+        item.href;
+
+
+      anchor.textContent =
+        item.label;
+
+
+      if (
+        currentPage ===
+        item.href
+      ) {
+
+        anchor.classList.add(
+          "active"
+        );
+
+      }
+
+
+      links.appendChild(
+        anchor
+      );
+
+    }
+  );
+
+
+  nav.appendChild(
+    links
+  );
+
+
+  root.appendChild(
+    nav
+  );
+
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  renderNav();
-});
 
+buildNavigation();

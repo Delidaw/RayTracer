@@ -436,17 +436,15 @@ body {
 
 #objectMediaHost img,
 #objectMediaHost video {
-  width:
-    100%;
+  width: 100%;
+  height: 100%;
 
-  height:
-    100%;
+  display: block;
 
-  display:
-    block;
+  object-fit: contain;
+  object-position: center;
 
-  object-fit:
-    cover;
+  background: #000;
 }
 
 
@@ -594,24 +592,28 @@ body {
 }
 
 
-#mainViewImage {
-  width:
-    100%;
+#mainViewImage,
+#mainViewVideo {
+  width: 100%;
+  height: 100%;
 
-  height:
-    100%;
+  display: block;
 
-  display:
-    block;
+  object-fit: contain;
+  object-position: center;
 
-  object-fit:
-    contain;
+  background: #000;
+}
 
-  object-position:
-    center;
 
-  background:
-    #000;
+#mainViewVideo {
+  object-fit: cover;
+}
+
+
+#mainViewImage.hidden,
+#mainViewVideo.hidden {
+  display: none;
 }
 
 
@@ -1442,4 +1444,49 @@ body {
       16 / 10;
   }
 
+}
+
+/* =========================================================
+   BLACK HOLE OBJECT THUMBNAILS
+   ========================================================= */
+
+.object-thumbnail {
+  width: 48px;
+  height: 48px;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  border:
+    1px solid
+    rgba(223, 160, 82, 0.42);
+
+  background: #02050a;
+
+  box-shadow:
+    0 0 0 1px
+    rgba(255, 255, 255, 0.02);
+}
+
+
+.object-thumbnail img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+}
+
+
+.object-button.active
+.object-thumbnail {
+  border-color:
+    var(--ex-gold);
+
+  box-shadow:
+    0 0 12px
+    rgba(223, 160, 82, 0.18);
 }

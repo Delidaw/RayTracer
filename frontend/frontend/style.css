@@ -596,3 +596,213 @@ select:focus {
   }
 }
 
+/* =========================================================
+   PHOTON FORGE — FINAL NAVIGATION
+   ========================================================= */
+
+#nav-root {
+  position: sticky;
+  top: 0;
+
+  z-index: 1000;
+
+  background:
+    rgba(3, 6, 10, 0.92);
+
+  backdrop-filter:
+    blur(14px);
+
+  border-bottom:
+    1px solid
+    rgba(118, 132, 154, 0.18);
+}
+
+
+.site-nav {
+  width:
+    min(
+      calc(100% - 36px),
+      1500px
+    );
+
+  min-height:
+    64px;
+
+  margin:
+    0 auto;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    30px;
+}
+
+
+.nav-brand {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    12px;
+
+  color:
+    #eeeae2;
+
+  text-decoration:
+    none;
+}
+
+
+.nav-black-hole {
+  width:
+    27px;
+
+  height:
+    27px;
+
+  border-radius:
+    50%;
+
+  border:
+    2px solid
+    #e0a052;
+
+  background:
+    #020306;
+
+  box-shadow:
+    0 0 8px
+    rgba(224, 160, 82, 0.58);
+}
+
+
+.nav-brand-text {
+  font-family:
+    "Fraunces",
+    serif;
+
+  font-size:
+    15px;
+
+  letter-spacing:
+    0.18em;
+}
+
+
+.nav-links {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    32px;
+}
+
+
+.nav-links a {
+  position:
+    relative;
+
+  padding:
+    23px 0 20px;
+
+  color:
+    #929aa7;
+
+  text-decoration:
+    none;
+
+  font:
+    8px
+    "Inter",
+    sans-serif;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    0.05em;
+
+  transition:
+    color .18s ease;
+}
+
+
+.nav-links a:hover {
+  color:
+    #eee9df;
+}
+
+
+.nav-links a.active {
+  color:
+    #e0a052;
+}
+
+
+.nav-links a.active::after {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  left: 0;
+
+  right: 0;
+
+  bottom: 0;
+
+  height:
+    1px;
+
+  background:
+    #e0a052;
+
+  box-shadow:
+    0 0 6px
+    rgba(224, 160, 82, .45);
+}
+
+
+@media (max-width: 760px) {
+
+  .site-nav {
+    min-height:
+      56px;
+  }
+
+
+  .nav-brand-text {
+    display:
+      none;
+  }
+
+
+  .nav-links {
+    gap:
+      13px;
+  }
+
+
+  .nav-links a {
+    padding:
+      20px 0 17px;
+
+    font-size:
+      6.5px;
+  }
+
+}
