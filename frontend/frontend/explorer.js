@@ -355,7 +355,7 @@ const blackHoles = {
       "image",
 
     media:
-      "assets/explorer/objects/sag_a.jpg",
+      "assets/explorer/objects/sag_a.jpeg",
 
     facts: [
 
@@ -391,7 +391,7 @@ const blackHoles = {
       "image",
 
     media:
-      "assets/explorer/objects/m87.jpg",
+      "assets/explorer/objects/m87.jpeg",
 
     facts: [
 
@@ -427,7 +427,7 @@ const blackHoles = {
       "image",
 
     media:
-      "assets/explorer/objects/cygnus_x1.jpg",
+      "assets/explorer/objects/cygnus_x1.jpeg",
 
     facts: [
 
@@ -463,7 +463,7 @@ const blackHoles = {
       "image",
 
     media:
-      "assets/explorer/objects/ngc_1277.jpg",
+      "assets/explorer/objects/ngc_1277.jpeg",
 
     facts: [
 
@@ -499,7 +499,7 @@ const blackHoles = {
       "image",
 
     media:
-      "assets/explorer/objects/ton_618.jpg",
+      "assets/explorer/objects/ton_618.jpeg",
 
     facts: [
 

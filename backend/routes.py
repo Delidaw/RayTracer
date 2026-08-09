@@ -5,7 +5,8 @@ from flask import (
     request,
     jsonify,
     send_from_directory,
-    render_template
+    render_template,
+    redirect
 )
 
 from backend.app import app
@@ -63,6 +64,9 @@ FRONTEND_DIR = next(
 )
 
 @app.route("/site")
+def website_home_redirect():
+    return redirect("/site/")
+
 @app.route("/site/")
 def website_home():
     return send_from_directory(FRONTEND_DIR, "index.html")
