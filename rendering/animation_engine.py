@@ -6,7 +6,7 @@ from rendering.camera_paths import OrbitPath
 
 class AnimationEngine:
     """
-    Controls time-dependent animation of Stella Nova.
+    Controls time-dependent animation of Photon Forge.
 
     The animation engine updates the observer position
     and asks the existing ray tracer to render each frame.

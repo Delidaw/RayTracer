@@ -288,8 +288,8 @@ Day 2 — Visual Theory page
 ✓ Home
 ✓ Simulator
 ✓ Visual Theory
-Explore
-Validation
+✓ Explore
+✓ Validation
 ✓ About
 ✓ Home Page Layout
 Day 3 — Validation and results
@@ -1034,7 +1034,7 @@ where the outer boundary is the ergosphere and the inner one is the event horizo
 
 New folder structure
 
-Eventually I'd like Stella Nova to look something like
+Eventually I'd like Photon Forge to look something like
 
 physics/
 
@@ -4846,7 +4846,7 @@ Actually, after working through your code over the past week, I think your check
 
 Here's how I would update it.
 
-Stella Nova — Progress Checklist
+Photon Forge — Progress Checklist
 Phase 1: Schwarzschild Physics Engine ✅ COMPLETE
 
 ✅ BlackHole
@@ -6279,7 +6279,7 @@ Schwarzschild
         ▼
 Christoffel
 
-This is the moment Stella Nova becomes a true geometry engine.
+This is the moment Photon Forge becomes a true geometry engine.
 
 Phase 6 — Kerr
 

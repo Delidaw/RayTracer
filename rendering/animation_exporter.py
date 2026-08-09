@@ -4,7 +4,7 @@ import numpy as np
 
 class AnimationExporter:
     """
-    Exports rendered Stella Nova animation frames
+    Exports rendered Photon Forge animation frames
     to GIF and MP4 formats.
     """
 

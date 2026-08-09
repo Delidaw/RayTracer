@@ -57,7 +57,7 @@ class RenderStatistics:
 
         print("=" * 50)
 
-        print("Stella Nova Render Statistics")
+        print("Photon Forge Render Statistics")
 
         print("=" * 50)
 

@@ -1,4 +1,4 @@
-STELLA NOVA GPU RENDERER V2
+PHOTON FORGE GPU RENDERER V2
 
 This is a new modular WebGL2 renderer. It keeps the existing Python engine untouched.
 
@@ -11,7 +11,7 @@ ROUTES_PATCH.txt
 
 INSTALL
 -------
-1. Copy the backend/templates and backend/static folders into your Stella Nova project.
+1. Copy the backend/templates and backend/static folders into your Photon Forge project.
    Merge them with the existing folders; do not delete your current files.
 
 2. Add the route from ROUTES_PATCH.txt to backend/routes.py.

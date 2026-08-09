@@ -24,6 +24,11 @@ const NAV_LINKS = [
   },
 
   {
+    href: "validation.html",
+    label: "Validation"
+  },
+
+  {
     href: "about.html",
     label: "About"
   }

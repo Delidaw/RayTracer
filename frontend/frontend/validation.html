@@ -1,0 +1,865 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1"
+>
+
+<title>
+  Validation & Results — Photon Forge
+</title>
+
+
+<link
+  rel="preconnect"
+  href="https://fonts.googleapis.com"
+>
+
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+  rel="stylesheet"
+>
+
+
+<link
+  rel="stylesheet"
+  href="style.css"
+>
+
+
+<link
+  rel="stylesheet"
+  href="validation.css"
+>
+
+
+</head>
+
+
+
+<body>
+
+
+<div id="nav-root"></div>
+
+
+
+<main class="validation-shell">
+
+
+<!-- ======================================================
+     HERO
+     ====================================================== -->
+
+<header class="validation-hero">
+
+
+  <div>
+
+    <span class="validation-kicker">
+      PHOTON FORGE · PHYSICS VALIDATION
+    </span>
+
+
+    <h1>
+      Validation &
+      <span>
+        Results
+      </span>
+    </h1>
+
+
+    <p>
+
+      Numerical relativity is only useful when its
+      implementation reproduces known physical results.
+      Photon Forge is checked against exact Schwarzschild
+      and Kerr benchmarks before those equations are used
+      for visualization.
+
+    </p>
+
+  </div>
+
+
+
+  <div class="validation-status-card">
+
+    <div
+      id="validationStatusDot"
+      class="status-dot"
+    ></div>
+
+
+    <div>
+
+      <span>
+        ENGINE STATUS
+      </span>
+
+      <strong id="validationStatus">
+        Connecting...
+      </strong>
+
+    </div>
+
+  </div>
+
+
+</header>
+
+
+
+<!-- ======================================================
+     OVERVIEW
+     ====================================================== -->
+
+<section class="validation-overview">
+
+
+  <article class="overview-card">
+
+    <span>
+      TESTS
+    </span>
+
+    <strong id="totalTests">
+      —
+    </strong>
+
+    <small>
+      benchmark checks
+    </small>
+
+  </article>
+
+
+
+  <article class="overview-card">
+
+    <span>
+      PASSED
+    </span>
+
+    <strong id="passedTests">
+      —
+    </strong>
+
+    <small>
+      successful
+    </small>
+
+  </article>
+
+
+
+  <article class="overview-card">
+
+    <span>
+      FAILED
+    </span>
+
+    <strong id="failedTests">
+      —
+    </strong>
+
+    <small>
+      require attention
+    </small>
+
+  </article>
+
+
+
+  <article class="overview-card highlight">
+
+    <span>
+      VALIDATION RATE
+    </span>
+
+    <strong id="passRate">
+      —
+    </strong>
+
+    <small>
+      analytic benchmarks
+    </small>
+
+  </article>
+
+
+</section>
+
+
+
+<!-- ======================================================
+     CHARACTERISTIC RADII
+     ====================================================== -->
+
+<section class="validation-card">
+
+
+  <div class="section-heading">
+
+    <div>
+
+      <span>
+        01 · SCHWARZSCHILD
+      </span>
+
+      <h2>
+        Characteristic Radii
+      </h2>
+
+    </div>
+
+
+    <p>
+      Exact radii expected for a non-rotating black hole
+      in units of M.
+    </p>
+
+  </div>
+
+
+
+  <div class="radii-grid">
+
+
+    <article>
+
+      <div class="radius-symbol">
+        rₕ
+      </div>
+
+      <span>
+        EVENT HORIZON
+      </span>
+
+      <strong id="horizonValue">
+        —
+      </strong>
+
+      <small>
+        expected 2M
+      </small>
+
+    </article>
+
+
+
+    <article>
+
+      <div class="radius-symbol">
+        rᵨ
+      </div>
+
+      <span>
+        PHOTON SPHERE
+      </span>
+
+      <strong id="photonValue">
+        —
+      </strong>
+
+      <small>
+        expected 3M
+      </small>
+
+    </article>
+
+
+
+    <article>
+
+      <div class="radius-symbol">
+        rISCO
+      </div>
+
+      <span>
+        ISCO
+      </span>
+
+      <strong id="iscoValue">
+        —
+      </strong>
+
+      <small>
+        expected 6M
+      </small>
+
+    </article>
+
+
+
+    <article>
+
+      <div class="radius-symbol">
+        bc
+      </div>
+
+      <span>
+        CRITICAL IMPACT
+      </span>
+
+      <strong id="impactValue">
+        —
+      </strong>
+
+      <small>
+        3√3 M
+      </small>
+
+    </article>
+
+
+  </div>
+
+
+</section>
+
+
+
+<!-- ======================================================
+     TEST TABLE
+     ====================================================== -->
+
+<section class="validation-card">
+
+
+  <div class="section-heading">
+
+    <div>
+
+      <span>
+        02 · BENCHMARK SUITE
+      </span>
+
+      <h2>
+        Validation Results
+      </h2>
+
+    </div>
+
+
+    <p>
+      Comparison of calculated benchmark quantities
+      against their analytic General Relativity values.
+    </p>
+
+  </div>
+
+
+
+  <div class="validation-table-wrap">
+
+
+    <table class="validation-table">
+
+
+      <thead>
+
+        <tr>
+
+          <th>
+            TEST
+          </th>
+
+          <th>
+            EXPECTED
+          </th>
+
+          <th>
+            CALCULATED
+          </th>
+
+          <th>
+            RELATIVE ERROR
+          </th>
+
+          <th>
+            STATUS
+          </th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody id="validationTableBody">
+
+      </tbody>
+
+
+    </table>
+
+
+  </div>
+
+
+</section>
+
+
+
+<!-- ======================================================
+     CAPTURE + DEFLECTION
+     ====================================================== -->
+
+<section class="validation-two-column">
+
+
+  <!-- CAPTURE -->
+
+  <article class="validation-card chart-card">
+
+
+    <div class="section-heading compact">
+
+      <div>
+
+        <span>
+          03 · PHOTON CAPTURE
+        </span>
+
+        <h2>
+          Critical Impact Parameter
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <div class="equation-box">
+
+      bc = 3√3 M ≈ 5.196 M
+
+    </div>
+
+
+    <svg
+      id="captureChart"
+      viewBox="0 0 700 270"
+    >
+    </svg>
+
+
+    <div class="chart-legend">
+
+      <span class="captured-key">
+        Captured
+      </span>
+
+      <span class="escaped-key">
+        Escaped
+      </span>
+
+      <span class="critical-key">
+        Critical boundary
+      </span>
+
+    </div>
+
+
+    <p class="chart-description">
+
+      Photons with an impact parameter below the
+      Schwarzschild critical value lie within the
+      capture region, while sufficiently large impact
+      parameters permit escape.
+
+    </p>
+
+
+  </article>
+
+
+
+  <!-- DEFLECTION -->
+
+  <article class="validation-card chart-card">
+
+
+    <div class="section-heading compact">
+
+      <div>
+
+        <span>
+          04 · LIGHT BENDING
+        </span>
+
+        <h2>
+          Weak-Field Deflection
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <div class="equation-box">
+
+      α ≈ 4M / b
+
+    </div>
+
+
+    <svg
+      id="deflectionChart"
+      viewBox="0 0 700 270"
+    >
+    </svg>
+
+
+    <p class="chart-description">
+
+      At large impact parameter, the Schwarzschild
+      light-bending solution approaches the familiar
+      weak-field General Relativity expression.
+
+    </p>
+
+
+  </article>
+
+
+</section>
+
+
+
+<!-- ======================================================
+     KERR LIMIT + CONVERGENCE
+     ====================================================== -->
+
+<section class="validation-two-column">
+
+
+  <!-- KERR -->
+
+  <article class="validation-card">
+
+
+    <div class="section-heading compact">
+
+      <div>
+
+        <span>
+          05 · KERR LIMIT
+        </span>
+
+        <h2>
+          Kerr → Schwarzschild
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <p class="section-copy">
+
+      When the dimensionless Kerr spin parameter tends
+      to zero, the rotating solution must reproduce the
+      Schwarzschild geometry.
+
+    </p>
+
+
+    <div class="limit-grid">
+
+
+      <div>
+
+        <span>
+          SPIN χ
+        </span>
+
+        <strong>
+          0
+        </strong>
+
+      </div>
+
+
+      <div>
+
+        <span>
+          HORIZON
+        </span>
+
+        <strong id="kerrHorizon">
+          —
+        </strong>
+
+        <small>
+          target 2M
+        </small>
+
+      </div>
+
+
+      <div>
+
+        <span>
+          PHOTON ORBIT
+        </span>
+
+        <strong id="kerrPhoton">
+          —
+        </strong>
+
+        <small>
+          target 3M
+        </small>
+
+      </div>
+
+
+      <div>
+
+        <span>
+          ISCO
+        </span>
+
+        <strong id="kerrIsco">
+          —
+        </strong>
+
+        <small>
+          target 6M
+        </small>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="limit-result">
+
+      <span>
+        RESULT
+      </span>
+
+      <strong id="kerrLimitResult">
+        —
+      </strong>
+
+    </div>
+
+
+  </article>
+
+
+
+  <!-- RK4 -->
+
+  <article class="validation-card chart-card">
+
+
+    <div class="section-heading compact">
+
+      <div>
+
+        <span>
+          06 · NUMERICAL METHOD
+        </span>
+
+        <h2>
+          RK4 Convergence
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <div class="equation-box">
+
+      global error ∝ h⁴
+
+    </div>
+
+
+    <svg
+      id="convergenceChart"
+      viewBox="0 0 700 270"
+    >
+    </svg>
+
+
+    <p class="chart-description">
+
+      Halving the RK4 step size should reduce the
+      leading global integration error by approximately
+      a factor of sixteen in the asymptotic regime.
+
+    </p>
+
+
+  </article>
+
+
+</section>
+
+
+
+<!-- ======================================================
+     VALIDATION FILES
+     ====================================================== -->
+
+<section class="validation-card">
+
+
+  <div class="section-heading">
+
+    <div>
+
+      <span>
+        07 · TEST INFRASTRUCTURE
+      </span>
+
+      <h2>
+        Existing Engine Validation
+      </h2>
+
+    </div>
+
+
+    <p>
+      Photon Forge includes dedicated validation modules
+      for geometry, ray generation, rendering and
+      numerical behaviour.
+    </p>
+
+  </div>
+
+
+
+  <div class="validation-module-grid">
+
+
+    <article>
+
+      <span>
+        GEOMETRY
+      </span>
+
+      <strong>
+        Schwarzschild + Kerr
+      </strong>
+
+      <p>
+        Event horizons, photon regions, ISCO,
+        ergosphere and metric coefficients.
+      </p>
+
+    </article>
+
+
+
+    <article>
+
+      <span>
+        GEODESICS
+      </span>
+
+      <strong>
+        Photon Dynamics
+      </strong>
+
+      <p>
+        Null trajectories, critical impact parameter,
+        photon orbits and ray initial conditions.
+      </p>
+
+    </article>
+
+
+
+    <article>
+
+      <span>
+        NUMERICS
+      </span>
+
+      <strong>
+        RK4 Integration
+      </strong>
+
+      <p>
+        Adaptive integration, conserved quantities,
+        orbital dynamics and trajectory behaviour.
+      </p>
+
+    </article>
+
+
+
+    <article>
+
+      <span>
+        RENDERING
+      </span>
+
+      <strong>
+        Ray Tracer
+      </strong>
+
+      <p>
+        Camera rays, disk intersection, shading,
+        redshift, caustics and render statistics.
+      </p>
+
+    </article>
+
+
+  </div>
+
+
+</section>
+
+
+
+<!-- ======================================================
+     FOOTER NOTE
+     ====================================================== -->
+
+<section class="validation-note">
+
+  <strong>
+    Validation philosophy
+  </strong>
+
+  <p>
+
+    Visual agreement alone is not treated as proof of
+    correctness. Photon Forge compares its implementation
+    with known analytic limits and physically constrained
+    benchmark quantities before using the engine for
+    scientific visualization.
+
+  </p>
+
+</section>
+
+
+</main>
+
+
+
+<script src="nav.js"></script>
+
+<script src="validation.js"></script>
+
+
+</body>
+
+</html>

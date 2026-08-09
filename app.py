@@ -12,7 +12,7 @@ app.register_blueprint(photon_bp)
 @app.route("/")
 def home():
     return {
-        "project": "Stella Nova",
+        "project": "Photon Forge",
         "engine": "General Relativity Physics Engine",
         "status": "Running"
     }

@@ -178,7 +178,7 @@ plt.imshow(
 """
 plt.imshow(np.clip(image / 255.0, 0, 1))
 
-plt.title("Stella Nova - First Kerr Render")
+plt.title("Photon Forge - First Kerr Render")
 
 plt.axis("off")
 

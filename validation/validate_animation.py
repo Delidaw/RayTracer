@@ -168,7 +168,7 @@ animation = AnimationEngine(
 
 print()
 print("=" * 50)
-print("Starting Stella Nova Animation")
+print("Starting Photon Forge Animation")
 print("=" * 50)
 
 animation.render_frames()
@@ -245,7 +245,7 @@ plt.imshow(
 )
 
 plt.title(
-    "Stella Nova - Animation Frame 3"
+    "Photon Forge - Animation Frame 3"
 )
 
 plt.axis("off")

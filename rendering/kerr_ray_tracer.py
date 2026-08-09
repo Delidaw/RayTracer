@@ -99,7 +99,7 @@ class KerrRayTracer:
         self.statistics.start()
 
         print()
-        print("========== Stella Nova ==========")
+        print("========== Photon Forge ==========")
         print(f"Rendering {width} x {height}")
         print()
 

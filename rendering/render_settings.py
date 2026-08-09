@@ -6,7 +6,7 @@ from dataclasses import dataclass
 @dataclass
 class RenderSettings:
     """
-    Global rendering settings for Stella Nova.
+    Global rendering settings for Photon Forge.
 
     A single RenderSettings object controls the quality,
     performance, and visual effects of a render.

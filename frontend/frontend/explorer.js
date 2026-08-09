@@ -701,174 +701,112 @@ function selectObject(objectKey) {
   const object =
     blackHoles[objectKey];
 
-
   if (!object) {
     return;
   }
 
 
-  /* =====================================================
-     RIGHT-SIDE DETAILS
-     KEEPING THIS EXACTLY AS BEFORE
-     ===================================================== */
+  /* ===============================
+     RIGHT-SIDE DATA
+     =============================== */
 
   objectName.textContent =
     object.name;
 
-
   objectType.textContent =
     object.type;
-
 
   objectMass.textContent =
     object.mass;
 
-
   objectDistance.textContent =
     object.distance;
-
 
   objectHost.textContent =
     object.host;
 
 
-  objectFacts.innerHTML =
-    "";
+  objectFacts.innerHTML = "";
+
+  object.facts.forEach(fact => {
+
+    const li =
+      document.createElement("li");
+
+    li.textContent =
+      fact;
+
+    objectFacts.appendChild(li);
+
+  });
 
 
-  object.facts.forEach(
-    fact => {
-
-      const listItem =
-        document.createElement(
-          "li"
-        );
-
-
-      listItem.textContent =
-        fact;
-
-
-      objectFacts.appendChild(
-        listItem
-      );
-
-    }
-  );
-
-
-  /* =====================================================
+  /* ===============================
      ACTIVE LEFT BUTTON
-     ===================================================== */
+     =============================== */
 
   document
-    .querySelectorAll(
-      ".object-button"
-    )
-    .forEach(
-      button => {
+    .querySelectorAll(".object-button")
+    .forEach(button => {
 
-        button.classList.toggle(
-          "active",
+      button.classList.toggle(
+        "active",
+        button.dataset.object === objectKey
+      );
 
-          button.dataset.object ===
-          objectKey
-        );
-
-      }
-    );
+    });
 
 
-  /* =====================================================
-     SHOW OBJECT IN MAIN CENTER BOX
-     ===================================================== */
+  /* ===============================
+     SHOW OBJECT IN MAIN MIDDLE BOX
+     =============================== */
 
-  /*
-    Hide Data View if it was open.
-  */
+  dataView.classList.add("hidden");
 
-  dataView.classList.add(
-    "hidden"
-  );
+  visualView.classList.remove("hidden");
 
 
-  /*
-    Show normal visual container.
-  */
-
-  visualView.classList.remove(
-    "hidden"
-  );
-
-
-  /*
-    Stop render-view MP4 if it was playing.
-  */
+  /* stop render video */
 
   if (mainViewVideo) {
 
     mainViewVideo.pause();
 
-    mainViewVideo.classList.add(
-      "hidden"
-    );
+    mainViewVideo.classList.add("hidden");
 
   }
 
 
-  /*
-    Show image element.
-  */
+  /* show image element */
 
-  mainViewImage.classList.remove(
-    "hidden"
-  );
+  mainViewImage.classList.remove("hidden");
 
 
-  /*
-    Put selected real-black-hole image
-    inside the central display.
-  */
+  /* THIS is the important part */
 
   mainViewImage.src =
     object.media;
-
 
   mainViewImage.alt =
     object.name;
 
 
-  /*
-    Update central caption.
-  */
-
   viewType.textContent =
     "BLACK HOLE OBJECT";
-
 
   viewTitle.textContent =
     object.name;
 
 
-  /*
-    Since we're now viewing an OBJECT,
-    none of the four top view buttons
-    should look selected.
-  */
+  /* remove active state from top view tabs */
 
   document
-    .querySelectorAll(
-      ".view-tab"
-    )
-    .forEach(
-      button => {
+    .querySelectorAll(".view-tab")
+    .forEach(button => {
 
-        button.classList.remove(
-          "active"
-        );
+      button.classList.remove("active");
 
-      }
-    );
+    });
 
 }
 
